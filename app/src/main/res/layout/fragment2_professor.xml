@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/professor_name2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="唐  宏"
+                android:textSize="22sp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="8dp"
+                android:text="       博士，教授，移动通信技术重庆市重点实验室常务副主任，四川省南充市人，1990年毕业于四川大学物理系，1995年于四川大学获理学硕士，2003年于重庆大学获工学博士。1995年7月至今在重庆邮电大学从事教学和科研工作，2008年-2009年在加拿大Mcgill大学访问研究一年。教育部“移动信息终端与测试技术”创新团队主要成员，重庆市高校优秀中青年骨干教师，重庆市高校优秀教学团队主要成员，国家级精品课程《现代交换原理》骨干成员，重庆市双语示范课程《数字电路与逻辑设计》负责人。主要研究方向包括移动通信技术、计算机网络，公开发表学术论文70余篇，其中核心级刊物及以上30余篇，作为项目负责人/合作单位负责人获得了国家科技重大专项、重庆市信息制造业重大科技专项、教育部高级访问学者基金、教育部春晖计划、重庆市自然科学基金、重庆市教委科学科学技术研究基金、重庆市移动通信重点实验室开放基金、重庆邮电大学科技基金的资助，以子课题负责人或主研身份参加了国家863项目“移动IP与MPLS结合的网络体系结构及关键技术”、国家科技重大专项“IMT-Advanced新型无线网络技术研发”、863重点项目“基于TD-SCDMA的集群通信关键技术和系统”、国家自然科学基金项目“协同中继系统跨层资源分配与优化调度的理论及方法” 等项目的研发工作。"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

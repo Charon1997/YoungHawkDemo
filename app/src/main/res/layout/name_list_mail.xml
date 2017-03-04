@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="64dp">
+    <ImageView
+        android:layout_marginLeft="16dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/member256"
+        android:layout_gravity="center_vertical"/>
+    <TextView
+        android:id="@+id/mail_list_teamName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="成员A"
+        android:textSize="18sp"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorPrimaryDark"/>
+</LinearLayout>

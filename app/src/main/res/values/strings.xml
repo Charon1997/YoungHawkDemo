@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">YoungHawkDemo</string>
+    <string name="book">管理手册</string>
+    <string name="professor" >专家</string>
+    <string name="personage">个人</string>
+    <string name="table">表格</string>
+    <string name="mailList">通讯录</string>
+    <string name="photograph">拍照</string>
+    <string name="more">更多</string>
+    <string name="projectTeam">项目成员</string>
+</resources>
