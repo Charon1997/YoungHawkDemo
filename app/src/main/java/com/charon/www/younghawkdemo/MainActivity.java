@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.charon.www.younghawkdemo.Fragments.ManageFragment;
+
 public class MainActivity extends AppCompatActivity {
     private TextView mPhotograph,mBook,mProfessor,mStudent,mTable,mMailList,mMore;
 
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this, BookActivity.class);
+            intent.setClass(MainActivity.this, ManageFragment.class);
             startActivity(intent);
         }
     }//done
@@ -64,9 +66,9 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent();
+           /* Intent intent = new Intent();
             intent.setClass(MainActivity.this, ProfessorActivity.class);
-            startActivity(intent);
+            startActivity(intent);*/
         }
     }//done
     private class StudentListener implements View.OnClickListener {

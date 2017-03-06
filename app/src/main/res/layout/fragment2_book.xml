@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -114,7 +114,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/colorBlack"
                 android:layout_marginTop="8dp"
-                android:text="       1)  项目阶段学员编入项目组，具体由项目牵头人负责（具体划分名单见通讯录）"/>
+
             <ImageView
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
@@ -137,6 +137,24 @@
                 android:textColor="@color/colorBlack"
                 android:layout_marginTop="8dp"
                 android:text="       雏鹰手册  追求卓越宣言  统一VI与邮箱 雏鹰平台工作证  工位安排与名单 等等（没齐） "/>
+        </LinearLayout>
+    </ScrollView>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:textSize="15sp"
+                android:alpha="0.87"
+                android:lineSpacingExtra="4dp"
+                android:id="@+id/text_arrange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
