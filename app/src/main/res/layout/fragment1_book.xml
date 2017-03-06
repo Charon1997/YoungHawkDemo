@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
-    <TextView
+    >
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="固定时间"
@@ -61,5 +61,22 @@
         android:textSize="18sp"
         android:textColor="@color/colorBlack"
         android:layout_marginTop="8dp"
-        android:text="       统一开发实践时间，由标准固定时间组成，在实践时间中进行工位开发与讨论，使用研究中心提供设备进行开发与问题集中讨论"/>
+        android:text="       统一开发实践时间，由标准固定时间组成，在实践时间中进行工位开发与讨论，使用研究中心提供设备进行开发与问题集中讨论"/>-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textSize="15sp"
+                android:alpha="0.87"
+                android:lineSpacingExtra="4dp"
+                android:id="@+id/time_communicate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

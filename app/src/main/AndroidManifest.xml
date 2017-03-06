@@ -9,17 +9,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".Activities.BookFragment" />
+        <activity android:name=".MailListActivity" />
+        <activity android:name=".NameListActivity" />
+        <activity android:name=".PersonalDateActivity" />
+        <activity
+            android:name=".Activities.ContractActivity"
+            android:label="@string/contract"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".BookActivity"/>
-        <activity android:name=".ProfessorActivity"/>
-        <activity android:name=".MailListActivity"/>
-        <activity android:name=".NameListActivity"/>
-        <activity android:name=".PersonalDateActivity"/>
     </application>
 
 </manifest>
