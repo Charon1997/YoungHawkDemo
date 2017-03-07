@@ -12,18 +12,10 @@
             android:id="@+id/mail_personal_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_default_height_material"
-            android:background="@color/colorFive"
+            android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </android.support.v7.widget.Toolbar>
-        <TextView
-            android:id="@+id/mail_personalTitleName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/projectTeam"
-            android:layout_centerInParent="true"
-            android:textColor="@color/colorWhite"
-            android:textSize="22sp"/>
     </RelativeLayout>
     <ImageView
         android:id="@+id/mail_personalImg"

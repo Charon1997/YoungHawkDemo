@@ -33,7 +33,7 @@ public class ContractActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         StatusUtil.initStatus(getWindow());
         setContentView(R.layout.activity_contract);
-
+        getFragmentManager().beginTransaction().add(R.id.content_contract,ContractFragment.getInstance()).commit();
         initView();
         initData();
     }

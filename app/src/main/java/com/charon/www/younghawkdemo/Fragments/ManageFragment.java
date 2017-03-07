@@ -1,6 +1,8 @@
 package com.charon.www.younghawkdemo.Fragments;
 
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -52,6 +54,7 @@ public class ManageFragment extends android.app.Fragment {
         mTabLayout.setupWithViewPager(mViewPager);
         return view;
     }
+    @TargetApi(Build.VERSION_CODES.M)
     private void addView() {
         list = new ArrayList<>();
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.fragment1_book, null);
@@ -65,11 +68,16 @@ public class ManageFragment extends android.app.Fragment {
         list.add(view1);
         View view2 = LayoutInflater.from(getContext()).inflate(R.layout.fragment2_book, null);
 
-        TextView textArrange = (TextView) view2.findViewById(R.id.text_arrange);
-        RichText.fromMarkdown(getString(R.string.text_arrange))
+        TextView textArrange1 = (TextView) view2.findViewById(R.id.text_arrange1);
+        TextView textArrange2 = (TextView) view2.findViewById(R.id.text_arrange2);
+        RichText.fromMarkdown(getString(R.string.text_arrange1))
                 .autoFix(true)
                 .noImage(true)
-                .into(textArrange);
+                .into(textArrange1);
+        RichText.fromMarkdown(getString(R.string.text_arrange2))
+                .autoFix(true)
+                .noImage(true)
+                .into(textArrange2);
 
         list.add(view2);
         View view3 = LayoutInflater.from(getContext()).inflate(R.layout.fragment3_book, null);

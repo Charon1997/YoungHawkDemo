@@ -30,7 +30,6 @@ public class MailListActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.mail_toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-
         mSimpleAdapter = new SimpleAdapter(this, getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});
         mListView.setAdapter(mSimpleAdapter);
         mListView.setOnItemClickListener(listListener);

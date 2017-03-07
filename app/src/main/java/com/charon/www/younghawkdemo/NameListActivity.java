@@ -24,6 +24,7 @@ public class NameListActivity extends AppCompatActivity {
     private ListView mListView;
     private Toolbar mToolbar;
     private Date date = new Date();
+    private String mListName[] = new String[]{"运营专责", "中学指导", "项目A"};
     /*private String mMemberName0[] = new String[]{"1成员A", "1成员B", "1成员C", "1成员D", "1成员E", "1成员F", "1成员G"};
     private String mMemberName1[] = new String[]{"2成员A", "1成员B", "1成员C", "1成员D", "1成员E", "1成员F", "1成员G"};
     private String mMemberName2[] = new String[]{"3成员A", "1成员B", "1成员C", "1成员D", "1成员E", "1成员F", "1成员G"};
@@ -37,13 +38,13 @@ public class NameListActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_namelist);
+        date.addToTeam();
         final Intent intent = getIntent();
         final int oldPositon = intent.getIntExtra("position", -1);
         Log.d("test", oldPositon+"oldPosition");
         mToolbar = (Toolbar) findViewById(R.id.mail_nameList_toolbar);
-        mToolbar.setTitle("");
+        mToolbar.setTitle(mListName[oldPositon]);
         setSupportActionBar(mToolbar);
-        date.addToTeam();
         mListView = (ListView) findViewById(R.id.mail_nameList);
         mSimpleAdapter = new SimpleAdapter(this, getDate(oldPositon), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
         mListView.setAdapter(mSimpleAdapter);

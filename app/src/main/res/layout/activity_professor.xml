@@ -7,20 +7,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/colorFive">
+        android:background="@color/colorTwo">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/mail_nameList_toolbar"
+            android:id="@+id/professor_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_default_height_material"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorTwo"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </android.support.v7.widget.Toolbar>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/professor"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="22sp"/>
     </RelativeLayout>
-    <ListView
-        android:id="@+id/mail_nameList"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/professor_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/professor_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
 </LinearLayout>

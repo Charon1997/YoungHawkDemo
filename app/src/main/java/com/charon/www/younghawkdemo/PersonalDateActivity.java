@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 public class PersonalDateActivity extends AppCompatActivity {
     private final static int DATENUMBER = 5;
-    private TextView mName,mDuty,qq,mPhoneNum,mEmail,mTitleName;
+    private TextView mName,mDuty,qq,mPhoneNum,mEmail;
     private ImageView mImg;
     private String personalDate[] = new String[DATENUMBER];
     private Toolbar mToolbar;
@@ -23,7 +23,7 @@ public class PersonalDateActivity extends AppCompatActivity {
         final Intent intent = getIntent();
         personalDate = intent.getStringArrayExtra("man");
         init();
-        mToolbar.setTitle("");
+        mToolbar.setTitle("通讯录");
         setSupportActionBar(mToolbar);
         addDate();
     }
@@ -35,12 +35,10 @@ public class PersonalDateActivity extends AppCompatActivity {
         qq = (TextView) findViewById(R.id.mail_personalQQ);
         mPhoneNum = (TextView) findViewById(R.id.mail_personalPhoneNum);
         mEmail = (TextView) findViewById(R.id.mail_personalEmail);
-        mTitleName = (TextView) findViewById(R.id.mail_personalTitleName);
         mToolbar = (Toolbar) findViewById(R.id.mail_personal_toolbar);
     }
 
     private void addDate() {
-        mTitleName.setText(personalDate[0]);
         mName.setText(personalDate[0]);
         mDuty.setText(personalDate[1]);
         mPhoneNum.setText(personalDate[2]);
