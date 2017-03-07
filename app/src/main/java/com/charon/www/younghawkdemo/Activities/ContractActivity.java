@@ -41,6 +41,7 @@ public class ContractActivity extends AppCompatActivity
     private void initData() {
         index = 0;
         currentFragment = fragmentPool.get(index);
+        getFragmentManager().beginTransaction().show(currentFragment).commit();
     }
 
     private void initView() {
@@ -86,6 +87,8 @@ public class ContractActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
 
         int id = item.getItemId();
 
@@ -108,9 +111,6 @@ public class ContractActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
