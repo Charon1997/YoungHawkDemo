@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.charon.www.younghawkdemo.Activities.IntroActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/intro_pager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp">
+    </android.support.v4.view.ViewPager>
+    <RelativeLayout
+        android:background="@color/colorPrimary"
+        android:layout_alignParentBottom="true"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        tools:layout_editor_absoluteX="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        >
+        <LinearLayout
+            android:id="@+id/indicator_page1_show"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/indicator_blank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/indicator_page2_show"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:src="@drawable/indicator_blank"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_next"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:layout_marginRight="32dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="@string/next"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/text_finish"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:layout_marginRight="32dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:text="@string/finish"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
