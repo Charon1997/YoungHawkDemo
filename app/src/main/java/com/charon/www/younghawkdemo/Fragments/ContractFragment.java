@@ -3,11 +3,11 @@ package com.charon.www.younghawkdemo.Fragments;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,29 +18,32 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import com.charon.www.younghawkdemo.Date;
+import com.charon.www.younghawkdemo.Man;
 import com.charon.www.younghawkdemo.NameListActivity;
+import com.charon.www.younghawkdemo.PersonalDateActivity;
+import com.charon.www.younghawkdemo.PinyinComparator;
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.adapter.MailViewpageAdapter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+import static android.content.Context.MODE_PRIVATE;
+
+
 public class ContractFragment extends android.app.Fragment {
     private Date date = new Date();
-    private ViewPager mViewPager;
-    private TabLayout mTabLayout;
-    private MailViewpageAdapter adapter;
-    private ListView mListView;
-    private SimpleAdapter mSimpleAdapter;
-    private String mListName[] = new String[]{"运营专责", "中学指导", "项目A"};
+    private ListView mListView1,mListView2;
     private static ContractFragment instance;
     private List<View> list;
-    private ListListener listListener = new ListListener();
+    private List<String> mListName = new ArrayList<>();
+    private ListListener1 listListener1 = new ListListener1();
+    private ListListener2 listListener2 = new ListListener2();
+    private PinyinComparator comparator = new PinyinComparator();
     public ContractFragment() {
 
     }
@@ -56,47 +59,120 @@ public class ContractFragment extends android.app.Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maillist, container, false);
-        mViewPager = (ViewPager) view.findViewById(R.id.mail_viewpager);
-        mTabLayout = (TabLayout) view.findViewById(R.id.mail_tablayout);
-        date.addToTeam();
+        ViewPager mViewPager = (ViewPager) view.findViewById(R.id.mail_viewpager);
+        TabLayout mTabLayout = (TabLayout) view.findViewById(R.id.mail_tablayout);
+        date.addDate();
+        getName();
+        Collections.sort(mListName, comparator);//按字母排序
         addView();
-        adapter = new MailViewpageAdapter(list);
+
+        MailViewpageAdapter adapter = new MailViewpageAdapter(list);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
-        mListView.setOnItemClickListener(listListener);
+        //设置监听
+        mListView1.setOnItemClickListener(listListener1);
+        mListView2.setOnItemClickListener(listListener2);
         return view;
+    }
+
+    //得到所有的名字
+    private void getName() {
+        for (int i = 0, j = 0; j < date.teamList.size(); j++) {
+            for (int k = 0; k < date.teamList.get(j).getManList().size(); k++) {
+                Log.d("test",date.teamList.get(j).getManList().get(k).getName());
+                mListName.add(date.teamList.get(j).getManList().get(k).getName());
+                i++;
+            }
+        }
+        mListName.remove(1);
+        mListName.remove(7);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        mListName.clear();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
     private void addView() {
         list = new ArrayList<>();
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.fragment1_maillist_project, null);
-        mListView = (ListView) view1.findViewById(R.id.maillist1);
-        mSimpleAdapter = new SimpleAdapter(getActivity(), getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});
-        mListView.setAdapter(mSimpleAdapter);
+        mListView1 = (ListView) view1.findViewById(R.id.maillist1);
+        SimpleAdapter mSimpleAdapter1 = new SimpleAdapter(getActivity(), getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});
+        mListView1.setAdapter(mSimpleAdapter1);
         list.add(view1);
 
         View view2 = LayoutInflater.from(getContext()).inflate(R.layout.fragment2_maillist_project, null);
-
+        mListView2 = (ListView) view2.findViewById(R.id.maillist2);
+        SimpleAdapter mSimpleAdapter2 = new SimpleAdapter(getActivity(), getData2(), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
+        mListView2.setAdapter(mSimpleAdapter2);
         list.add(view2);
     }
+
+
     private List<Map<String, Object>> getData() {
-        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-        for (String aMListName : mListName) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("name", aMListName);
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0 ;i< date.teamList.size();i++) {
+            Log.d("test",date.teamList.get(0).getManList().get(0).getName());
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", date.teamList.get(i).getProjectName());
             list.add(map);
         }
         return list;
     }
-    private class ListListener implements AdapterView.OnItemClickListener{
+    private List<Map<String, Object>> getData2() {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < mListName.size(); i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("name", mListName.get(i));
+            list.add(map);
+        }
+        return list;
+    }
+
+    private class ListListener1 implements AdapterView.OnItemClickListener {
 
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             Intent intent = new Intent();
             Bundle bundle1 = new Bundle();
-            bundle1.putInt("position",i);
+            bundle1.putInt("position", i);
             intent.setClass(getActivity(), NameListActivity.class);
+            Log.d("test", "跳转" + i);
+            intent.putExtras(bundle1);
+            startActivity(intent);
+        }
+    }
+    private class ListListener2 implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            String clickName = mListName.get(i);
+            Man man = new Man();
+            int found = 0;
+            int difMan = 0;
+            for (int j = 0;j<date.teamList.size();j++) {
+                for (int k = 0; k < date.teamList.get(j).getManList().size();k++) {
+                    if (clickName.equals( date.teamList.get(j).getManList().get(k).getName())) {
+                        man = date.teamList.get(j).getManList().get(k);
+                        if (date.teamList.get(j).getManList().get(k).getName().equals("陈思捷")){
+                            difMan = 1;
+                        }else if (date.teamList.get(j).getManList().get(k).getName().equals("匡政泽")){
+                            difMan = 2;
+                        }
+                        found = 1;
+                        break;
+                    }
+                }
+                if (found == 1)
+                    break;
+            }
+            Intent intent = new Intent();
+            Bundle bundle1 = new Bundle();
+            bundle1.putInt("key",difMan);
+            bundle1.putSerializable("man", man);
+            intent.setClass(getActivity(), PersonalDateActivity.class);
             Log.d("test", "跳转" + i);
             intent.putExtras(bundle1);
             startActivity(intent);

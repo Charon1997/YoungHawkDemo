@@ -16,12 +16,11 @@ import java.util.Comparator;
 public class PinyinComparator implements Comparator<Object> {
     @Override
     public int compare(Object o, Object t1) {
-        String[] name1 = (String[]) o;
-        String[] name2 = (String[]) t1;
-        String str1 = getPingYin(name1[0]);
-        String str2 = getPingYin(name2[0]);
-        int flag = str1.compareTo(str2);
-        return flag;
+        String name1 = (String) o;
+        String name2 = (String) t1;
+        String str1 = getPingYin(name1);
+        String str2 = getPingYin(name2);
+        return str1.compareTo(str2);
     }
 
     public String getPingYin(String inputString) {

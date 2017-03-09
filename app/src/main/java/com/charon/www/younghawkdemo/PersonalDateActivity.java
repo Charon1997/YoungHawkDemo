@@ -5,27 +5,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
 public class PersonalDateActivity extends AppCompatActivity {
-    private final static int DATENUMBER = 5;
     private TextView mName,mDuty,qq,mPhoneNum,mEmail;
     private ImageView mImg;
-    private String personalDate[] = new String[DATENUMBER];
     private Toolbar mToolbar;
+    private Man man = new Man();
+    private int dif = 0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mail_personal);
-        final Intent intent = getIntent();
-        personalDate = intent.getStringArrayExtra("man");
+        Bundle bundle=getIntent().getExtras();
+        man=(Man)bundle.getSerializable("man");
+        dif = bundle.getInt("key");
         init();
-        mToolbar.setTitle("通讯录");
+        mToolbar.setTitle(man.getName());
         setSupportActionBar(mToolbar);
-        addDate();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        if (man != null) {
+            addDate();
+        }
     }
 
     private void init() {
@@ -39,10 +50,20 @@ public class PersonalDateActivity extends AppCompatActivity {
     }
 
     private void addDate() {
-        mName.setText(personalDate[0]);
-        mDuty.setText(personalDate[1]);
-        mPhoneNum.setText(personalDate[2]);
-        qq.setText(personalDate[3]);
-        mEmail.setText(personalDate[4]);
+        switch (dif) {
+            case 1:
+                mDuty.setText("运营专责牵头人");
+                break;
+            case 2:
+                mDuty.setText("牵头人   项目指导");
+                break;
+            default:
+                mDuty.setText(man.getDuty());
+                break;
+        }
+        mName.setText(man.getName());
+        mPhoneNum.setText(man.getPhoneNum());
+        qq.setText(man.getQQNum());
+        mEmail.setText(man.getEmail());
     }
 }

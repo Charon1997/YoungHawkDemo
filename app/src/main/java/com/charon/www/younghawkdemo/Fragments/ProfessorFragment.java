@@ -1,7 +1,9 @@
 package com.charon.www.younghawkdemo.Fragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -38,6 +40,7 @@ public class ProfessorFragment extends android.app.Fragment {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class ProfessorFragment extends android.app.Fragment {
         return view;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void addView() {
         list = new ArrayList<>();
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.fragment1_professor, null);

@@ -46,6 +46,7 @@ public class ContractActivity extends AppCompatActivity
 
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("通讯录");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

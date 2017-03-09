@@ -10,11 +10,13 @@
         android:background="@color/colorFive">
 
         <android.support.v7.widget.Toolbar
+            android:elevation="4dp"
             android:id="@+id/mail_nameList_toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/abc_action_bar_default_height_material"
             android:background="@color/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
+            android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </android.support.v7.widget.Toolbar>
     </RelativeLayout>
