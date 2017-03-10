@@ -46,7 +46,6 @@ public class ContractActivity extends AppCompatActivity
 
     private void initView() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("通讯录");
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -96,6 +95,7 @@ public class ContractActivity extends AppCompatActivity
         if (id == R.id.nav_camera) {
             switchFragment(currentFragment,fragmentPool.get(0));
             currentFragment = fragmentPool.get(0);
+            toolbar.setTitle(R.string.mailList);
         } else if (id == R.id.nav_gallery) {
             switchFragment(currentFragment,fragmentPool.get(1));
             currentFragment = fragmentPool.get(1);

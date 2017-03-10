@@ -27,7 +27,9 @@ import com.charon.www.younghawkdemo.adapter.MailViewpageAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,6 +38,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class ContractFragment extends android.app.Fragment {
+    private int firstEnter;
     private Date date = new Date();
     private ListView mListView1,mListView2;
     private static ContractFragment instance;
@@ -44,6 +47,7 @@ public class ContractFragment extends android.app.Fragment {
     private ListListener1 listListener1 = new ListListener1();
     private ListListener2 listListener2 = new ListListener2();
     private PinyinComparator comparator = new PinyinComparator();
+    SharedPreferences spre;
     public ContractFragment() {
 
     }
@@ -61,9 +65,28 @@ public class ContractFragment extends android.app.Fragment {
         View view = inflater.inflate(R.layout.fragment_maillist, container, false);
         ViewPager mViewPager = (ViewPager) view.findViewById(R.id.mail_viewpager);
         TabLayout mTabLayout = (TabLayout) view.findViewById(R.id.mail_tablayout);
+        spre= getActivity().getSharedPreferences("myPref", MODE_PRIVATE);
+        firstEnter = spre.getInt("flag", 0);
+        Log.d("test",firstEnter+"");
         date.addDate();
-        getName();
-        Collections.sort(mListName, comparator);//按字母排序
+        if (firstEnter == 1) {
+            getName();
+            Collections.sort(mListName, comparator);//按字母排序
+            SharedPreferences.Editor editor = spre.edit();
+            editor.putInt("nameSize", mListName.size());
+            editor.putInt("flag", 2);
+            Log.d("test", mListName.toString());
+            //list -> string
+            for (int i = 0; i < mListName.size();i++) {
+                editor.putString("nameList"+i, mListName.get(i));
+            }
+            editor.apply();
+        }else {// string -> list
+            for (int i = 0; i < spre.getInt("nameSize",0);i++) {
+                mListName.add(spre.getString("nameList" + i, "1"));
+            }
+            Log.d("test", mListName.toString());
+        }
         addView();
 
         MailViewpageAdapter adapter = new MailViewpageAdapter(list);
@@ -79,7 +102,6 @@ public class ContractFragment extends android.app.Fragment {
     private void getName() {
         for (int i = 0, j = 0; j < date.teamList.size(); j++) {
             for (int k = 0; k < date.teamList.get(j).getManList().size(); k++) {
-                Log.d("test",date.teamList.get(j).getManList().get(k).getName());
                 mListName.add(date.teamList.get(j).getManList().get(k).getName());
                 i++;
             }
@@ -88,11 +110,7 @@ public class ContractFragment extends android.app.Fragment {
         mListName.remove(7);
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        mListName.clear();
-    }
+
 
     @TargetApi(Build.VERSION_CODES.M)
     private void addView() {
@@ -114,7 +132,6 @@ public class ContractFragment extends android.app.Fragment {
     private List<Map<String, Object>> getData() {
         List<Map<String, Object>> list = new ArrayList<>();
         for (int i = 0 ;i< date.teamList.size();i++) {
-            Log.d("test",date.teamList.get(0).getManList().get(0).getName());
             Map<String, Object> map = new HashMap<>();
             map.put("name", date.teamList.get(i).getProjectName());
             list.add(map);
@@ -178,5 +195,6 @@ public class ContractFragment extends android.app.Fragment {
             startActivity(intent);
         }
     }
+
 
 }

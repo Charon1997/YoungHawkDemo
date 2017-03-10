@@ -52,7 +52,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="230dp"
         android:layout_toRightOf="@id/mail_personalImg">
@@ -65,9 +65,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="8dp"
             android:id="@+id/mail_personalDuty"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="项目指导"
+            android:text="牵头人项目指导"
             android:textSize="22sp"/>
     </LinearLayout>
     <LinearLayout
