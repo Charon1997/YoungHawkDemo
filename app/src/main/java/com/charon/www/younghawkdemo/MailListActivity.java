@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.charon.www.younghawkdemo.adapter.ItemAdapter;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +29,9 @@ public class MailListActivity extends AppCompatActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.mail_toolbar);
         mToolbar.setTitle("");
         setSupportActionBar(mToolbar);
-        SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});
-        mListView.setAdapter(mSimpleAdapter);
+        /*SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});
+        mListView.setAdapter(mSimpleAdapter);*/
+        mListView.setAdapter(new ItemAdapter(this,getData()));
         mListView.setOnItemClickListener(listListener);
     }
 

@@ -1,4 +1,7 @@
-package com.charon.www.younghawkdemo;
+package com.charon.www.younghawkdemo.temp;
+
+import com.charon.www.younghawkdemo.temp.Man;
+import com.charon.www.younghawkdemo.temp.Team;
 
 import java.util.ArrayList;
 import java.util.List;
