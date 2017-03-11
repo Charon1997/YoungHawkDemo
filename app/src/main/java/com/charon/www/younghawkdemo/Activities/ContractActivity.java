@@ -25,7 +25,6 @@ import java.util.List;
 
 public class ContractActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,IContract {
-    private int index;
     private Fragment currentFragment;
     private Toolbar toolbar;
     private final List<Fragment> fragmentPool = Arrays.asList(ContractFragment.getInstance(),ManageFragment.getInstance(),ProfessorFragment.getInstance(), TableFragment.getInstance());
@@ -41,7 +40,7 @@ public class ContractActivity extends AppCompatActivity
     }
 
     private void initData() {
-        index = 0;
+        int index = 0;
         currentFragment = fragmentPool.get(index);
         getFragmentManager().beginTransaction().show(currentFragment).commit();
     }
@@ -70,21 +69,9 @@ public class ContractActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.contract, menu);
-        return true;
-    }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -112,9 +99,7 @@ public class ContractActivity extends AppCompatActivity
             toolbar.setTitle(R.string.table);
         } else if (id == R.id.nav_share) {
             Toast.makeText(this,"Beta Version",Toast.LENGTH_SHORT).show();
-        } /*else if (id == R.id.nav_send) {
-
-        }*/
+        }
         return true;
     }
 

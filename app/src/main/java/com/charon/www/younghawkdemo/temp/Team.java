@@ -1,6 +1,5 @@
 package com.charon.www.younghawkdemo.temp;
 
-import com.charon.www.younghawkdemo.temp.Man;
 
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class Team {
     private List<Man> manList;
     private String projectName;
 
-    public Team(List<Man> manList, String projectName) {
+    Team(List<Man> manList, String projectName) {
         this.manList = manList;
         this.projectName = projectName;
     }

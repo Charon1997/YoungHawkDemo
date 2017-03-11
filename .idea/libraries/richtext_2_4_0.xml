@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="richtext-2.4.0">
     <CLASSES>
-      <root url="file://$USER_HOME$/.android/build-cache/f5573c7bb537dc5d7145629759fdd60541f079c2/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/f5573c7bb537dc5d7145629759fdd60541f079c2/output/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.android/build-cache/27de1666e6898dbaf9f558a8a89d8262f541319f/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/27de1666e6898dbaf9f558a8a89d8262f541319f/output/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

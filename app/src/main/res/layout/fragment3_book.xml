@@ -2,147 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--<ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:padding="16dp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="学员报到"
-                android:textSize="22sp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       1)  学员须提前做好规划，按规定准时报到。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       2)  若有特殊原因无法按时报到，必须提前向牵头人备案，报到后再补齐相关手续。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       3)  未按时报到者，课时按旷课登记。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       4)  从规定开课时间计，超过4周次未完成报到者，退回学员原单位。"/>
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="考勤制度"
-                android:textSize="22sp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       1)  项目开展期间必须严格遵守平台的考勤，凡因病、因事不能参加项目的必须提前办理请假手续。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       2)  按约定时间，由各项目组进行出勤管理，迟到、早退超过2小时视为旷勤一次。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       3)  考勤数据为周报制，主管每周汇总上报考勤数据，作为备案；每月向学员学校邮件报送考勤表一次；"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       4)  参训学员因病请假须持医生诊断证明，无特殊情况不予休假。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       5)  参训学员需临时请假必须提前邮件告知项目主管。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       6)  未请假或请假未批准而不参加项目者按旷勤处理。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       7)  旷勤超过4次者，由项目主管进行训诫与约谈，形成纪要；旷勤超过6次者，由研究中心运营团队进行约谈与训诫，形成纪要并报送学员单位；旷勤超过8次者，由研究中心首席运营专责进行约谈与训诫，形成纪要并通报研究中心、学员单位取消工位、工作证、学员名牌、追求卓越宣言、追回研究中心纪念品；旷勤超过10次者，取消学员资格，退回学员原单位，并报送原单位、教委备案，提请更换项目成员或做不合格处理。"/>
-
-            <TextView
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="实践开发制度"
-                android:textSize="22sp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       1)  学员在受训时间内，专用教室、工位、开发设备统一配发，相对固定。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       2)  实践时须服从项目组统一的指导与管理，遵守纪律，保持桌面整齐并摆放相关物品。禁止在研究中心内吸烟，禁止带领无关人员进入中心。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       3)  自觉爱护研究中心设施。不得随意移动电脑位置，严禁拆开机箱及其附件；严禁将任何附件（如鼠标、键盘、电线板等）带出；严禁学员修改或删除硬盘上的系统软件与应用软件、电脑系统原有设置；"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       4)  实践开发由各项目组组织推进并记录。"/>
-        </LinearLayout>
-    </ScrollView>-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -150,7 +10,7 @@
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="15sp"
                 android:alpha="0.87"
@@ -158,6 +18,7 @@
                 android:id="@+id/text_platform_rules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <include layout="@layout/nmid_intro"/>
         </LinearLayout>
     </ScrollView>
 

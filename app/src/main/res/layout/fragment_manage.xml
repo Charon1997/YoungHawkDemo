@@ -5,31 +5,7 @@
     android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/colorOne">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/book_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/abc_action_bar_default_height_material"
-            android:background="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-        </android.support.v7.widget.Toolbar>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/book"
-            android:layout_centerInParent="true"
-            android:textColor="@color/colorWhite"
-            android:textSize="22sp"/>
-    </RelativeLayout>
-    <android.support.design.widget.TabLayout
-        android:id="@+id/book_tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />-->
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

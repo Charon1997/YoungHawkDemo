@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:id="@+id/table_image_download1"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:src="@drawable/download"
@@ -92,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ImageView
+                android:id="@+id/table_image_download2"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:src="@drawable/download"

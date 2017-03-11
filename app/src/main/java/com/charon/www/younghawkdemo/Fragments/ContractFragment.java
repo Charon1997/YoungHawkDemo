@@ -16,14 +16,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.charon.www.younghawkdemo.Activities.NameListActivity;
+import com.charon.www.younghawkdemo.Activities.PersonalDateActivity;
 import com.charon.www.younghawkdemo.adapter.ItemAdapter;
 import com.charon.www.younghawkdemo.temp.Date;
 import com.charon.www.younghawkdemo.temp.Man;
-import com.charon.www.younghawkdemo.NameListActivity;
-import com.charon.www.younghawkdemo.PersonalDateActivity;
 import com.charon.www.younghawkdemo.PinyinComparator;
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.adapter.MailViewpageAdapter;
+import com.charon.www.younghawkdemo.adapter.MailViewpagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,6 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class ContractFragment extends android.app.Fragment {
-    private int firstEnter;
     private Date date = new Date();
     private ListView mListView1,mListView2;
     private static ContractFragment instance;
@@ -63,8 +62,8 @@ public class ContractFragment extends android.app.Fragment {
         ViewPager mViewPager = (ViewPager) view.findViewById(R.id.mail_viewpager);
         TabLayout mTabLayout = (TabLayout) view.findViewById(R.id.mail_tablayout);
         spre= getActivity().getSharedPreferences("myPref", MODE_PRIVATE);
-        firstEnter = spre.getInt("flag", 0);
-        Log.d("test",firstEnter+"");
+        int firstEnter = spre.getInt("flag", 0);
+        Log.d("test", firstEnter +"");
         date.addDate();
         if (firstEnter == 1) {
             getName();
@@ -86,7 +85,7 @@ public class ContractFragment extends android.app.Fragment {
         }
         addView();
 
-        MailViewpageAdapter adapter = new MailViewpageAdapter(list);
+        MailViewpagerAdapter adapter = new MailViewpagerAdapter(list);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
         //设置监听
@@ -97,10 +96,10 @@ public class ContractFragment extends android.app.Fragment {
 
     //得到所有的名字
     private void getName() {
-        for (int i = 0, j = 0; j < date.teamList.size(); j++) {
+        for (int j = 0; j < date.teamList.size(); j++) {
             for (int k = 0; k < date.teamList.get(j).getManList().size(); k++) {
                 mListName.add(date.teamList.get(j).getManList().get(k).getName());
-                i++;
+
             }
         }
         mListName.remove(1);
@@ -114,15 +113,11 @@ public class ContractFragment extends android.app.Fragment {
         list = new ArrayList<>();
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.fragment1_maillist_project, null);
         mListView1 = (ListView) view1.findViewById(R.id.maillist1);
-        /*SimpleAdapter mSimpleAdapter1 = new SimpleAdapter(getActivity(), getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});*/
-       /* mListView1.setAdapter(mSimpleAdapter1);*/
         mListView1.setAdapter(new ItemAdapter(getContext(),getData()));
         list.add(view1);
 
         View view2 = LayoutInflater.from(getContext()).inflate(R.layout.fragment2_maillist_project, null);
         mListView2 = (ListView) view2.findViewById(R.id.maillist2);
-        /*SimpleAdapter mSimpleAdapter2 = new SimpleAdapter(getActivity(), getData2(), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
-        mListView2.setAdapter(mSimpleAdapter2);*/
         mListView2.setAdapter(new ItemAdapter(getContext(),getData2()));
         list.add(view2);
     }

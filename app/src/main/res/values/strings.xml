@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YoungHawkDemo</string>
+    <string name="app_name">雏鹰计划</string>
     <string name="book">管理手册</string>
     <string name="professor">专家</string>
     <string name="personage">个人</string>
@@ -67,7 +67,7 @@
         * 项目阶段学员编入项目组，具体由项目牵头人负责（具体划分名单见通讯录）\n\n
     </string>
     <string name="text_arrange2">##### 领取资料和信息应答项\n\n
-        * 雏鹰手册  追求卓越宣言  统一VI与邮箱 雏鹰平台工作证  工位安排与名单 \n\n</string>
+        * 雏鹰手册  追求卓越宣言  雏鹰平台工作证   考勤系统登记   研究中心纪念品   工位安排与名牌   证统一VI与邮箱   项目组划分信息   项目组开发设备配置\n\n</string>
     <string name="contract">联系人</string>
     <string name="text_introduce_page1">####各位雏鹰学员，好！\n\n
         &#8195;欢迎进入重邮移动互联网应用工程研究中心，我中心隶属教育部移动通信重点实验室，通过多年的建设，我中心已成为重庆邮电大学通信与信息工程学院学生创新创业实践基地、全国首批“移动互联网创新教育基地”，依托通信与信息工程学院“科研团队”培养规划，通过校级学生科技创新计划、院级教学改革立项、院级产业开发等项目给予重点的支撑，中心已经形成固定研发平台、支撑团队、孵化团队、项目储备、技术输出结合的梯队建设规模，努力为重庆邮电大学移动互联网应用水平提升探索路径。

@@ -10,40 +10,14 @@
             android:orientation="vertical"
             android:padding="16dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <!--<TextView
-                android:id="@+id/professor_name1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="陈前斌"
-                android:textSize="22sp"
-                android:textColor="@color/colorBlack"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:layout_marginTop="8dp"
-                android:text="       博士，教授（二级），博士生导师。重庆邮电大学通信与信息工程学院执行院长，兼重庆邮电大学电子信息与网络工程研究院院长、重庆市移动通信技术重点实验室主任。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:text="       2002年获得国务院政府特殊津贴专家称号，2006年入选教育部“新世纪优秀人才支持计划”，2008年入选重庆市学术技术带头人，2010年入选重庆高校“巴渝学者”，2013年入选重庆市“两江学者”特聘教授。现为国际IEEE高级会员、中国通信学会会士，《中国邮电高校学报》(英文版)、《重庆邮电大学学报（自然科学版）》编委，《中兴通讯技术》编委会副主任，教育部高等学校电子信息类专业教学指导委员会委员、重庆市政府第四届决策咨询专家委员会专家。"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@color/colorBlack"
-                android:text="       陈前斌教授长期从事通信网理论与技术、无线通信、多媒体信息传输与处理等领域的科研和教学工作。先后主持完成国家及省部级20余项科研项目，获得国家科技进步二等奖1项、重庆市技术发明一等奖1项、重庆市科技进步一等奖1项、二、三等奖共5项。获得国家发明专利28项，软件成果登记3项。出版教材著作7部，发表论文被SCI、EI检索120余篇。培养了一批通信人才，获得国家级教学成果二等奖2项，重庆市教学成果4项。"/>&ndash;&gt;-->
+            android:layout_height="wrap_content">
             <TextView
                 android:textSize="15sp"
                 android:lineSpacingExtra="4dp"
                 android:id="@+id/professor_chen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <include layout="@layout/nmid_intro"/>
         </LinearLayout>
     </ScrollView>
 

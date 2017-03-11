@@ -59,7 +59,7 @@ public class IntroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 SharedPreferences.Editor editor = spre.edit();
                 editor.putInt("flag", 1);
-                editor.commit();
+                editor.apply();
                 Intent intent = new Intent(IntroActivity.this,ContractActivity.class);
                 startActivity(intent);
                 finish();

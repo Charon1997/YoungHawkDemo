@@ -3,65 +3,6 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <!--<TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="固定时间"
-        android:textSize="22sp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/colorBlack"
-        android:layout_marginTop="8dp"
-        android:text="       具体交流时间由各个项目组议定，保持每周至少一次交流与开发时间；固定时间交流需要形成交流纪要与照片"/>
-    <TextView
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="灵活时间"
-        android:textSize="22sp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/colorBlack"
-        android:layout_marginTop="8dp"
-        android:text="       按照课题、项目进度，设立灵活交流时间，可以采用QQ、邮件、视频会议等形式进行，需要形成交流纪要"/>
-    <TextView
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="讲授时间"
-        android:textSize="22sp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/colorBlack"
-        android:layout_marginTop="8dp"
-        android:text="       理论学习阶段，可以根据涉及知识点的不同，设立跨小组、跨项目的统一讲授时间，可以采用实地、网络、信息流等形式进行"/>
-    <TextView
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="实践时间"
-        android:textSize="22sp"
-        android:textColor="@color/colorBlack"
-        android:textStyle="bold"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/colorBlack"
-        android:layout_marginTop="8dp"
-        android:text="       统一开发实践时间，由标准固定时间组成，在实践时间中进行工位开发与讨论，使用研究中心提供设备进行开发与问题集中讨论"/>-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -77,6 +18,7 @@
                 android:id="@+id/time_communicate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <include layout="@layout/nmid_intro"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
