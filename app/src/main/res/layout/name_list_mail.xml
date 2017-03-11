@@ -2,19 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="64dp">
-    <ImageView
-        android:layout_marginLeft="16dp"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:src="@drawable/member256"
+    <com.nexuslink.textimageview.TextImageView
+        android:id="@+id/text_image"
+        android:layout_margin="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_vertical"/>
     <TextView
-        android:id="@+id/mail_list_teamName"
+        android:alpha="0.8"
+        android:id="@+id/mail_list_projectName"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:text="成员A"
-        android:textSize="18sp"
-        android:layout_marginLeft="8dp"
+        android:text="成员"
+        android:textSize="16sp"
+        android:layout_marginLeft="16dp"
         android:gravity="center_vertical"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@android:color/black"/>
 </LinearLayout>

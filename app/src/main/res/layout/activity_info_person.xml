@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="256dp">
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/person_toolbar_layout"
+            app:expandedTitleMarginStart="48dp"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll|snap"
+            app:contentScrim="@color/colorPrimaryDark"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/person_toolbar"
+                app:layout_collapseMode="pin"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:src="@drawable/ic_call"
+        android:padding="10dp"
+        android:id="@+id/fab"
+        android:layout_margin="16dp"
+        app:layout_anchorGravity="bottom|right"
+        app:layout_anchor="@id/appbar"
+        android:layout_width="56dp"
+        android:layout_height="56dp" />
+    <android.support.v4.widget.NestedScrollView
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_marginTop="28dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="85dp">
+                <ImageView
+                    android:src="@drawable/ic_call_primary"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="16dp"
+                    android:layout_width="26dp"
+                    android:layout_height="24dp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:alpha="0.8"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"
+                        android:text="41111111"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:text="电话"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="82dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_mail"
+                    android:layout_margin="16dp"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:alpha="0.8"
+                        android:textColor="@android:color/black"
+                        android:textSize="20dp"
+                        android:text="41111111@gmail.com"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:text="邮件"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="85dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_qq"
+                    android:layout_margin="18dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:alpha="0.8"
+                        android:textColor="@android:color/black"
+                        android:textSize="20dp"
+                        android:text="41111111"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:text="QQ"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="85dp">
+                <ImageView
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_star"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp" />
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:alpha="0.8"
+                        android:textColor="@android:color/black"
+                        android:textSize="16dp"
+                        android:text="运营专责"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:text="职责"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.design.widget.CoordinatorLayout>

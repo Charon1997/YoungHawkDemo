@@ -10,6 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.charon.www.younghawkdemo.adapter.ItemAdapter;
+import com.charon.www.younghawkdemo.temp.Date;
+import com.charon.www.younghawkdemo.temp.Man;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,8 +44,9 @@ public class NameListActivity extends AppCompatActivity {
             }
         });
         ListView mListView = (ListView) findViewById(R.id.mail_nameList);
-        SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, getDate(oldPositon), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
-        mListView.setAdapter(mSimpleAdapter);
+        /*SimpleAdapter mSimpleAdapter = new SimpleAdapter(this, getDate(oldPositon), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
+        mListView.setAdapter(mSimpleAdapter);*/
+        mListView.setAdapter(new ItemAdapter(this,getDate(oldPositon)));
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

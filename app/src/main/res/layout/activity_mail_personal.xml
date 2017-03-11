@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/colorFive">
 
         <android.support.v7.widget.Toolbar
             android:elevation="4dp"
@@ -18,7 +14,6 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             app:popupTheme="@style/AppTheme.PopupOverlay">
         </android.support.v7.widget.Toolbar>
-    </RelativeLayout>
     <ImageView
         android:id="@+id/mail_personalImg"
         android:layout_marginTop="80dp"

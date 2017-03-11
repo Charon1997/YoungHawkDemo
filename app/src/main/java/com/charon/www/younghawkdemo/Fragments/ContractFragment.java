@@ -17,8 +17,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
-import com.charon.www.younghawkdemo.Date;
-import com.charon.www.younghawkdemo.Man;
+import com.charon.www.younghawkdemo.adapter.ItemAdapter;
+import com.charon.www.younghawkdemo.temp.Date;
+import com.charon.www.younghawkdemo.temp.Man;
 import com.charon.www.younghawkdemo.NameListActivity;
 import com.charon.www.younghawkdemo.PersonalDateActivity;
 import com.charon.www.younghawkdemo.PinyinComparator;
@@ -27,12 +28,9 @@ import com.charon.www.younghawkdemo.adapter.MailViewpageAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -117,14 +115,16 @@ public class ContractFragment extends android.app.Fragment {
         list = new ArrayList<>();
         View view1 = LayoutInflater.from(getContext()).inflate(R.layout.fragment1_maillist_project, null);
         mListView1 = (ListView) view1.findViewById(R.id.maillist1);
-        SimpleAdapter mSimpleAdapter1 = new SimpleAdapter(getActivity(), getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});
-        mListView1.setAdapter(mSimpleAdapter1);
+        /*SimpleAdapter mSimpleAdapter1 = new SimpleAdapter(getActivity(), getData(), R.layout.project_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_projectName});*/
+       /* mListView1.setAdapter(mSimpleAdapter1);*/
+        mListView1.setAdapter(new ItemAdapter(getContext(),getData()));
         list.add(view1);
 
         View view2 = LayoutInflater.from(getContext()).inflate(R.layout.fragment2_maillist_project, null);
         mListView2 = (ListView) view2.findViewById(R.id.maillist2);
-        SimpleAdapter mSimpleAdapter2 = new SimpleAdapter(getActivity(), getData2(), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
-        mListView2.setAdapter(mSimpleAdapter2);
+        /*SimpleAdapter mSimpleAdapter2 = new SimpleAdapter(getActivity(), getData2(), R.layout.name_list_mail, new String[]{"name"}, new int[]{R.id.mail_list_teamName});
+        mListView2.setAdapter(mSimpleAdapter2);*/
+        mListView2.setAdapter(new ItemAdapter(getContext(),getData2()));
         list.add(view2);
     }
 

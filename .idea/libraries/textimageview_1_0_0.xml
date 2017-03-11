@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="textimageview-1.0.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.android/build-cache/4ea3005eee557ebe91ad6546a1882c2dec006e2d/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/4ea3005eee557ebe91ad6546a1882c2dec006e2d/output/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/nexuslink.rye.TextImageView/textimageview/1.0.0/91532a32697304486bd3bead71ec16a58816f732/textimageview-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

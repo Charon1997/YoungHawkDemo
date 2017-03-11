@@ -1,4 +1,6 @@
-package com.charon.www.younghawkdemo;
+package com.charon.www.younghawkdemo.temp;
+
+import com.charon.www.younghawkdemo.temp.Man;
 
 import java.util.List;
 

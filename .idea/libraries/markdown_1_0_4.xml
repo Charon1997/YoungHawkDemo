@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="markdown-1.0.4">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/daeffd9eff62232654f29fc4833926e3bea66148/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/daeffd9eff62232654f29fc4833926e3bea66148/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/dbceefe2476a211347cc57de9fe616f07be20b72/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/dbceefe2476a211347cc57de9fe616f07be20b72/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
