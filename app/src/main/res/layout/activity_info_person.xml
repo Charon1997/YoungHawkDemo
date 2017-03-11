@@ -59,6 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/person_phone"
                         android:alpha="0.8"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
@@ -88,9 +89,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/person_email"
                         android:alpha="0.8"
                         android:textColor="@android:color/black"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:text="41111111@gmail.com"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -117,9 +119,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/person_qq"
                         android:alpha="0.8"
                         android:textColor="@android:color/black"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:text="41111111"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
@@ -147,9 +150,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/person_duty"
                         android:alpha="0.8"
                         android:textColor="@android:color/black"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:text="运营专责"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />

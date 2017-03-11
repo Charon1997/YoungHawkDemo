@@ -1,6 +1,7 @@
 package com.charon.www.younghawkdemo.Activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,6 +21,7 @@ import java.util.List;
 public class IntroActivity extends AppCompatActivity {
     private LinearLayout indicatorPage1Show;
     private LinearLayout indicatorPage2Show;
+    private SharedPreferences spre;
     private TextView next;
     private TextView finish;
 
@@ -28,6 +30,7 @@ public class IntroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
 
+        spre= getSharedPreferences("myPref", MODE_PRIVATE);
         initView(getData());
 
     }
@@ -54,6 +57,9 @@ public class IntroActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences.Editor editor = spre.edit();
+                editor.putInt("flag", 1);
+                editor.commit();
                 Intent intent = new Intent(IntroActivity.this,ContractActivity.class);
                 startActivity(intent);
                 finish();

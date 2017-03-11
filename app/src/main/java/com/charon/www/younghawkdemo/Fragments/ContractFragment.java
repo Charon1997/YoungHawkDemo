@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import com.charon.www.younghawkdemo.adapter.ItemAdapter;
 import com.charon.www.younghawkdemo.temp.Date;

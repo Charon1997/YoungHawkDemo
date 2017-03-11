@@ -1,7 +1,10 @@
 package com.charon.www.younghawkdemo;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -13,16 +16,17 @@ import com.charon.www.younghawkdemo.temp.Man;
 
 
 public class PersonalDateActivity extends AppCompatActivity {
-    private TextView mName,mDuty,qq,mPhoneNum,mEmail;
-    private ImageView mImg;
+    private TextView mDuty,qq,mPhoneNum,mEmail;
     private CollapsingToolbarLayout mToolbarlayout;
     private Toolbar mToolbar;
     private Man man = new Man();
     private int dif = 0;
+    private FloatingActionButton mFloatingActionButton;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_person);
+        init();
         mToolbarlayout = (CollapsingToolbarLayout) findViewById(R.id.person_toolbar_layout);
         mToolbar = (Toolbar) findViewById(R.id.person_toolbar);
         Bundle bundle=getIntent().getExtras();
@@ -32,6 +36,22 @@ public class PersonalDateActivity extends AppCompatActivity {
         mToolbarlayout.setTitle(man.getName());
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" + man.getPhoneNum());
+                intent.setData(data);
+                startActivity(intent);
+            }
+        });
+        setDate();
        /* Bundle bundle=getIntent().getExtras();
         man=(Man)bundle.getSerializable("man");
         dif = bundle.getInt("key");
@@ -60,28 +80,25 @@ public class PersonalDateActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mImg = (ImageView) findViewById(R.id.mail_personalImg);
-        mName = (TextView) findViewById(R.id.mail_personalName);
-        mDuty = (TextView) findViewById(R.id.mail_personalDuty);
-        qq = (TextView) findViewById(R.id.mail_personalQQ);
-        mPhoneNum = (TextView) findViewById(R.id.mail_personalPhoneNum);
-        mEmail = (TextView) findViewById(R.id.mail_personalEmail);
-      /*  mToolbar = (Toolbar) findViewById(R.id.mail_personal_toolbar);*/
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mDuty = (TextView) findViewById(R.id.person_duty);
+        qq = (TextView) findViewById(R.id.person_qq);
+        mPhoneNum = (TextView) findViewById(R.id.person_phone);
+        mEmail = (TextView) findViewById(R.id.person_email);
     }
 
-    private void addDate() {
+    private void setDate() {
         switch (dif) {
             case 1:
-                mDuty.setText("运营专责牵头人");
+                mDuty.setText("运营专责&&牵头人");
                 break;
             case 2:
-                mDuty.setText("牵头人   项目指导");
+                mDuty.setText("牵头人&&项目指导");
                 break;
             default:
                 mDuty.setText(man.getDuty());
                 break;
         }
-        mName.setText(man.getName());
         mPhoneNum.setText(man.getPhoneNum());
         qq.setText(man.getQQNum());
         mEmail.setText(man.getEmail());

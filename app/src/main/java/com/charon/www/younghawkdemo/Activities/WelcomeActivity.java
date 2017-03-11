@@ -16,7 +16,7 @@ import com.charon.www.younghawkdemo.R;
 
 public class WelcomeActivity extends AppCompatActivity {
     private int firstEnter = 0;
-    SharedPreferences spre;
+    private SharedPreferences spre;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +36,6 @@ public class WelcomeActivity extends AppCompatActivity {
                 if (firstEnter == 0) {
                     Intent intent = new Intent(WelcomeActivity.this, IntroActivity.class);
                     startActivity(intent);
-                    SharedPreferences.Editor editor = spre.edit();
-                    editor.putInt("flag", 1);
-                    editor.commit();
                     finish();
                 } else {
                     Intent intent = new Intent(WelcomeActivity.this, ContractActivity.class);
