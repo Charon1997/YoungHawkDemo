@@ -10,8 +10,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.Fragments.ContractFragment;
+import com.charon.www.younghawkdemo.Fragments.TableFragment;
 import com.charon.www.younghawkdemo.IContract;
 import com.charon.www.younghawkdemo.Fragments.ManageFragment;
 import com.charon.www.younghawkdemo.Fragments.ProfessorFragment;
@@ -26,7 +28,7 @@ public class ContractActivity extends AppCompatActivity
     private int index;
     private Fragment currentFragment;
     private Toolbar toolbar;
-    private final List<Fragment> fragmentPool = Arrays.asList(ContractFragment.getInstance(),ManageFragment.getInstance(),ProfessorFragment.getInstance());
+    private final List<Fragment> fragmentPool = Arrays.asList(ContractFragment.getInstance(),ManageFragment.getInstance(),ProfessorFragment.getInstance(), TableFragment.getInstance());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,15 +105,16 @@ public class ContractActivity extends AppCompatActivity
         } else if (id == R.id.nav_slideshow) {
             switchFragment(currentFragment,fragmentPool.get(2));
             currentFragment = fragmentPool.get(2);
-
             toolbar.setTitle(R.string.professor);
         } else if (id == R.id.nav_manage) {
-
+            switchFragment(currentFragment,fragmentPool.get(3));
+            currentFragment = fragmentPool.get(3);
+            toolbar.setTitle(R.string.table);
         } else if (id == R.id.nav_share) {
+            Toast.makeText(this,"Beta Version",Toast.LENGTH_SHORT).show();
+        } /*else if (id == R.id.nav_send) {
 
-        } else if (id == R.id.nav_send) {
-
-        }
+        }*/
         return true;
     }
 
