@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -22,10 +23,14 @@ import com.charon.www.younghawkdemo.Costum.StatusUtil;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ContractActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener ,IContract {
     private Fragment currentFragment;
+    private boolean isQuit = false;
+    private Timer timer = new Timer();
     private Toolbar toolbar;
     private final List<Fragment> fragmentPool = Arrays.asList(ContractFragment.getInstance(),ManageFragment.getInstance(),ProfessorFragment.getInstance(), TableFragment.getInstance());
 
@@ -111,5 +116,27 @@ public class ContractActivity extends AppCompatActivity
             getFragmentManager().beginTransaction().add(R.id.content_contract,to).commit();
         }
         getFragmentManager().beginTransaction().hide(from).show(to).commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (isQuit == false) {
+                isQuit = true;
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                TimerTask task = null;
+                task = new TimerTask() {
+                    @Override
+                    public void run() {
+                        isQuit = false;
+                    }
+                };
+                timer.schedule(task,2000);
+            }else {
+                finish();
+                System.exit(0);
+            }
+        }
+        return true;
     }
 }
