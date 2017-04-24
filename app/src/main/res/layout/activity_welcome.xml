@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@android:color/white"
-    tools:context="com.charon.www.younghawkdemo.Activities.WelcomeActivity">
+    tools:context=".ui.Activities.WelcomeActivity">
     <LinearLayout
         android:id="@+id/launcher"
         android:layout_centerInParent="true"

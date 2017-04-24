@@ -11,12 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.ContractActivity"
+            android:name=".ui.Activities.ContractActivity"
             android:label="@string/contract"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"></activity>
         <activity
-            android:name=".Activities.WelcomeActivity"
+            android:name=".ui.Activities.WelcomeActivity"
             android:theme="@style/WelcomeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,11 +24,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.IntroActivity"
+        <activity android:name=".ui.Activities.IntroActivity"
             android:theme="@style/AppTheme">
         </activity>
-        <activity android:name=".Activities.NameListActivity"/>
-        <activity android:name=".Activities.PersonalDateActivity"/>
+        <activity android:name=".ui.Activities.NameListActivity"/>
+        <activity android:name=".ui.Activities.PersonalDateActivity"/>
+        <activity android:name=".ui.Activities.LoginActivity"/>
+        <activity android:name=".ui.Activities.MainActivity"/>
+        <activity android:name=".ui.Activities.MailListActivity"/>
+        <activity android:name=".ui.Activities.ManageActivity"/>
+        <activity android:name=".ui.Activities.ProfessorActivity"/>
+        <activity android:name=".ui.Activities.TableActivity"/>
     </application>
 
 </manifest>

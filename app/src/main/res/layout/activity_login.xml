@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/login_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <LinearLayout
+        android:id="@+id/login_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo256" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/login_name"
+            android:layout_width="260dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:hint="请输入您的手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_singleLineEllipsis="true"
+            app:met_iconLeft="@drawable/login_username"/>
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/login_password"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:hint="请输入您的密码"
+            android:inputType="textPassword"
+            android:maxLength="6"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:met_clearButton="true"
+            app:met_floatingLabel="highlight"
+            app:met_singleLineEllipsis="true"
+            app:met_iconLeft="@drawable/login_password"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/login_linear">
+
+        <Button
+            android:id="@+id/login_send_button"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:text="登录"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/login_signup_button"
+            android:layout_width="260dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_send_button"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:text="注册"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/login_visitor_button"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignLeft="@id/login_send_button"
+            android:layout_below="@id/login_signup_button"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="8dp"
+            android:background="#00000000"
+            android:gravity="left"
+            android:text="游客进入"
+            android:textSize="12dp" />
+
+        <Button
+            android:id="@+id/login_forget_button"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_alignRight="@id/login_send_button"
+            android:layout_below="@id/login_signup_button"
+            android:layout_marginRight="3dp"
+            android:layout_marginTop="8dp"
+            android:background="#00000000"
+            android:gravity="right"
+            android:text="忘记密码"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.charon.www.younghawkdemo.Fragments.IntroPage2Fragment">
+    tools:context=".ui.Fragments.IntroPage2Fragment">
     <RelativeLayout
         android:layout_marginBottom="52dp"
         android:layout_weight="1"

@@ -4,7 +4,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context="com.charon.www.younghawkdemo.Fragments.TableFragment">
+    tools:context=".ui.Fragments.TableFragment">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/table_toolbar"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.Toolbar>
     <android.support.v7.widget.CardView
         android:layout_marginTop="6dp"
         android:layout_marginLeft="8dp"
