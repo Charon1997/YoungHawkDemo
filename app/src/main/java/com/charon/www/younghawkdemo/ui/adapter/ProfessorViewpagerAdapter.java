@@ -7,12 +7,12 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * Created by Charon on 2017/3/4.
+ * Created by Administrator on 2017/3/4.
  */
-public class BookViewpageAdapter extends PagerAdapter {
+public class ProfessorViewpagerAdapter extends PagerAdapter {
     private List<View> list_view;
-    private String[] titles = {"交流时间","总体安排","平台制度"};
-    public BookViewpageAdapter(List<View> list_view) {
+    private String[] titles = {"陈前斌","唐  宏"};
+    public ProfessorViewpagerAdapter(List<View> list_view) {
         this.list_view = list_view;
     }
     @Override

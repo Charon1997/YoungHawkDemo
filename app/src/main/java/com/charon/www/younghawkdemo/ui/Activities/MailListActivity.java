@@ -108,7 +108,7 @@ public class MailListActivity extends AppCompatActivity{
         mListName.remove(7);
     }
 
-    @TargetApi(Build.VERSION_CODES.M)
+
     private void addView() {
         list = new ArrayList<>();
         View view1 = LayoutInflater.from(this).inflate(R.layout.fragment1_maillist_project, null);

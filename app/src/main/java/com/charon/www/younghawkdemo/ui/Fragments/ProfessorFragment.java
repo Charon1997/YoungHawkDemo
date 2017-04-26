@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.ui.adapter.ProfessorViewpageAdapter;
+import com.charon.www.younghawkdemo.ui.adapter.ProfessorViewpagerAdapter;
 import com.zzhoujay.richtext.RichText;
 
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class ProfessorFragment extends android.app.Fragment {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private List<View> list;
-    private ProfessorViewpageAdapter adapter;
+    private ProfessorViewpagerAdapter adapter;
     private static ProfessorFragment instance;
 
     public ProfessorFragment() {
@@ -51,7 +51,7 @@ public class ProfessorFragment extends android.app.Fragment {
 
         //加载view
         addView();
-        adapter = new ProfessorViewpageAdapter(list);
+        adapter = new ProfessorViewpagerAdapter(list);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
 

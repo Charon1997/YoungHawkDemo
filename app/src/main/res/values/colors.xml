@@ -12,4 +12,6 @@
     <color name="colorFive">#FF8D83</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorBlack">#000000</color>
+
+    <color name="colorTextPrimary">#CC000000</color>
 </resources>

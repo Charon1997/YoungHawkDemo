@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.ui.adapter.BookViewpageAdapter;
+import com.charon.www.younghawkdemo.ui.adapter.BookViewpagerAdapter;
 import com.zzhoujay.richtext.RichText;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class ManageFragment extends android.app.Fragment {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private List<View> list;
-    private BookViewpageAdapter adapter;
+    private BookViewpagerAdapter adapter;
     private static ManageFragment instance;
 
     public ManageFragment() {
@@ -49,7 +49,7 @@ public class ManageFragment extends android.app.Fragment {
         //
         addView();
         Log.d("test", ":" + list.size());
-        adapter = new BookViewpageAdapter(list);
+        adapter = new BookViewpagerAdapter(list);
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
         return view;
