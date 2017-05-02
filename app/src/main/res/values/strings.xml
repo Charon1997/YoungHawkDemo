@@ -94,5 +94,6 @@
     <string name="next">下一步</string>
     <string name="finish">完成</string>
     <string name="others">其他</string>
+    <string name="menu_release">发布</string>
 
 </resources>

@@ -68,10 +68,10 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
                     animation.setDuration(durationMillis);
                     ((MyViewHolder) holder).mTvContent.startAnimation(animation);
                 } else {
-
                     ((MyViewHolder) holder).mTvContent.setMaxLines(4);
                     ((MyViewHolder) holder).mTvMore.setText("更多");
                     mMore = false;
+
                     Animation animation = new Animation() {
                         //interpolatedTime 为当前动画帧对应的相对时间，值总在0-1之间
                         protected void applyTransformation(float interpolatedTime, Transformation t) { //根据ImageView旋转动画的百分比来显示textview高度，达到动画效果
@@ -85,9 +85,6 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
                 }
             }
         });
-
-
-
     }
 
     @Override

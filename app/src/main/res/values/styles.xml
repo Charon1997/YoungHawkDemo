@@ -6,8 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
-
+        <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
         <item name="actionOverflowMenuStyle">@style/CKMenuStyle</item>
     </style>
 
@@ -16,7 +15,6 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@android:color/white</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:navigationBarColor">@android:color/white</item>
 
         <item name="actionOverflowMenuStyle">@style/CKMenuStyle</item>
     </style>
@@ -28,4 +26,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MenuTextStyle">
+        <item name="android:textSize">18sp</item>
+    </style>
 </resources>

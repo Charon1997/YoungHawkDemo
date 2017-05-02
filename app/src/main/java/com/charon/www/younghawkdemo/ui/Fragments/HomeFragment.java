@@ -9,8 +9,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
@@ -55,6 +57,8 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
+
     private void addView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_recycler);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
@@ -94,4 +98,6 @@ public class HomeFragment extends Fragment {
             mHomeList.add(homeItem);
         }
     }
+
+
 }

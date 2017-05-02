@@ -163,6 +163,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 mFab.setVisibility(View.INVISIBLE);
                 switchFragment(currentNavFragment, fragmentNavPool.get(3));
                 currentNavFragment = fragmentNavPool.get(3);
+                toolbar.setTitle("我的");
                 break;
         }
     }
@@ -210,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public void onClick(View v) {
             Toast.makeText(MainActivity.this, "首页", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, FabHomeActivity.class);
+            startActivity(intent);
         }
     }
     private class OnFabClickListener2 implements View.OnClickListener{

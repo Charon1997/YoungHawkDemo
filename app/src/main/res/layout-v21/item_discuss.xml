@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/item_discuss_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        app:cardCornerRadius="4dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:stateListAnimator="@drawable/lift_on_touch">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="24dp">
+            <TextView
+                android:id="@+id/item_discuss_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:text="雏鹰计划"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/item_discuss_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/item_discuss_name"
+                android:layout_alignLeft="@+id/item_discuss_name"
+                android:layout_alignStart="@+id/item_discuss_name"
+                android:text="2017年5月30日    18:52"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/item_discuss_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:textSize="14sp"
+                android:layout_below="@id/item_discuss_time"
+                android:layout_alignLeft="@id/item_discuss_name"
+                android:layout_alignStart="@id/item_discuss_name"
+                android:layout_marginBottom="16dp"
+                android:text="今天我们来带了这里看了大家特么撒了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里啊啊啊啊啊" />
+         
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

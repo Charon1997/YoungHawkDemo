@@ -30,6 +30,7 @@
         <activity android:name=".ui.Activities.ManageActivity"/>
         <activity android:name=".ui.Activities.ProfessorActivity"/>
         <activity android:name=".ui.Activities.TableActivity"/>
+        <activity android:name=".ui.Activities.FabHomeActivity"/>
     </application>
 
 </manifest>
