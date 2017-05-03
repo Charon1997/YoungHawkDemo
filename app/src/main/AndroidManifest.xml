@@ -31,6 +31,8 @@
         <activity android:name=".ui.Activities.ProfessorActivity"/>
         <activity android:name=".ui.Activities.TableActivity"/>
         <activity android:name=".ui.Activities.FabHomeActivity"/>
+        <activity android:name=".ui.Activities.FabPlanActivity"/>
+        <activity android:name=".ui.Activities.FabDiscussActivity"/>
     </application>
 
 </manifest>

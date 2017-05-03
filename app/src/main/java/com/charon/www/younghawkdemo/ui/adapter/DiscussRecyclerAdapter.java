@@ -14,7 +14,7 @@ import com.charon.www.younghawkdemo.model.Time;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/5/2.
+ * Created by Charon on 2017/5/2.
  */
 
 public class DiscussRecyclerAdapter extends RecyclerView.Adapter {

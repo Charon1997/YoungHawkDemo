@@ -15,7 +15,7 @@ import com.charon.www.younghawkdemo.view.ILoginView;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 /**
- * Created by Administrator on 2017/4/20.
+ * Created by Charon on 2017/4/20.
  */
 
 public class LoginActivity extends AppCompatActivity implements ILoginView {

@@ -9,7 +9,7 @@ import android.view.View;
 import com.charon.www.younghawkdemo.R;
 
 /**
- * Created by Administrator on 2017/4/24.
+ * Created by Charon on 2017/4/24.
  */
 
 public class TableActivity extends AppCompatActivity {

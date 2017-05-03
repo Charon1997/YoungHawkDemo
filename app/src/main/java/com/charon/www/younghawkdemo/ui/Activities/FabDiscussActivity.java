@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,22 +13,24 @@ import android.widget.Toast;
 import com.charon.www.younghawkdemo.R;
 
 /**
- * Created by Charon on 2017/5/2.
+ * Created by Charon on 2017/5/3.
  */
 
-public class FabHomeActivity extends AppCompatActivity {
-    private EditText mEditText;
+public class FabDiscussActivity extends AppCompatActivity {
+    private EditText mEtTitle,mEtContent;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fab_home);
+        setContentView(R.layout.activity_fab_discuss);
         initView();
     }
 
     private void initView() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.fab_home_toolbar);
-        mEditText = (EditText) findViewById(R.id.fab_home_edit);
-        mToolbar.setTitle("发动态");
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.fab_discuss_toolbar);
+        mEtTitle = (EditText) findViewById(R.id.fab_discuss_et_title);
+        mEtContent = (EditText) findViewById(R.id.fab_discuss_et_content);
+
+        mToolbar.setTitle("讨论与集中");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,7 @@ public class FabHomeActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -55,7 +57,7 @@ public class FabHomeActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.fab_home_release) {
-            Toast.makeText(this, "" + mEditText.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "标题" + mEtTitle.getText()+"内容"+mEtContent.getText(), Toast.LENGTH_SHORT).show();
             //上传
             finish();
             return true;

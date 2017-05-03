@@ -21,7 +21,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by Administrator on 2017/4/26.
+ * Created by Charon on 2017/4/26.
  */
 
 public class PlanRecyclerAdapter extends RecyclerView.Adapter {

@@ -47,7 +47,7 @@ import java.util.TimerTask;
 import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_SHIFTING;
 
 /**
- * Created by Administrator on 2017/4/24.
+ * Created by Charon on 2017/4/24.
  */
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IContract, BottomNavigationBar.OnTabSelectedListener{
@@ -219,12 +219,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         public void onClick(View v) {
             Toast.makeText(MainActivity.this, "计划", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, FabPlanActivity.class);
+            startActivity(intent);
         }
     }
     private class OnFabClickListener3 implements View.OnClickListener{
         @Override
         public void onClick(View v) {
             Toast.makeText(MainActivity.this, "讨论", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, FabDiscussActivity.class);
+            startActivity(intent);
         }
     }
 }

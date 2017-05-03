@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/4/24.
+ * Created by Charon on 2017/4/24.
  */
 
 public class ManageActivity extends AppCompatActivity {

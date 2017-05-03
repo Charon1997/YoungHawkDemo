@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <android.support.v7.widget.Toolbar
+            app:elevation="4dp"
+            android:id="@+id/fab_discuss_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary">
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+    <EditText
+        android:id="@+id/fab_discuss_et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:background="@drawable/et"
+        android:layout_margin="8dp"
+        android:hint="标题（必填），4-40字"
+        android:gravity="start|top"
+        android:padding="8dp"
+        android:ellipsize="start"/>
+    <EditText
+        android:id="@+id/fab_discuss_et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="4"
+        android:maxLines="6"
+        android:background="@drawable/et"
+        android:layout_margin="8dp"
+        android:hint="正文（必填），15-500字"
+        android:gravity="start|top"
+        android:padding="8dp"
+        android:ellipsize="start"/>
+</LinearLayout>
