@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -28,6 +30,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.widget.Toast;
 
+import com.androidadvance.topsnackbar.TSnackbar;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.charon.www.younghawkdemo.Costum.StatusUtil;
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private BottomNavigationBar mBNBar;
     private FloatingActionButton mFab;
+    //private CoordinatorLayout mConstraintLayout;
     private OnFabClickListener1 onFabClickListener1 = new OnFabClickListener1();
     private OnFabClickListener2 onFabClickListener2 = new OnFabClickListener2();
     private OnFabClickListener3 onFabClickListener3 = new OnFabClickListener3();
@@ -84,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //mConstraintLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator);
 
         mBNBar = (BottomNavigationBar) findViewById(R.id.bottom_nav_bar);
         mBNBar.addItem(new BottomNavigationItem(R.drawable.nav_home, "主页"))
@@ -129,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, TableActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(this, "Beta Version", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Beta Version 1.1", Toast.LENGTH_SHORT).show();
         }
         return true;
     }
@@ -190,7 +196,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (!isQuit) {
                 isQuit = true;
-                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                //TSnackbar tSnackbar = TSnackbar.make(mConstraintLayout,"点击两次退出",TSnackbar.LENGTH_SHORT);
+                //tSnackbar.show();
+                Toast.makeText(this, "点击两次退出", Toast.LENGTH_SHORT).show();
                 TimerTask task = null;
                 task = new TimerTask() {
                     @Override

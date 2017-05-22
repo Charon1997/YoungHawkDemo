@@ -17,7 +17,6 @@
         app:cardCornerRadius="4dp"
         app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless"
         android:stateListAnimator="@drawable/lift_on_touch">
 
         <RelativeLayout

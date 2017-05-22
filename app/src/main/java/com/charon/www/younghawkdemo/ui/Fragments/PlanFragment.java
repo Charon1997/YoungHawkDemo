@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -54,8 +55,8 @@ public class PlanFragment extends Fragment {
 
     private void addView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.plan_recycler);
-        RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(manager);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new PlanRecyclerAdapter(mPlanList,getActivity());
         mRecyclerView.setAdapter(adapter);
@@ -81,14 +82,49 @@ public class PlanFragment extends Fragment {
                 }, 5000);
             }
         });
+
+
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+
+            }
+        });
     }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        int position = adapter.getPosition();
+        switch (id) {
+            case 0:
+                Toast.makeText(getActivity(), "编辑"+position, Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(getActivity(), "删除"+position, Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
 
     private void addDate(int j) {
         mPlanList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
             Time time = new Time(2017,2,3,12,i);
-            PlanItem planList = new PlanItem("Charon",time,"这是一个计划计划计划计划很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
+            PlanItem planList = new PlanItem("Charon",time,"这是一个计划计划计划计划很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
             mPlanList.add(planList);
         }
+        Time time = new Time(2017,2,3,12,23);
+        PlanItem planList = new PlanItem("Charon",time,"这是一个计划计划计划计划很划很很长很长长的测试文字段"+23);
+        mPlanList.add(planList);
     }
 }

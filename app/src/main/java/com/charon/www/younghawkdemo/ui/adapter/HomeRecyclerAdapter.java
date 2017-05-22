@@ -1,23 +1,18 @@
 package com.charon.www.younghawkdemo.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.biz.MyItemClickListener;
-import com.charon.www.younghawkdemo.biz.MyItemLongClickListener;
 import com.charon.www.younghawkdemo.model.HomeItem;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.Fragments.HomeFragment;
@@ -30,12 +25,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by Charon on 2017/4/25.
  */
 
-public class HomeRecyclerAdapter extends RecyclerView.Adapter {
+public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     private List<HomeItem> list;//相关数据
     private Context mContext;
     private int position;
+    private HomeFragment homeFragment = new HomeFragment();
 
-    public int getPosition1() {
+    public int getPosition() {
         return position;
     }
 
@@ -71,7 +67,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 Toast.makeText(mContext, "喜欢了一下", Toast.LENGTH_SHORT).show();
-            }
+             }
         });
         ((MyViewHolder) holder).mIvComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,8 +75,22 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter {
                 Toast.makeText(mContext, "评论了一下", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
+
+        ((MyViewHolder)holder).mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                homeFragment.showInf(list,position);
+            }
+        });
+        ((MyViewHolder)holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPosition(position);
+                return false;
+            }
+        });
+    }
     @Override
     public int getItemCount() {
         return list.size();
@@ -106,57 +116,30 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter {
 
 
 
-    private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener,View.OnLongClickListener,MenuItem.OnMenuItemClickListener {
+
+    private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         private TextView mTvName, mTvTime, mTvContent;
         private ImageView mIvLike, mIvComment;
         private CircleImageView mCivHead;
-
+        private CardView mCardView;
 
         MyViewHolder(View itemView) {
             super(itemView);
+            mCardView = (CardView) itemView.findViewById(R.id.item_home_card);
             mTvName = (TextView) itemView.findViewById(R.id.item_home_name);
             mTvTime = (TextView) itemView.findViewById(R.id.item_home_time);
             mTvContent = (TextView) itemView.findViewById(R.id.item_home_content);
             mIvLike = (ImageView) itemView.findViewById(R.id.item_home_like);
             mIvComment = (ImageView) itemView.findViewById(R.id.item_home_img_comment);
             mCivHead = (CircleImageView) itemView.findViewById(R.id.item_home_img_head);
-            itemView.setOnCreateContextMenuListener(this);
-            itemView.setOnLongClickListener(this);
-        }
 
+            mCardView.setOnCreateContextMenuListener(this);
+        }
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            MenuItem edit = menu.add(0, 1, 0, "编辑");
-            MenuItem delete =menu.add(0, 2, 0, "删除");
-            Log.d("123", "创建了");
-            edit.setOnMenuItemClickListener(this);
-            delete.setOnMenuItemClickListener(this);
-        }
-
-
-
-        @Override
-        public boolean onLongClick(View v) {
-            return true;
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            int position = -1;
-            position = getPosition1();
-            if (position >= 0) {
-                switch (item.getItemId()) {
-                    case 1:
-                        Log.d("123", "编辑" + position);
-                        break;
-                    case 2:
-                        Log.d("123", "删除" + position);
-                        deleteItem(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
-                        break;
-                }
-            }
-            return true;
+            menu.add(0, 0, 0, "编辑");
+            menu.add(0, 1, 0, "删除");
         }
     }
 
@@ -203,6 +186,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter {
         this.list = list;
         notifyDataSetChanged();
     }
+
     public void deleteItem(int i) {
         int size = list.size();
         if (size > 0) {

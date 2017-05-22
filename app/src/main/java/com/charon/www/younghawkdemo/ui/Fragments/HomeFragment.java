@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.biz.MyRecClickListener;
 import com.charon.www.younghawkdemo.model.HomeItem;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.adapter.HomeRecyclerAdapter;
@@ -52,12 +53,22 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         addDate(20);
         addView(view);
-
-
         return view;
     }
-
-
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        int position = adapter.getPosition();
+        switch (id) {
+            case 0:
+                Toast.makeText(getActivity(), "编辑"+position, Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(getActivity(), "删除"+position, Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
 
     private void addView(View view) {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_recycler);
@@ -75,7 +86,6 @@ public class HomeFragment extends Fragment {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
                         for (int i = 0; i <1; i++) {
                             Time time = new Time(2017,2,3,12,i);
                             HomeItem homeItem = new HomeItem(R.drawable.charonhead,"Charon",time,"这是一个很长很长很长很长很长很长很长很长的刷新测试文字段"+i,0,0);
@@ -90,6 +100,10 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    public void showInf(List<HomeItem> list, int position) {
+        //Toast.makeText(getActivity(), "点击的名字" + list.get(position).getUserName(), Toast.LENGTH_SHORT).show();
+    }
+
     private void addDate(int j) {
         mHomeList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
@@ -100,4 +114,8 @@ public class HomeFragment extends Fragment {
     }
 
 
+
+    public void clickLong() {
+        Toast.makeText(getActivity(), "long", Toast.LENGTH_SHORT).show();
+    }
 }

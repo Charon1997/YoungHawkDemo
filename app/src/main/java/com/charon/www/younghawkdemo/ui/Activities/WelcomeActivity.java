@@ -20,7 +20,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         spre= getSharedPreferences("myPref", MODE_PRIVATE);
         firstEnter = spre.getInt("flag", 0);
+
         setContentView(R.layout.activity_welcome);
+
         LinearLayout logoView = (LinearLayout) findViewById(R.id.launcher);
         AlphaAnimation animation = new AlphaAnimation(0, 1);
         animation.setDuration(2000);
@@ -39,7 +41,6 @@ public class WelcomeActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }
-
             }
         }, 2500);
     }
