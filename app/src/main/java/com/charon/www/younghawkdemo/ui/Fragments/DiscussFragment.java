@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.biz.MyRecClickListener;
-import com.charon.www.younghawkdemo.model.PlanItem;
+import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.adapter.DiscussRecyclerAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
@@ -41,7 +41,7 @@ public class DiscussFragment extends Fragment {
 
 
     //临时数据
-    private List<PlanItem> mDiscussList;
+    private List<PlanBean> mDiscussList;
 
 
     public static DiscussFragment getInstance() {
@@ -99,7 +99,7 @@ public class DiscussFragment extends Fragment {
 
                         for (int i = 0; i <1; i++) {
                             Time time = new Time(2017,2,3,12,i);
-                            PlanItem homeItem = new PlanItem("Charon",time,"这是一个讨论很长很长很长很长很长很长很长很长的刷新测试文字段"+i);
+                            PlanBean homeItem = new PlanBean("Charon",time,"这是一个讨论很长很长很长很长很长很长很长很长的刷新测试文字段"+i);
                             mDiscussList.add(0,homeItem);
                         }
                         adapter.addHeadItem(mDiscussList);
@@ -129,7 +129,7 @@ public class DiscussFragment extends Fragment {
                             Log.d("123", "onsrollstate");
                                 for (int i = 0; i <1; i++) {
                                     Time time = new Time(2017,2,3,17,i);
-                                    PlanItem homeItem = new PlanItem("Charon",time,"这是一个讨论很长很长很长很长很长很长很长很长的底部测试文字段111"+i);
+                                    PlanBean homeItem = new PlanBean("Charon",time,"这是一个讨论很长很长很长很长很长很长很长很长的底部测试文字段111"+i);
                                     mDiscussList.add(homeItem);
                                 }
                                 adapter.addFooterItem(mDiscussList);
@@ -156,7 +156,7 @@ public class DiscussFragment extends Fragment {
         mDiscussList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
             Time time = new Time(2017,2,3,12,i);
-            PlanItem planList = new PlanItem("Charon",time,"这是一个讨论讨论讨论讨论讨论讨论讨论讨论讨论讨论讨论很长讨论讨论讨论讨论讨论讨论长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
+            PlanBean planList = new PlanBean("Charon",time,"这是一个讨论讨论讨论讨论讨论讨论讨论讨论讨论讨论讨论很长讨论讨论讨论讨论讨论讨论长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
             mDiscussList.add(planList);
         }
     }

@@ -4,12 +4,12 @@ package com.charon.www.younghawkdemo.model;
  * Created by Administrator on 2017/4/26.
  */
 
-public class PlanItem {
+public class PlanBean {
     private String userName;
     private Time pubTime;
     private String pubContent;
 
-    public PlanItem(String userName, Time pubTime, String pubContent) {
+    public PlanBean(String userName, Time pubTime, String pubContent) {
         this.userName = userName;
         this.pubTime = pubTime;
         this.pubContent = pubContent;

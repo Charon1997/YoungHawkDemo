@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Administrator on 2017/4/25.
  */
 
-public class HomeItem {
+public class HomeBean {
     private int img;
     private String userName;
     private Time pubTime;
@@ -14,7 +14,7 @@ public class HomeItem {
     private int likeNum;
     private int commentNum;
 
-    public HomeItem(int img, String userName, Time pubTime, String pubContent, int likeNum, int commentNum) {
+    public HomeBean(int img, String userName, Time pubTime, String pubContent, int likeNum, int commentNum) {
         this.img = img;
         this.userName = userName;
         this.pubTime = pubTime;

@@ -15,8 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeItem;
-import com.charon.www.younghawkdemo.model.PlanItem;
+import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.adapter.HomeRecyclerAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
@@ -35,7 +34,7 @@ public class PlanFragment extends Fragment {
     private static PlanFragment instance;
 
     //临时数据
-    private List<PlanItem> mPlanList;
+    private List<PlanBean> mPlanList;
 
     public static PlanFragment getInstance() {
         if (instance == null) {
@@ -72,7 +71,7 @@ public class PlanFragment extends Fragment {
 
                         for (int i = 0; i <1; i++) {
                             Time time = new Time(2017,2,3,12,i);
-                            PlanItem homeItem = new PlanItem("Charon",time,"这是一个计划很长很长很长很长很长很长很长很长的刷新测试文字段"+i);
+                            PlanBean homeItem = new PlanBean("Charon",time,"这是一个计划很长很长很长很长很长很长很长很长的刷新测试文字段"+i);
                             mPlanList.add(0,homeItem);
                         }
                         adapter.addHeadItem(mPlanList);
@@ -120,11 +119,11 @@ public class PlanFragment extends Fragment {
         mPlanList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
             Time time = new Time(2017,2,3,12,i);
-            PlanItem planList = new PlanItem("Charon",time,"这是一个计划计划计划计划很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
+            PlanBean planList = new PlanBean("Charon",time,"这是一个计划计划计划计划很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很划很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
             mPlanList.add(planList);
         }
         Time time = new Time(2017,2,3,12,23);
-        PlanItem planList = new PlanItem("Charon",time,"这是一个计划计划计划计划很划很很长很长长的测试文字段"+23);
+        PlanBean planList = new PlanBean("Charon",time,"这是一个计划计划计划计划很划很很长很长长的测试文字段"+23);
         mPlanList.add(planList);
     }
 }

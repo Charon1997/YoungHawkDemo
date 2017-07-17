@@ -13,10 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeItem;
+import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.Fragments.HomeFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -26,10 +27,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
-    private List<HomeItem> list;//相关数据
+    private static boolean noMore = false;
+    private static boolean onError = false;
+
+    private List<HomeBean> list;//相关数据
     private Context mContext;
     private int position;
     private HomeFragment homeFragment = new HomeFragment();
+    private static final int TYPE_ITEM = 0;
+    private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_END = 2;
+    private static final int TYPE_ERROR = 3;
 
     public int getPosition() {
         return position;
@@ -40,7 +48,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     }
 
 
-    public HomeRecyclerAdapter(List<HomeItem> list, Context context) {
+    public HomeRecyclerAdapter(List<HomeBean> list, Context context) {
         this.list = list;
         this.mContext = context;
     }
@@ -48,60 +56,79 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if (viewType == 0) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home, parent, false);
-            return new MyViewHolder(view);
-        } else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_footer, parent, false);
-            return new FooterHolder(view);
+        switch (viewType) {
+            case TYPE_ITEM:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home, parent, false);
+                return new MyViewHolder(view);
+
+            case TYPE_FOOTER:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_footer, parent, false);
+                return new FooterHolder(view);
+            case TYPE_END:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_end, parent, false);
+                return new EndHolder(view);
+            case TYPE_ERROR:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_error, parent, false);
+                return new ErrorHolder(view);
+            default:return null;
         }
     }
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        ((MyViewHolder) holder).mCivHead.setImageResource(list.get(position).getImg());
-        ((MyViewHolder) holder).mTvName.setText(list.get(position).getUserName());
-        ((MyViewHolder) holder).mTvTime.setText(changeTime(position));
-        ((MyViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
-        ((MyViewHolder) holder).mIvLike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "喜欢了一下", Toast.LENGTH_SHORT).show();
-             }
-        });
-        ((MyViewHolder) holder).mIvComment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(mContext, "评论了一下", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if (holder instanceof MyViewHolder) {
+            ((MyViewHolder) holder).mCivHead.setImageResource(list.get(position).getImg());
+            ((MyViewHolder) holder).mTvName.setText(list.get(position).getUserName());
+            ((MyViewHolder) holder).mTvTime.setText(changeTime(position));
+            ((MyViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
+            ((MyViewHolder) holder).mIvLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "喜欢了一下", Toast.LENGTH_SHORT).show();
+                    homeFragment.clickLike(position);
+                }
+            });
+            ((MyViewHolder) holder).mIvComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext, "评论了一下", Toast.LENGTH_SHORT).show();
+                    homeFragment.clickComment(position);
+                }
+            });
 
+            ((MyViewHolder)holder).mCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    homeFragment.showInf(list,position);
+                }
+            });
+            ((MyViewHolder)holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    setPosition(position);
+                    return false;
+                }
+            });
+        }
 
-        ((MyViewHolder)holder).mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                homeFragment.showInf(list,position);
-            }
-        });
-        ((MyViewHolder)holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                setPosition(position);
-                return false;
-            }
-        });
     }
     @Override
     public int getItemCount() {
-        return list.size();
+        return list.size() == 0?0:list.size()+1;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == list.size())
-            return 1;
+        if (position+1 == getItemCount()){
+            if (noMore)
+                return TYPE_END;
+            else if (onError)
+                return TYPE_ERROR;
+            else
+                return TYPE_FOOTER;
+        }
         else
-            return 0;
+            return TYPE_ITEM;
     }
 
     private String changeTime(int position) {
@@ -113,9 +140,6 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
         String min = String.valueOf(timeList.getMin());
         return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
     }
-
-
-
 
     private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener{
         private TextView mTvName, mTvTime, mTvContent;
@@ -145,45 +169,27 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
 
     private class FooterHolder extends RecyclerView.ViewHolder {
         ProgressBar mPbFooter;
-        TextView mTvFooterEnd;
-
         FooterHolder(View itemView) {
             super(itemView);
             mPbFooter = (ProgressBar) itemView.findViewById(R.id.footer_progress_bar);
-            mTvFooterEnd = (TextView) itemView.findViewById(R.id.footer_text_end);
-        }
-
-        public void setData(int status) {
-            switch (status) {
-                case 0:
-                    setAllGone();
-                    break;
-                case 1:
-                    setAllGone();
-                    mPbFooter.setVisibility(View.VISIBLE);
-                    break;
-                case 2:
-                    setAllGone();
-                    mTvFooterEnd.setVisibility(View.VISIBLE);
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        void setAllGone() {
-            if (mPbFooter != null) {
-                mPbFooter.setVisibility(View.GONE);
-            }
-            if (mTvFooterEnd != null) {
-                mTvFooterEnd.setVisibility(View.GONE);
-            }
         }
     }
 
-    public void addHeadItem(List<HomeItem> list) {
+    private class EndHolder extends RecyclerView.ViewHolder {
+        public EndHolder(View itemView) {
+            super(itemView);
+        }
+    }
 
-        this.list = list;
+    private class ErrorHolder extends RecyclerView.ViewHolder {
+        public ErrorHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    public void addHeadItem(List<HomeBean> list) {
+        //没做好
+        this.list.add(0,list.get(0));
         notifyDataSetChanged();
     }
 
@@ -195,5 +201,19 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
         }
     }
 
+    public void addData(List<HomeBean> homeBeanList) {
+        for (int i = 0;i < homeBeanList.size();i++) {
+            list.add(homeBeanList.get(i));
+        }
+        notifyDataSetChanged();
+    }
 
+    public void onError() {
+
+    }
+
+    public boolean ifMore() {
+        //如果没有更多就返回false，noMore = ture;
+        return true;
+    }
 }

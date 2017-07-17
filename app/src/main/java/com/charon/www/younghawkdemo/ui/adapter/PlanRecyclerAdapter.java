@@ -16,8 +16,7 @@ import android.widget.Toast;
 
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeItem;
-import com.charon.www.younghawkdemo.model.PlanItem;
+import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 
 import java.util.List;
@@ -29,7 +28,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  */
 
 public class PlanRecyclerAdapter extends RecyclerView.Adapter {
-    private List<PlanItem> list;//相关数据
+    private List<PlanBean> list;//相关数据
     private Context mContext;
     private boolean mMore = false;//false代表最大3行
 
@@ -42,7 +41,7 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
         this.position = position;
     }
 
-    public PlanRecyclerAdapter(List<PlanItem> list, Context mContext) {
+    public PlanRecyclerAdapter(List<PlanBean> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
@@ -167,7 +166,7 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
         return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
     }
 
-    public void addHeadItem(List<PlanItem> list) {
+    public void addHeadItem(List<PlanBean> list) {
 
         this.list = list;
 

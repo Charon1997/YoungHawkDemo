@@ -13,7 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.PlanItem;
+import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
 
-    private List<PlanItem> list;//相关数据
+    private List<PlanBean> list;//相关数据
     private Context mContext;
     private int position;
     private int isEnd;
@@ -47,7 +47,7 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
         this.position = position;
     }
 
-    public DiscussRecyclerAdapter(List<PlanItem> list, Context mContext) {
+    public DiscussRecyclerAdapter(List<PlanBean> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
@@ -88,16 +88,6 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
                     return false;
                 }
             });
-        } else {
-            if (getIsEnd() == 0) {
-                //还有数据
-                ((FooterViewHolder) holder).mPb.setVisibility(View.VISIBLE);
-                ((FooterViewHolder) holder).mTv.setVisibility(View.GONE);
-            } else if(getIsEnd() == 1) {
-                //到达底部了
-                ((FooterViewHolder) holder).mPb.setVisibility(View.GONE);
-                ((FooterViewHolder) holder).mTv.setVisibility(View.VISIBLE);
-            }
         }
     }
 
@@ -143,12 +133,10 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
 
     private class FooterViewHolder extends RecyclerView.ViewHolder {
         private ProgressBar mPb;
-        private TextView mTv;
 
         FooterViewHolder(View itemView) {
             super(itemView);
             mPb = (ProgressBar) itemView.findViewById(R.id.footer_progress_bar);
-            mTv = (TextView) itemView.findViewById(R.id.footer_text_end);
         }
     }
 
@@ -164,13 +152,13 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
 
 
 
-    public void addHeadItem(List<PlanItem> list) {
+    public void addHeadItem(List<PlanBean> list) {
         this.list.clear();
         this.list = list;
         notifyDataSetChanged();
     }
 
-    public void addFooterItem(List<PlanItem> list) {
+    public void addFooterItem(List<PlanBean> list) {
         this.list.clear();
         this.list = list;
         notifyDataSetChanged();
