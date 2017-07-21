@@ -1,7 +1,10 @@
 package com.charon.www.younghawkdemo.ui.Fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,12 +25,15 @@ import com.charon.www.younghawkdemo.biz.MyRecClickListener;
 import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.presenter.HomePresenter;
+import com.charon.www.younghawkdemo.ui.Activities.FabHomeActivity;
+import com.charon.www.younghawkdemo.ui.Activities.MainActivity;
 import com.charon.www.younghawkdemo.ui.adapter.HomeRecyclerAdapter;
 import com.charon.www.younghawkdemo.view.IHomeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.charon.www.younghawkdemo.model.Constant.HOME_CONTENT;
 import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
 
 /**
@@ -45,6 +51,8 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     private HomePresenter homePresenter = new HomePresenter(this);
 
+    private Activity mainActivity ;
+    private Context context;
 
     public static HomeFragment getInstance() {
         if (instance == null) {
@@ -61,6 +69,11 @@ public class HomeFragment extends Fragment implements IHomeView {
         refresh = (SwipeRefreshLayout) view.findViewById(R.id.home_refresh);
         homePresenter.getHomeInf();
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
@@ -133,7 +146,11 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void editItem(int position) {
-
+        Intent intent = new Intent(HomeFragment.getInstance().getActivity(), FabHomeActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(HOME_CONTENT,adapter.getContent(position));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override
@@ -174,11 +191,12 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void showInf(List<HomeBean> list, int position) {
+
         //Toast.makeText(getActivity(), "点击的名字" + list.get(position).getUserName(), Toast.LENGTH_SHORT).show();
     }
 
     public void clickLong() {
-        Toast.makeText(getActivity(), "long", Toast.LENGTH_SHORT).show();
+        Toast.makeText(HomeFragment.getInstance().getActivity(), "long", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -192,5 +210,15 @@ public class HomeFragment extends Fragment implements IHomeView {
         homePresenter.clickComment(position);
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mainActivity = activity;
+    }
 }

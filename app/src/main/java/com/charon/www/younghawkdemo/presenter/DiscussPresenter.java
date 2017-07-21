@@ -30,7 +30,7 @@ public class DiscussPresenter {
         discussList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
             Time time = new Time(2017,2,3,12,i);
-            DiscussBean discussBean = new DiscussBean("Charon",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的讨论文字段"+i);
+            DiscussBean discussBean = new DiscussBean("陈恳",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的讨论文字段"+i,"标题");
             discussList.add(discussBean);
         }
         return discussList;

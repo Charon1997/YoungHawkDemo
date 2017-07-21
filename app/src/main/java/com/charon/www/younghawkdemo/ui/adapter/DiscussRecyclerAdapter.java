@@ -75,7 +75,7 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof MyViewHolder) {
-            ((MyViewHolder) holder).mTvName.setText(list.get(position).getUserName());
+            ((MyViewHolder) holder).mTvName.setText(list.get(position).getPubTitle());
             ((MyViewHolder) holder).mTvTime.setText(changeTime(position));
             ((MyViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
             Log.d("123", "绑定了holder");
@@ -199,5 +199,13 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
             list.remove(i);
             notifyDataSetChanged();
         }
+    }
+
+    public String getContent(int position) {
+        return list.get(position).getPubContent();
+    }
+
+    public String getTitle(int position) {
+        return list.get(position).getPubTitle();
     }
 }

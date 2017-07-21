@@ -8,11 +8,21 @@ public class DiscussBean {
     private String userName;
     private Time pubTime;
     private String pubContent;
+    private String pubTitle;
 
-    public DiscussBean(String userName, Time pubTime, String pubContent) {
+    public DiscussBean(String userName, Time pubTime, String pubContent,String pubTitle) {
         this.userName = userName;
         this.pubTime = pubTime;
         this.pubContent = pubContent;
+        this.pubTitle = pubTitle;
+    }
+
+    public String getPubTitle() {
+        return pubTitle;
+    }
+
+    public void setPubTitle(String pubTitle) {
+        this.pubTitle = pubTitle;
     }
 
     public String getUserName() {

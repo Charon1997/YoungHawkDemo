@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 
+import static com.charon.www.younghawkdemo.model.Constant.HOME_CONTENT;
+
 /**
  * Created by Charon on 2017/5/2.
  */
@@ -38,6 +40,8 @@ public class FabHomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+        mEditText.setText(getIntent().getStringExtra(HOME_CONTENT));
+        mEditText.setSelection(mEditText.getText().toString().length());
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

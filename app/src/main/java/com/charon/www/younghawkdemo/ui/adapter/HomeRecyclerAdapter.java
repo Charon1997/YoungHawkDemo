@@ -216,4 +216,8 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
         //如果没有更多就返回false，noMore = ture;
         return true;
     }
+
+    public String getContent(int position) {
+        return list.get(position).getPubContent();
+    }
 }

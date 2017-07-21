@@ -2,6 +2,7 @@ package com.charon.www.younghawkdemo.ui.Fragments;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,8 @@ import com.charon.www.younghawkdemo.model.DiscussBean;
 import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.presenter.DiscussPresenter;
+import com.charon.www.younghawkdemo.ui.Activities.FabDiscussActivity;
+import com.charon.www.younghawkdemo.ui.Activities.FabHomeActivity;
 import com.charon.www.younghawkdemo.ui.adapter.DiscussRecyclerAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
 import com.charon.www.younghawkdemo.view.IDiscussView;
@@ -33,6 +36,9 @@ import com.charon.www.younghawkdemo.view.IDiscussView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_CONTENT;
+import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
+import static com.charon.www.younghawkdemo.model.Constant.HOME_CONTENT;
 import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
 
 /**
@@ -146,7 +152,12 @@ public class DiscussFragment extends Fragment implements IDiscussView {
 
     @Override
     public void editItem(int position) {
-
+        Intent intent = new Intent(DiscussFragment.getInstance().getActivity(), FabDiscussActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(DISCUSS_CONTENT,adapter.getContent(position));
+        bundle.putString(DISCUSS_TITLE,adapter.getTitle(position));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override

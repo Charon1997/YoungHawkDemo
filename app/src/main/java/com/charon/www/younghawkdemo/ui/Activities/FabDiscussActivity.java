@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 
+import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_CONTENT;
+import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
+
 /**
  * Created by Charon on 2017/5/3.
  */
@@ -39,6 +42,11 @@ public class FabDiscussActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        mEtTitle.setText(getIntent().getStringExtra(DISCUSS_TITLE));
+        mEtContent.setText(getIntent().getStringExtra(DISCUSS_CONTENT));
+        mEtTitle.setSelection(mEtTitle.getText().toString().length());
+        mEtContent.setSelection(mEtContent.getText().toString().length());
     }
 
     @Override
