@@ -21,7 +21,7 @@ import com.charon.www.younghawkdemo.ui.Activities.PersonalDateActivity;
 import com.charon.www.younghawkdemo.ui.adapter.ItemAdapter;
 import com.charon.www.younghawkdemo.temp.Date;
 import com.charon.www.younghawkdemo.temp.Man;
-import com.charon.www.younghawkdemo.PinyinComparator;
+import com.charon.www.younghawkdemo.util.PinyinComparator;
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.ui.adapter.MailViewpagerAdapter;
 
@@ -187,6 +187,4 @@ public class ContractFragment extends android.app.Fragment {
             startActivity(intent);
         }
     }
-
-
 }

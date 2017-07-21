@@ -1,4 +1,4 @@
-package com.charon.www.younghawkdemo;
+package com.charon.www.younghawkdemo.util;
 
 import android.util.Log;
 

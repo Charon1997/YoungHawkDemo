@@ -1,24 +1,20 @@
 package com.charon.www.younghawkdemo.view;
 
-import android.view.View;
-
 import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.PlanBean;
 
 import java.util.List;
 
 /**
- * Created by Administrator on 2017/7/17.
+ * Created by Administrator on 2017/7/21.
  */
 
-public interface IHomeView {
-    void showInf(List<HomeBean> list, int position);
+public interface IPlanView {
 
-    void clickLike(int position);
 
-    void clickComment(int position);
+    void showInf(List<PlanBean> list, int position);
 
-    void addView(List<HomeBean> homeList);
+    void addView(List<PlanBean> planList);
 
     void loading(boolean loading);
 
@@ -28,8 +24,7 @@ public interface IHomeView {
 
     void deleteItem(int position);
 
-    void refreshList(List<HomeBean> homeList);
+    void refreshList(List<PlanBean> planList);
 
     void refresh(boolean refresh);
-
 }

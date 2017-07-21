@@ -188,8 +188,8 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     }
 
     public void addHeadItem(List<HomeBean> list) {
-        //没做好
         this.list.add(0,list.get(0));
+        //具体在变。
         notifyDataSetChanged();
     }
 

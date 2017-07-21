@@ -24,7 +24,7 @@ public class HomePresenter {
         this.homeView = homeView;
     }
 
-    public List<HomeBean> addDate(int j) {
+    private List<HomeBean> addDate(int j) {
         homeList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
             Time time = new Time(2017,2,3,12,i);
@@ -35,11 +35,12 @@ public class HomePresenter {
     }
 
     public void getHomeInf() {
+        homeView.loading(true);
         homeView.addView(addDate(20));
+        homeView.loading(false);
     }
 
     public void getMoreInf() {
-
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -47,18 +48,17 @@ public class HomePresenter {
                 HomeFragment.loading = false;
             }
         },1500);
-
     }
 
     public void getHeadInf() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                homeView.addView(addDate(1));
+                homeView.refreshList(addDate(1));
                 HomeFragment.loading = false;
+                homeView.refresh(false);
             }
-        },1500);
-
+        },500);
     }
 
     public void deleteItem(int position) {

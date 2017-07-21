@@ -1,10 +1,7 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.AnimationDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -17,11 +14,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.charon.www.younghawkdemo.PinyinComparator;
+import com.charon.www.younghawkdemo.util.PinyinComparator;
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.temp.Date;
 import com.charon.www.younghawkdemo.temp.Man;
-import com.charon.www.younghawkdemo.ui.Fragments.ContractFragment;
 import com.charon.www.younghawkdemo.ui.adapter.ItemAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.MailViewpagerAdapter;
 

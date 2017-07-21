@@ -1,11 +1,11 @@
 package com.charon.www.younghawkdemo.ui.Fragments;
 
 import android.app.Fragment;
-import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,30 +37,20 @@ import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
 public class HomeFragment extends Fragment implements IHomeView {
     public static int moreCount = 0;
     public static boolean loading = false;
+
     private static HomeFragment instance;
     private HomeRecyclerAdapter adapter;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout refresh;
-    public static final int NORMAL = 0;
-    public static final int LOADING = 1;
-    public static final int END = 2;
-    private HomePresenter homePresenter = new HomePresenter(this);
-    private Context mContext;
 
-    //临时数据
-    private List<HomeBean> mHomeList;
+    private HomePresenter homePresenter = new HomePresenter(this);
+
 
     public static HomeFragment getInstance() {
         if (instance == null) {
             instance = new HomeFragment();
         }
         return instance;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mContext = getActivity();
     }
 
     @Nullable
@@ -72,6 +62,7 @@ public class HomeFragment extends Fragment implements IHomeView {
         homePresenter.getHomeInf();
         return view;
     }
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -79,11 +70,11 @@ public class HomeFragment extends Fragment implements IHomeView {
         switch (id) {
             case 0:
                 homePresenter.editItem(position);
-                Toast.makeText(getActivity(), "编辑"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "编辑" + position, Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                 homePresenter.deleteItem(position);
-                Toast.makeText(getActivity(), "删除"+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "删除" + position, Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onContextItemSelected(item);
@@ -95,7 +86,7 @@ public class HomeFragment extends Fragment implements IHomeView {
             RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(manager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-            adapter = new HomeRecyclerAdapter(homeList,getActivity());
+            adapter = new HomeRecyclerAdapter(homeList, getActivity());
             mRecyclerView.setAdapter(adapter);
         } else adapter.addData(homeList);
 
@@ -104,14 +95,8 @@ public class HomeFragment extends Fragment implements IHomeView {
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.addHeadItem(homePresenter.addDate(1));
-                        refresh.setRefreshing(false);
-                        Toast.makeText(getActivity(), "更新了1条数据...", Toast.LENGTH_SHORT).show();
-                    }
-                }, 1000);
+                homePresenter.getHeadInf();
+                Toast.makeText(getActivity(), "更新了1条数据...", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -124,8 +109,8 @@ public class HomeFragment extends Fragment implements IHomeView {
                 int totalItemCount = layoutManager.getItemCount();
 
                 int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                Log.d("123", "开始前loading" + loading + "movieMore" + moreCount + "last" + totalItemCount );
-                if (!loading && totalItemCount < (lastVisibleItem + VISIBLE_THRESHOLD) && dy > 0&& adapter.ifMore() ) {
+                Log.d("123", "开始前loading" + loading + "movieMore" + moreCount + "last" + totalItemCount);
+                if (!loading && totalItemCount < (lastVisibleItem + VISIBLE_THRESHOLD) && dy > 0 && adapter.ifMore()) {
                     //未在加载、且还有3个就要到底了
                     moreCount++;
                     Log.d("123", "开始后loading" + loading + "movieMore" + moreCount);
@@ -137,12 +122,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
+    public void loading(boolean loading) {
 
     }
 
@@ -153,15 +133,46 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void editItem(int position) {
-        adapter.deleteItem(position);
+
     }
 
     @Override
-    public void deleteItem(int position) {
+    public void deleteItem(final int position) {
+        final AlertDialog.Builder normalDialog =
+                new AlertDialog.Builder(getActivity());
+        normalDialog.setIcon(R.mipmap.ic_launcher);
+        normalDialog.setTitle("删除动态");
+        normalDialog.setMessage("是否删除此项动态");
+        normalDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //...To-do传入数据库，建立连接，退出
+                        adapter.deleteItem(position);
+                    }
+                });
+        normalDialog.setNegativeButton("关闭",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        // 显示
+        normalDialog.show();
+    }
 
+    @Override
+    public void refreshList(List<HomeBean> homeList) {
+        adapter.addHeadItem(homeList);
+    }
+
+    @Override
+    public void refresh(boolean refresh) {
+        this.refresh.setRefreshing(refresh);
     }
 
 
+    @Override
     public void showInf(List<HomeBean> list, int position) {
         //Toast.makeText(getActivity(), "点击的名字" + list.get(position).getUserName(), Toast.LENGTH_SHORT).show();
     }
@@ -172,7 +183,6 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void clickLike(int position) {
-
         homePresenter.clickLike(position);
     }
 
@@ -181,12 +191,6 @@ public class HomeFragment extends Fragment implements IHomeView {
 
         homePresenter.clickComment(position);
     }
-
-    @Override
-    public void initView() {
-
-    }
-
 
 
 }

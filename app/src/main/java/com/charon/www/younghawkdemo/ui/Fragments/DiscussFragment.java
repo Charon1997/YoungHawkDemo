@@ -1,10 +1,13 @@
 package com.charon.www.younghawkdemo.ui.Fragments;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,29 +22,33 @@ import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.biz.MyRecClickListener;
+import com.charon.www.younghawkdemo.model.DiscussBean;
 import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
+import com.charon.www.younghawkdemo.presenter.DiscussPresenter;
 import com.charon.www.younghawkdemo.ui.adapter.DiscussRecyclerAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
+import com.charon.www.younghawkdemo.view.IDiscussView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
 
 /**
  * Created by Charon on 2017/4/24.
  */
 
-public class DiscussFragment extends Fragment {
+public class DiscussFragment extends Fragment implements IDiscussView {
+    public static int moreCount = 0;
+    public static boolean loading = false;
+
     private DiscussRecyclerAdapter adapter;
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout refresh;
     private static DiscussFragment instance;
-    private int lastVisibleItemPosition;
-    private boolean isLoading;
 
-
-    //临时数据
-    private List<PlanBean> mDiscussList;
+    private DiscussPresenter discussPresenter = new DiscussPresenter(this);
 
 
     public static DiscussFragment getInstance() {
@@ -56,12 +63,11 @@ public class DiscussFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_discuss, container, false);
-
-        addDate(2);
-        addView(view);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.discuss_recycler);
+        refresh = (SwipeRefreshLayout) view.findViewById(R.id.discuss_refresh);
+        discussPresenter.getDiscussInf();
         return view;
     }
-
 
 
     @Override
@@ -70,94 +76,111 @@ public class DiscussFragment extends Fragment {
         int position = adapter.getPosition();
         switch (id) {
             case 0:
-                Toast.makeText(getActivity(), "编辑"+position, Toast.LENGTH_SHORT).show();
+                discussPresenter.editItem(position);
+                Toast.makeText(getActivity(), "编辑" + position, Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-                Toast.makeText(getActivity(), "删除"+position, Toast.LENGTH_SHORT).show();
+                discussPresenter.deleteItem(position);
+                Toast.makeText(getActivity(), "删除" + position, Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onContextItemSelected(item);
     }
 
-    private void addView(View view) {
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.discuss_recycler);
-        final LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        adapter = new DiscussRecyclerAdapter(mDiscussList,getActivity());
-        mRecyclerView.setAdapter(adapter);
+    @Override
+    public void showInf(List<DiscussBean> discussList, int position) {
+
+    }
 
 
-        refresh = (SwipeRefreshLayout) view.findViewById(R.id.discuss_refresh);
+    @Override
+    public void addView(List<DiscussBean> discussList) {
+        if (moreCount == 0) {
+            final LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+            mRecyclerView.setLayoutManager(manager);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            adapter = new DiscussRecyclerAdapter(discussList, getActivity());
+            mRecyclerView.setAdapter(adapter);
+        } else adapter.addData(discussList);
+
+
         refresh.setColorSchemeResources(R.color.colorPrimary);
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        for (int i = 0; i <1; i++) {
-                            Time time = new Time(2017,2,3,12,i);
-                            PlanBean homeItem = new PlanBean("Charon",time,"这是一个讨论很长很长很长很长很长很长很长很长的刷新测试文字段"+i);
-                            mDiscussList.add(0,homeItem);
-                        }
-                        adapter.addHeadItem(mDiscussList);
-                        refresh.setRefreshing(false);
-                        Toast.makeText(getActivity(), "更新了1条数据...", Toast.LENGTH_SHORT).show();
-                    }
-                }, 5000);
+                discussPresenter.getHeadInf();
+                Toast.makeText(getActivity(), "更新了1条数据...", Toast.LENGTH_SHORT).show();
             }
         });
 
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition + 1 == adapter.getItemCount()) {
-                    boolean isRefreshing = refresh.isRefreshing();
-                    if (isRefreshing) {
-                        adapter.notifyItemRemoved(adapter.getItemCount());
-                        return;
-                    }
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            //会多次到底部，需要一个flag
-                            Log.d("123", "onsrollstate");
-                                for (int i = 0; i <1; i++) {
-                                    Time time = new Time(2017,2,3,17,i);
-                                    PlanBean homeItem = new PlanBean("Charon",time,"这是一个讨论很长很长很长很长很长很长很长很长的底部测试文字段111"+i);
-                                    mDiscussList.add(homeItem);
-                                }
-                                adapter.addFooterItem(mDiscussList);
-                                Toast.makeText(getActivity(), "更新了1条底部数据...", Toast.LENGTH_SHORT).show();
-
-                        }
-                    },1000);
-                }
-            }
-
-            @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                final int[] isScrolled = {0};
-                lastVisibleItemPosition = manager.findLastVisibleItemPosition();
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
 
+                int totalItemCount = layoutManager.getItemCount();
 
+                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+                Log.d("123", "开始前loading" + loading + "movieMore" + moreCount + "last" + totalItemCount);
+                if (!loading && totalItemCount < (lastVisibleItem + VISIBLE_THRESHOLD) && dy > 0 && adapter.ifMore()) {
+                    //未在加载、且还有3个就要到底了
+                    moreCount++;
+                    Log.d("123", "开始后loading" + loading + "movieMore" + moreCount);
+                    discussPresenter.getMoreInf();
+                    loading = true;
+                }
             }
         });
+    }
+
+    @Override
+    public void loading(boolean loading) {
 
     }
 
-    private void addDate(int j) {
-        mDiscussList = new ArrayList<>();
-        for (int i = 0 ; i < j ; i++) {
-            Time time = new Time(2017,2,3,12,i);
-            PlanBean planList = new PlanBean("Charon",time,"这是一个讨论讨论讨论讨论讨论讨论讨论讨论讨论讨论讨论很长讨论讨论讨论讨论讨论讨论长长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i);
-            mDiscussList.add(planList);
-        }
+    @Override
+    public void showError() {
+
+    }
+
+    @Override
+    public void editItem(int position) {
+
+    }
+
+    @Override
+    public void deleteItem(final int position) {
+        final AlertDialog.Builder normalDialog =
+                new AlertDialog.Builder(getActivity());
+        normalDialog.setIcon(R.mipmap.ic_launcher);
+        normalDialog.setTitle("删除讨论");
+        normalDialog.setMessage("是否删除此项讨论");
+        normalDialog.setPositiveButton("确定",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //...To-do传入数据库，建立连接，退出
+                        adapter.deleteItem(position);
+                    }
+                });
+        normalDialog.setNegativeButton("关闭",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+        // 显示
+        normalDialog.show();
+    }
+
+    @Override
+    public void refreshList(List<DiscussBean> discussList) {
+        adapter.addHeadItem(discussList);
+    }
+
+    @Override
+    public void refresh(boolean refresh) {
+        this.refresh.setRefreshing(refresh);
     }
 }

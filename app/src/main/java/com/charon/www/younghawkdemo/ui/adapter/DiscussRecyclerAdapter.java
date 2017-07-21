@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.model.DiscussBean;
+import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 
@@ -23,21 +25,17 @@ import java.util.List;
  */
 
 public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
+    private static boolean noMore = false;
+    private static boolean onError = false;
+
     private static final int TYPE_ITEM = 0;
     private static final int TYPE_FOOTER = 1;
+    private static final int TYPE_END = 2;
+    private static final int TYPE_ERROR = 3;
 
-    private List<PlanBean> list;//相关数据
+    private List<DiscussBean> list;//相关数据
     private Context mContext;
     private int position;
-    private int isEnd;
-
-    public int getIsEnd() {
-        return isEnd;
-    }
-
-    public void setIsEnd(int isEnd) {
-        this.isEnd = isEnd;
-    }
 
     public int getPosition() {
         return position;
@@ -47,21 +45,30 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
         this.position = position;
     }
 
-    public DiscussRecyclerAdapter(List<PlanBean> list, Context mContext) {
+    public DiscussRecyclerAdapter(List<DiscussBean> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == TYPE_ITEM) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_discuss, parent, false);
-            return new MyViewHolder(view);
-        } else if (viewType == TYPE_FOOTER) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_footer, parent, false);
-            return new FooterViewHolder(view);
+        View view;
+        switch (viewType) {
+            case TYPE_ITEM:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_discuss, parent, false);
+                return new MyViewHolder(view);
+
+            case TYPE_FOOTER:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_footer, parent, false);
+                return new FooterHolder(view);
+            case TYPE_END:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_end, parent, false);
+                return new EndHolder(view);
+            case TYPE_ERROR:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_error, parent, false);
+                return new ErrorHolder(view);
+            default:return null;
         }
-        return null;
     }
 
 
@@ -106,9 +113,16 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (position + 1 == getItemCount()) {
-            return TYPE_FOOTER;
-        } else return TYPE_ITEM;
+        if (position+1 == getItemCount()){
+            if (noMore)
+                return TYPE_END;
+            else if (onError)
+                return TYPE_ERROR;
+            else
+                return TYPE_FOOTER;
+        }
+        else
+            return TYPE_ITEM;
     }
 
     private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
@@ -131,12 +145,23 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
         }
     }
 
-    private class FooterViewHolder extends RecyclerView.ViewHolder {
-        private ProgressBar mPb;
-
-        FooterViewHolder(View itemView) {
+    private class FooterHolder extends RecyclerView.ViewHolder {
+        ProgressBar mPbFooter;
+        FooterHolder(View itemView) {
             super(itemView);
-            mPb = (ProgressBar) itemView.findViewById(R.id.footer_progress_bar);
+            mPbFooter = (ProgressBar) itemView.findViewById(R.id.footer_progress_bar);
+        }
+    }
+
+    private class EndHolder extends RecyclerView.ViewHolder {
+        public EndHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    private class ErrorHolder extends RecyclerView.ViewHolder {
+        public ErrorHolder(View itemView) {
+            super(itemView);
         }
     }
 
@@ -152,15 +177,27 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
 
 
 
-    public void addHeadItem(List<PlanBean> list) {
-        this.list.clear();
-        this.list = list;
+    public void addHeadItem(List<DiscussBean> list) {
+        this.list.add(0,list.get(0));
+        //具体在变。
+        notifyDataSetChanged();
+    }
+    public void addData(List<DiscussBean> list) {
+        for (int i = 0;i < list.size();i++) {
+            this.list.add(list.get(i));
+        }
         notifyDataSetChanged();
     }
 
-    public void addFooterItem(List<PlanBean> list) {
-        this.list.clear();
-        this.list = list;
-        notifyDataSetChanged();
+    public boolean ifMore() {
+        //如果没有更多就返回false，noMore = ture;
+        return true;
+    }
+    public void deleteItem(int i) {
+        int size = list.size();
+        if (size > 0) {
+            list.remove(i);
+            notifyDataSetChanged();
+        }
     }
 }
