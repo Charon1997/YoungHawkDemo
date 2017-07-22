@@ -1,11 +1,14 @@
 package com.charon.www.younghawkdemo.ui.Fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,9 +25,13 @@ import com.charon.www.younghawkdemo.ui.Activities.NMIDActivity;
 import com.charon.www.younghawkdemo.ui.MPoPuWindow;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static android.R.attr.path;
 import static android.app.Activity.RESULT_OK;
 import static com.charon.www.younghawkdemo.model.Constant.CAMERA;
 import static com.charon.www.younghawkdemo.model.Constant.PHONE;
@@ -155,10 +162,34 @@ public class MeFragment extends Fragment {
                     if (bitmap != null) {
                         mCivHead.setImageBitmap(bitmap);
                         Log.d("123", "bitmap"+bitmap.toString());
+                        saveImageToGallery(MeFragment.getInstance().getActivity(),bitmap,file);
                     }
                 }
             }
         }
+    }
+    public static void saveImageToGallery(Context context, Bitmap bmp,File file) {
+        // 首先保存图片
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    file.getAbsolutePath(),System.currentTimeMillis()+".jpg", null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path)));
     }
 }
