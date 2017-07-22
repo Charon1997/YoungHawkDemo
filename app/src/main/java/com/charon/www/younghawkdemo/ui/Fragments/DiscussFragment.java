@@ -61,7 +61,6 @@ public class DiscussFragment extends Fragment implements IDiscussView {
         if (instance == null) {
             instance = new DiscussFragment();
         }
-
         return instance;
     }
 

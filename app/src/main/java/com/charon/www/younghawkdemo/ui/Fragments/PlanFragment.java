@@ -2,6 +2,7 @@ package com.charon.www.younghawkdemo.ui.Fragments;
 
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -22,6 +23,8 @@ import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.presenter.PlanPresenter;
+import com.charon.www.younghawkdemo.ui.Activities.FabDiscussActivity;
+import com.charon.www.younghawkdemo.ui.Activities.FabPlanActivity;
 import com.charon.www.younghawkdemo.ui.adapter.HomeRecyclerAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
 import com.charon.www.younghawkdemo.view.IHomeView;
@@ -30,6 +33,10 @@ import com.charon.www.younghawkdemo.view.IPlanView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_CONTENT;
+import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
+import static com.charon.www.younghawkdemo.model.Constant.PLAN_PLAN;
+import static com.charon.www.younghawkdemo.model.Constant.PLAN_SUMMARY;
 import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
 
 /**
@@ -141,7 +148,12 @@ public class PlanFragment extends Fragment implements IPlanView {
 
     @Override
     public void editItem(int position) {
-
+        Intent intent = new Intent(PlanFragment.getInstance().getActivity(), FabPlanActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(PLAN_SUMMARY,adapter.getSummary(position));
+        bundle.putString(PLAN_PLAN,adapter.getPlan(position));
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     @Override

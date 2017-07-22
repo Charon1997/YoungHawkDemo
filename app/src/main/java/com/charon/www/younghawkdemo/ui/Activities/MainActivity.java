@@ -15,6 +15,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,11 +45,11 @@ import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_SHIFTING;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IContract, BottomNavigationBar.OnTabSelectedListener{
     private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
-    private Fragment currentNavFragment;//底部导航
+    private Fragment currentNavFragment;
     private boolean isQuit = false;
     private Timer timer = new Timer();
     private Toolbar toolbar;
-    private BottomNavigationBar mBNBar;
+    private BottomNavigationBar mBNBar;//底部导航
     private FloatingActionButton mFab;
     //private CoordinatorLayout mConstraintLayout;
     private OnFabClickListener1 onFabClickListener1 = new OnFabClickListener1();
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mFab.setOnClickListener(onFabClickListener1);
     }
     private void initData() {
+        Log.d("Main", "加载数据");
         int index = 0;
         currentNavFragment = fragmentNavPool.get(index);
     }
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, TableActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(this, "Beta Version 1.1", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Beta Version 1.2", Toast.LENGTH_SHORT).show();
         }
         return true;
     }

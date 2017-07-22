@@ -7,12 +7,30 @@ package com.charon.www.younghawkdemo.model;
 public class PlanBean {
     private String userName;
     private Time pubTime;
-    private String pubContent;
+    private String summary;
+    private String plan;
 
-    public PlanBean(String userName, Time pubTime, String pubContent) {
+    public PlanBean(String userName, Time pubTime, String summary, String plan) {
         this.userName = userName;
         this.pubTime = pubTime;
-        this.pubContent = pubContent;
+        this.summary = summary;
+        this.plan = plan;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getPlan() {
+        return plan;
+    }
+
+    public void setPlan(String plan) {
+        this.plan = plan;
     }
 
     public String getUserName() {
@@ -31,11 +49,5 @@ public class PlanBean {
         this.pubTime = pubTime;
     }
 
-    public String getPubContent() {
-        return pubContent;
-    }
 
-    public void setPubContent(String pubContent) {
-        this.pubContent = pubContent;
-    }
 }

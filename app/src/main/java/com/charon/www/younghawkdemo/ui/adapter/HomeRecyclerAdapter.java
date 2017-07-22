@@ -22,6 +22,11 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_FOOTER;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM;
+
 /**
  * Created by Charon on 2017/4/25.
  */
@@ -34,10 +39,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     private Context mContext;
     private int position;
     private HomeFragment homeFragment = new HomeFragment();
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_FOOTER = 1;
-    private static final int TYPE_END = 2;
-    private static final int TYPE_ERROR = 3;
+
 
     public int getPosition() {
         return position;

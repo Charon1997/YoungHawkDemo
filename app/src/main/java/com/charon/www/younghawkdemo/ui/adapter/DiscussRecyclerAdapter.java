@@ -20,6 +20,11 @@ import com.charon.www.younghawkdemo.model.Time;
 
 import java.util.List;
 
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_FOOTER;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM;
+
 /**
  * Created by Charon on 2017/5/2.
  */
@@ -28,10 +33,6 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
     private static boolean noMore = false;
     private static boolean onError = false;
 
-    private static final int TYPE_ITEM = 0;
-    private static final int TYPE_FOOTER = 1;
-    private static final int TYPE_END = 2;
-    private static final int TYPE_ERROR = 3;
 
     private List<DiscussBean> list;//相关数据
     private Context mContext;

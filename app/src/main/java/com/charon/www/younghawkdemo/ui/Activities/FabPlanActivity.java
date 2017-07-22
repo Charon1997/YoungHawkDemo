@@ -12,6 +12,9 @@ import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 
+import static com.charon.www.younghawkdemo.model.Constant.PLAN_PLAN;
+import static com.charon.www.younghawkdemo.model.Constant.PLAN_SUMMARY;
+
 /**
  * Created by Charon on 2017/5/3.
  */
@@ -40,6 +43,10 @@ public class FabPlanActivity extends AppCompatActivity {
             }
         });
 
+        mEtSummary.setText(getIntent().getStringExtra(PLAN_SUMMARY));
+        mEtSummary.setSelection(mEtSummary.getText().toString().length());
+        mEtPlan.setText(getIntent().getStringExtra(PLAN_PLAN));
+        mEtPlan.setSelection(mEtPlan.getText().toString().length());
     }
 
     @Override

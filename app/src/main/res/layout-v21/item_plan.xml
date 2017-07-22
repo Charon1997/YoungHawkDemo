@@ -45,31 +45,63 @@
                 android:layout_alignStart="@+id/item_plan_name"
                 android:text="2017年5月30日    18:52"
                 android:textSize="14sp" />
+            <TextView
+                android:id="@+id/item_plan_text_summary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总结"
+                android:textSize="14sp"
+                android:layout_alignStart="@id/item_plan_name"
+                android:layout_below="@id/item_plan_time"
+                android:layout_marginTop="16dp"/>
 
             <TextView
-                android:id="@+id/item_plan_content"
+                android:id="@+id/item_plan_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:textSize="14sp"
-                android:layout_below="@id/item_plan_time"
+                android:layout_below="@id/item_plan_text_summary"
                 android:layout_alignLeft="@id/item_plan_name"
                 android:layout_alignStart="@id/item_plan_name"
                 android:layout_marginBottom="16dp"
-                android:maxLines="4"
-                android:text="今天我们来带了这里看了大家特么撒了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里" />
+                android:text="今天我们来带了这里看了大家特a a a a a 么撒了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里" />
             <TextView
-                android:id="@+id/item_plan_more"
+                android:id="@+id/item_plan_text_plan"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="更多"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:layout_alignParentRight="true"
+                android:layout_height="wrap_content"
+                android:text="计划"
+                android:textSize="14sp"
+                android:layout_alignStart="@id/item_plan_name"
+                android:layout_below="@id/item_plan_summary"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/item_plan_plan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_below="@id/item_plan_content"/>
+                android:layout_marginTop="8dp"
+                android:textSize="14sp"
+                android:layout_below="@id/item_plan_text_plan"
+                android:layout_alignLeft="@id/item_plan_name"
+                android:layout_alignStart="@id/item_plan_name"
+                android:layout_marginBottom="16dp"
+                android:text="今天我们来带了这里看了大家a 特么撒了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里了点附近萨洛克附件三了吉林省的房间里" />
+
+            <!--<TextView-->
+                <!--android:id="@+id/item_plan_more"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:text="更多"-->
+                <!--android:textSize="18sp"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_below="@id/item_plan_content"/>-->
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
