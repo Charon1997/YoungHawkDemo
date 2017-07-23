@@ -1,9 +1,11 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -14,18 +16,46 @@ import com.charon.www.younghawkdemo.R;
  * Created by Administrator on 2017/7/22.
  */
 
-public class NMIDActivity extends AppCompatActivity {
+public class NMIDActivity extends BaseActivity {
     private WebView mWvNMID;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nmid);
+    public void widgetClick(View v) {
+
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_nmid;
+    }
+
+    @Override
+    public void initView(View view) {
+        mWvNMID = $(R.id.nmid_web);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         init();
     }
 
     private void init() {
-        mWvNMID = (WebView) findViewById(R.id.nmid_web);
+
         mWvNMID.loadUrl("http://nmid.cqupt.edu.cn/");
         mWvNMID.setWebViewClient(new WebViewClient(){
             @Override

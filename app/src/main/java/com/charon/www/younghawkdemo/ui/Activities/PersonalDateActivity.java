@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,18 +16,58 @@ import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.temp.Man;
 
 
-public class PersonalDateActivity extends AppCompatActivity {
+public class PersonalDateActivity extends BaseActivity {
     private TextView mDuty,qq,mPhoneNum,mEmail;
     private Man man = new Man();
     private int dif = 0;
     private FloatingActionButton mFloatingActionButton;
+    private CollapsingToolbarLayout mToolbarlayout;
+    private Toolbar mToolbar;
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_person);
-        init();
-        CollapsingToolbarLayout mToolbarlayout = (CollapsingToolbarLayout) findViewById(R.id.person_toolbar_layout);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.person_toolbar);
+    public void widgetClick(View v) {
+        switch (v.getId()) {
+            case R.id.fab:
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                Uri data = Uri.parse("tel:" + man.getPhoneNum());
+                intent.setData(data);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_info_person;
+    }
+
+    @Override
+    public void initView(View view) {
+        mFloatingActionButton = $(R.id.fab);
+        mDuty = $(R.id.person_duty);
+        qq = $(R.id.person_qq);
+        mPhoneNum =$(R.id.person_phone);
+        mEmail =$(R.id.person_email);
+        mToolbarlayout =$(R.id.person_toolbar_layout);
+        mToolbar = $(R.id.person_toolbar);
+    }
+
+    @Override
+    public void setListener() {
+        mFloatingActionButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         Bundle bundle=getIntent().getExtras();
         man=(Man)bundle.getSerializable("man");
         dif = bundle.getInt("key");
@@ -38,15 +79,6 @@ public class PersonalDateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                Uri data = Uri.parse("tel:" + man.getPhoneNum());
-                intent.setData(data);
-                startActivity(intent);
             }
         });
         setDate();
@@ -61,13 +93,7 @@ public class PersonalDateActivity extends AppCompatActivity {
         return false;
     }
 
-    private void init() {
-        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        mDuty = (TextView) findViewById(R.id.person_duty);
-        qq = (TextView) findViewById(R.id.person_qq);
-        mPhoneNum = (TextView) findViewById(R.id.person_phone);
-        mEmail = (TextView) findViewById(R.id.person_email);
-    }
+
 
     private void setDate() {
         switch (dif) {

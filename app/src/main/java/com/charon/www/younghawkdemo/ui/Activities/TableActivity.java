@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,13 +13,40 @@ import com.charon.www.younghawkdemo.R;
  * Created by Charon on 2017/4/24.
  */
 
-public class TableActivity extends AppCompatActivity {
+public class TableActivity extends BaseActivity {
+    private Toolbar mToolbar;
+    @Override
+    public void widgetClick(View v) {
+
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_table);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.table_toolbar);
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_table;
+    }
+
+    @Override
+    public void initView(View view) {
+        mToolbar =$(R.id.table_toolbar);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         mToolbar.setTitle("表格");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

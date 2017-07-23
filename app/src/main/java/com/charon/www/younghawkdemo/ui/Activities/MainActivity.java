@@ -3,6 +3,7 @@ package com.charon.www.younghawkdemo.ui.Activities;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -43,63 +44,90 @@ import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_SHIFTING;
  * Created by Charon on 2017/4/24.
  */
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, IContract, BottomNavigationBar.OnTabSelectedListener{
-    private static final Interpolator INTERPOLATOR = new FastOutSlowInInterpolator();
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, IContract, BottomNavigationBar.OnTabSelectedListener {
     private Fragment currentNavFragment;
     private boolean isQuit = false;
     private Timer timer = new Timer();
     private Toolbar toolbar;
     private BottomNavigationBar mBNBar;//底部导航
     private FloatingActionButton mFab;
-    //private CoordinatorLayout mConstraintLayout;
     private OnFabClickListener1 onFabClickListener1 = new OnFabClickListener1();
     private OnFabClickListener2 onFabClickListener2 = new OnFabClickListener2();
     private OnFabClickListener3 onFabClickListener3 = new OnFabClickListener3();
     private final List<Fragment> fragmentNavPool = Arrays.asList(HomeFragment.getInstance(), PlanFragment.getInstance(), DiscussFragment.getInstance(), MeFragment.getInstance());
+    private DrawerLayout drawer;
+    private NavigationView navigationView;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void widgetClick(View v) {
+
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_contract;
+    }
+
+    @Override
+    public void initView(View view) {
+        toolbar = $(R.id.toolbar);
+        drawer = $(R.id.drawer_layout);
+        navigationView = $(R.id.nav_view);
+        mBNBar = $(R.id.bottom_nav_bar);
+        mFab = $(R.id.main_fab);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         StatusUtil.initStatus(getWindow());
-        setContentView(R.layout.activity_contract);
         initView();
         initData();
         setDefaultFragment();
     }
 
     private void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        setSupportActionBar(toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //mConstraintLayout = (CoordinatorLayout) findViewById(R.id.main_coordinator);
-
-        mBNBar = (BottomNavigationBar) findViewById(R.id.bottom_nav_bar);
         mBNBar.addItem(new BottomNavigationItem(R.drawable.nav_home, "主页"))
                 .addItem(new BottomNavigationItem(R.drawable.nav_plan, "计划"))
                 .addItem(new BottomNavigationItem(R.drawable.nav_discuss, "讨论"))
-                .addItem(new BottomNavigationItem(R.drawable.nav_me,"我的"))
+                .addItem(new BottomNavigationItem(R.drawable.nav_me, "我的"))
                 .setActiveColor(R.color.colorPrimary)
                 .setMode(MODE_SHIFTING)
                 .initialise();
         mBNBar.setAutoHideEnabled(true);
         mBNBar.setTabSelectedListener(this);
 
-        mFab = (FloatingActionButton) findViewById(R.id.main_fab);
         mFab.setOnClickListener(onFabClickListener1);
     }
+
     private void initData() {
-        Log.d("Main", "加载数据");
         int index = 0;
         currentNavFragment = fragmentNavPool.get(index);
     }
+
     private void setDefaultFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -107,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         transaction.commit();
         toolbar.setTitle("主页");
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -126,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent = new Intent(MainActivity.this, TableActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_share) {
-            Toast.makeText(this, "Beta Version 1.2", Toast.LENGTH_SHORT).show();
+            showToast("Beta Version 1.2");
         }
         return true;
     }
@@ -182,14 +211,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         getFragmentManager().beginTransaction().hide(from).show(to).commit();
     }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             if (!isQuit) {
                 isQuit = true;
-                //TSnackbar tSnackbar = TSnackbar.make(mConstraintLayout,"点击两次退出",TSnackbar.LENGTH_SHORT);
-                //tSnackbar.show();
-                Toast.makeText(this, "点击两次退出", Toast.LENGTH_SHORT).show();
+                showToast("点击两次退出");
                 TimerTask task = null;
                 task = new TimerTask() {
                     @Override
@@ -206,28 +234,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    private class OnFabClickListener1 implements View.OnClickListener{
+    private class OnFabClickListener1 implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Toast.makeText(MainActivity.this, "首页", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, FabHomeActivity.class);
-            startActivity(intent);
+            startActivity(FabHomeActivity.class);
         }
     }
-    private class OnFabClickListener2 implements View.OnClickListener{
+
+    private class OnFabClickListener2 implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Toast.makeText(MainActivity.this, "计划", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, FabPlanActivity.class);
-            startActivity(intent);
+            startActivity(FabPlanActivity.class);
         }
     }
-    private class OnFabClickListener3 implements View.OnClickListener{
+
+    private class OnFabClickListener3 implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            Toast.makeText(MainActivity.this, "讨论", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, FabDiscussActivity.class);
-            startActivity(intent);
+            startActivity( FabDiscussActivity.class);
         }
     }
 }

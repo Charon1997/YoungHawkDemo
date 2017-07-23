@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ import java.util.Map;
  * Created by Charon on 2017/4/24.
  */
 
-public class MailListActivity extends AppCompatActivity{
+public class MailListActivity extends BaseActivity{
     private Date date = new Date();
     private ListView mListView1,mListView2;
     private List<View> list;
@@ -39,18 +40,48 @@ public class MailListActivity extends AppCompatActivity{
     private MailListActivity.ListListener1 listListener1 = new MailListActivity.ListListener1();
     private MailListActivity.ListListener2 listListener2 = new MailListActivity.ListListener2();
     private PinyinComparator comparator = new PinyinComparator();
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private Toolbar mToolbar;
+
     SharedPreferences spre;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_maillist);
-        init();
+    public void widgetClick(View v) {
+
     }
 
-    private void init() {
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.mail_list_viewpager);
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.mail_list_tablayout);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.mail_list_toolbar);
+
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_maillist;
+    }
+
+    @Override
+    public void initView(View view) {
+        mViewPager = $(R.id.mail_list_viewpager);
+        mTabLayout = $(R.id.mail_list_tablayout);
+        mToolbar =$(R.id.mail_list_toolbar);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
+
         mToolbar.setTitle("通讯录");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,12 +123,12 @@ public class MailListActivity extends AppCompatActivity{
         mListView2.setOnItemClickListener(listListener2);
     }
 
+
     //得到所有的名字
     private void getName() {
         for (int j = 0; j < date.teamList.size(); j++) {
             for (int k = 0; k < date.teamList.get(j).getManList().size(); k++) {
                 mListName.add(date.teamList.get(j).getManList().get(k).getName());
-
             }
         }
         mListName.remove(1);

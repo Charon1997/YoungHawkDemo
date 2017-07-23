@@ -1,6 +1,7 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -24,16 +25,47 @@ import java.util.List;
  * Created by Charon on 2017/4/24.
  */
 
-public class ManageActivity extends AppCompatActivity {
+public class ManageActivity extends BaseActivity {
     private List<View> list;
 
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private Toolbar mToolbar;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_manage);
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.manage_viewpager);
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.manage_tablayout);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.manage_toolbar);
+    public void widgetClick(View v) {
+
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_manage;
+    }
+
+    @Override
+    public void initView(View view) {
+        mViewPager = $(R.id.manage_viewpager);
+        mTabLayout = $(R.id.manage_tablayout);
+        mToolbar = $(R.id.manage_toolbar);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         mToolbar.setTitle("管理手册");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

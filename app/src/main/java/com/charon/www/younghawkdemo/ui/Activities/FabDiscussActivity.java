@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 
+import static com.charon.www.younghawkdemo.R.layout.activity_fab_discuss;
 import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_CONTENT;
 import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
 
@@ -19,20 +21,43 @@ import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
  * Created by Charon on 2017/5/3.
  */
 
-public class FabDiscussActivity extends AppCompatActivity {
+public class FabDiscussActivity extends BaseActivity {
     private EditText mEtTitle,mEtContent;
+    private Toolbar mToolbar;
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fab_discuss);
-        initView();
+    public void widgetClick(View v) {
+
     }
 
-    private void initView() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.fab_discuss_toolbar);
-        mEtTitle = (EditText) findViewById(R.id.fab_discuss_et_title);
-        mEtContent = (EditText) findViewById(R.id.fab_discuss_et_content);
+    @Override
+    public void initParms(Bundle parms) {
 
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return activity_fab_discuss;
+    }
+
+    @Override
+    public void initView(View view) {
+        mEtTitle=$(R.id.fab_discuss_et_title);
+        mEtContent = $(R.id.fab_discuss_et_content);
+        mToolbar = $(R.id.fab_discuss_toolbar);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         mToolbar.setTitle("讨论与集中");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

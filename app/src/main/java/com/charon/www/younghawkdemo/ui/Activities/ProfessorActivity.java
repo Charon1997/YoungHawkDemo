@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -23,17 +24,46 @@ import java.util.List;
  * Created by Charon on 2017/4/24.
  */
 
-public class ProfessorActivity extends AppCompatActivity {
+public class ProfessorActivity extends BaseActivity {
     private List<View> list;
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private Toolbar mToolbar;
+
+    @Override
+    public void widgetClick(View v) {
+
+    }
+
+    @Override
+    public void initParms(Bundle parms) {
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.fragment_professor;
+    }
+
+    @Override
+    public void initView(View view) {
+        mViewPager = $(R.id.professor_viewpager);
+        mTabLayout = $(R.id.professor_tablayout);
+        mToolbar = $(R.id.professor_toolbar);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_professor);
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.professor_viewpager);
-        TabLayout mTabLayout = (TabLayout) findViewById(R.id.professor_tablayout);
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.professor_toolbar);
+    public void doBusiness(Context mContext) {
         mToolbar.setTitle("专家");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

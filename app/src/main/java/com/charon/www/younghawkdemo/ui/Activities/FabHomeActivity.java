@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,18 +20,43 @@ import static com.charon.www.younghawkdemo.model.Constant.HOME_CONTENT;
  * Created by Charon on 2017/5/2.
  */
 
-public class FabHomeActivity extends AppCompatActivity {
+public class FabHomeActivity extends BaseActivity {
     private EditText mEditText;
+    private Toolbar mToolbar;
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fab_home);
-        initView();
+    public void widgetClick(View v) {
+
     }
 
-    private void initView() {
-        Toolbar mToolbar = (Toolbar) findViewById(R.id.fab_home_toolbar);
-        mEditText = (EditText) findViewById(R.id.fab_home_edit);
+    @Override
+    public void initParms(Bundle parms) {
+
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_fab_home;
+    }
+
+    @Override
+    public void initView(View view) {
+        mToolbar=$(R.id.fab_home_toolbar);
+        mEditText=$(R.id.fab_home_edit);
+    }
+
+    @Override
+    public void setListener() {
+
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         mToolbar.setTitle("发动态");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -43,6 +69,7 @@ public class FabHomeActivity extends AppCompatActivity {
         mEditText.setText(getIntent().getStringExtra(HOME_CONTENT));
         mEditText.setSelection(mEditText.getText().toString().length());
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

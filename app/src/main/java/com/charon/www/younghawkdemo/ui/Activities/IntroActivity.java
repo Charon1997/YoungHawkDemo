@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
@@ -18,21 +19,63 @@ import com.charon.www.younghawkdemo.ui.adapter.IntroFragmentStatePagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IntroActivity extends AppCompatActivity {
+public class IntroActivity extends BaseActivity {
     private LinearLayout indicatorPage1Show;
     private LinearLayout indicatorPage2Show;
     private SharedPreferences spre;
     private TextView next;
     private TextView finish;
+    private ViewPager viewPager;
+    @Override
+    public void widgetClick(View v) {
+        switch (v.getId()) {
+            case R.id.text_next:
+                viewPager.setCurrentItem(1);
+                break;
+            case R.id.text_finish:
+                SharedPreferences.Editor editor = spre.edit();
+                editor.putInt("flag", 1);
+                editor.apply();
+                startActivity(LoginActivity.class);
+                finish();
+                break;
+        }
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
+    public void initParms(Bundle parms) {
 
+    }
+
+    @Override
+    public View bindView() {
+        return null;
+    }
+
+    @Override
+    public int bindLayout() {
+        return R.layout.activity_intro;
+    }
+
+    @Override
+    public void initView(View view) {
+        indicatorPage1Show = $(R.id.indicator_page1_show);
+        indicatorPage2Show = $(R.id.indicator_page2_show);
+        next = $(R.id.text_next);
+        finish = $(R.id.text_finish);
+        viewPager =$(R.id.intro_pager);
+    }
+
+    @Override
+    public void setListener() {
+        next.setOnClickListener(this);
+        finish.setOnClickListener(this);
+    }
+
+    @Override
+    public void doBusiness(Context mContext) {
         spre= getSharedPreferences("myPref", MODE_PRIVATE);
         initView(getData());
-
     }
 
     private List<Fragment> getData() {
@@ -43,28 +86,6 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void initView(List<Fragment> fragments) {
-        indicatorPage1Show = (LinearLayout) findViewById(R.id.indicator_page1_show);
-        indicatorPage2Show = (LinearLayout) findViewById(R.id.indicator_page2_show);
-        next = (TextView) findViewById(R.id.text_next);
-        finish = (TextView) findViewById(R.id.text_finish);
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.intro_pager);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                viewPager.setCurrentItem(1);
-            }
-        });
-        finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SharedPreferences.Editor editor = spre.edit();
-                editor.putInt("flag", 1);
-                editor.apply();
-                Intent intent = new Intent(IntroActivity.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
         viewPager.setAdapter(new IntroFragmentStatePagerAdapter(getSupportFragmentManager(),fragments) {
         });
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
