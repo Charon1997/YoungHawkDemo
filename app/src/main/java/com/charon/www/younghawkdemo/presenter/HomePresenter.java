@@ -2,6 +2,7 @@ package com.charon.www.younghawkdemo.presenter;
 
 
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.model.HomeBean;
@@ -72,10 +73,12 @@ public class HomePresenter {
     }
 
     public void clickLike(int position) {
-
+        //可以点赞;
+        //homeView.changeLikeView(true);
     }
 
     public void clickComment(int position) {
-
+        //可以评论
+        //homeView.changeCommentView(true);
     }
 }

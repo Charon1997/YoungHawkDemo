@@ -85,7 +85,7 @@ public class MeFragment extends Fragment {
                 //改头像
                 puWindow = new MPoPuWindow(MeFragment.getInstance().getActivity(), MeFragment.getInstance());
                 puWindow.showPopupWindow(LayoutInflater.from(MeFragment.getInstance().getActivity()).inflate(R.layout.fragment_me, null));
-                puWindow.setOnGetTypeClckListener(new MPoPuWindow.onGetTypeClckListener() {
+                puWindow.setOnGetTypeClickListener(new MPoPuWindow.onGetTypeClickListener() {
                     @Override
                     public void getType(int type) {
                         MeFragment.this.type = type;
@@ -162,7 +162,7 @@ public class MeFragment extends Fragment {
                     if (bitmap != null) {
                         mCivHead.setImageBitmap(bitmap);
                         Log.d("123", "bitmap"+bitmap.toString());
-                        saveImageToGallery(MeFragment.getInstance().getActivity(),bitmap,file);
+                        //saveImageToGallery(MeFragment.getInstance().getActivity(),bitmap,file);
                     }
                 }
             }

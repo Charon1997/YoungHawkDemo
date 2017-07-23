@@ -25,6 +25,6 @@
         <style name="popuwindow_from_bottom">
                 <item name="android:windowEnterAnimation">@anim/popu_show_from_bottom</item>
                 <item name="android:windowExitAnimation">@anim/popu_hiden_from_top</item>
-
         </style>
+
 </resources>

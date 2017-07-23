@@ -77,22 +77,22 @@
                 android:layout_below="@+id/item_home_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:padding="16dp"
+                android:padding="14dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/item_home_comment" />
+                android:src="@drawable/item_home_comment_off" />
 
             <ImageView
                 android:id="@+id/item_home_like"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_below="@+id/item_home_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_toLeftOf="@id/item_home_img_comment"
                 android:layout_toStartOf="@id/item_home_img_comment"
-                android:padding="16dp"
+                android:padding="14dp"
                 android:scaleType="centerInside"
-                android:src="@drawable/item_home_like" />
+                android:src="@drawable/item_home_like_off" />
 
         </RelativeLayout>
 

@@ -32,4 +32,8 @@ public interface IHomeView {
 
     void refresh(boolean refresh);
 
+    void changeLikeView(boolean isBlue);
+
+    void changeCommentView(boolean isBlue);
+
 }

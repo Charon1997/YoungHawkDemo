@@ -1,6 +1,7 @@
 package com.charon.www.younghawkdemo.ui.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -16,7 +17,9 @@ import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.Fragments.HomeFragment;
+import com.charon.www.younghawkdemo.ui.MPoPuWindow;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,14 +89,14 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
             ((MyViewHolder) holder).mIvLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "喜欢了一下", Toast.LENGTH_SHORT).show();
+                    //((MyViewHolder) holder).mIvLike.setImageResource(R.drawable.item_home_like_on);
                     homeFragment.clickLike(position);
                 }
             });
             ((MyViewHolder) holder).mIvComment.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "评论了一下", Toast.LENGTH_SHORT).show();
+                    //((MyViewHolder) holder).mIvComment.setImageResource(R.drawable.item_home_comment_on);
                     homeFragment.clickComment(position);
                 }
             });
@@ -221,5 +224,17 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
 
     public String getContent(int position) {
         return list.get(position).getPubContent();
+    }
+
+    public interface onGetImageClickListener {
+        void getLike(ImageView likeImage);
+
+        void getComment(ImageView commentImage);
+    }
+
+    private onGetImageClickListener listener;
+
+    public void setOnGetImageClickListener(onGetImageClickListener listener) {
+        this.listener = listener;
     }
 }

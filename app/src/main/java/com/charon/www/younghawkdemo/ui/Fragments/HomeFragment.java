@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
@@ -53,6 +54,7 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     private Activity mainActivity ;
     private Context context;
+    private ImageView mIvLike,mIvComment;
 
     public static HomeFragment getInstance() {
         if (instance == null) {
@@ -101,7 +103,20 @@ public class HomeFragment extends Fragment implements IHomeView {
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             adapter = new HomeRecyclerAdapter(homeList, getActivity());
             mRecyclerView.setAdapter(adapter);
+            adapter.setOnGetImageClickListener(new HomeRecyclerAdapter.onGetImageClickListener() {
+                @Override
+                public void getLike(ImageView likeImage) {
+                    mIvLike = likeImage;
+                }
+
+                @Override
+                public void getComment(ImageView commentImage) {
+                    mIvComment = commentImage;
+                }
+            });
         } else adapter.addData(homeList);
+
+
 
 
         refresh.setColorSchemeResources(R.color.colorPrimary);
@@ -188,6 +203,22 @@ public class HomeFragment extends Fragment implements IHomeView {
         this.refresh.setRefreshing(refresh);
     }
 
+    @Override
+    public void changeLikeView(boolean isBlue) {
+        if (isBlue) {
+            //如果是点亮的
+            mIvLike.setImageResource(R.drawable.item_home_like_off);
+        } else mIvLike.setImageResource(R.drawable.item_home_like_on);
+    }
+
+    @Override
+    public void changeCommentView(boolean isBlue) {
+        if (isBlue) {
+            //如果是点亮的
+            mIvComment.setImageResource(R.drawable.item_home_comment_off);
+        } else mIvComment.setImageResource(R.drawable.item_home_comment_on);
+    }
+
 
     @Override
     public void showInf(List<HomeBean> list, int position) {
@@ -201,12 +232,13 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void clickLike(int position) {
+        Toast.makeText(HomeFragment.getInstance().getActivity(), "喜欢了一下", Toast.LENGTH_SHORT).show();
         homePresenter.clickLike(position);
     }
 
     @Override
     public void clickComment(int position) {
-
+        Toast.makeText(HomeFragment.getInstance().getActivity(), "评论了一下", Toast.LENGTH_SHORT).show();
         homePresenter.clickComment(position);
     }
 
@@ -221,4 +253,7 @@ public class HomeFragment extends Fragment implements IHomeView {
         super.onAttach(activity);
         mainActivity = activity;
     }
+
+
+
 }

@@ -88,7 +88,6 @@ public class MPoPuWindow extends PopupWindow implements View.OnClickListener {
             this.showAtLocation(parent, Gravity.BOTTOM, 0, 0);
         } else {
             this.dismiss();
-
         }
     }
 
@@ -153,15 +152,15 @@ public class MPoPuWindow extends PopupWindow implements View.OnClickListener {
         mFragment.startActivityForResult(intent, 3);
     }
 
-    public interface onGetTypeClckListener {
+    public interface onGetTypeClickListener {
         void getType(int type);
 
         void getImgUri(Uri imgUri, File file);
     }
 
-    private onGetTypeClckListener listener;
+    private onGetTypeClickListener listener;
 
-    public void setOnGetTypeClckListener(onGetTypeClckListener listener) {
+    public void setOnGetTypeClickListener(onGetTypeClickListener listener) {
         this.listener = listener;
     }
 }
