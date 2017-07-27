@@ -2,10 +2,12 @@ package com.charon.www.younghawkdemo.ui.Activities;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.charon.www.younghawkdemo.R;
 
@@ -15,9 +17,29 @@ import com.charon.www.younghawkdemo.R;
 
 public class TableActivity extends BaseActivity {
     private Toolbar mToolbar;
+    private ImageView mIvDownload1,mIvDownload2;
     @Override
     public void widgetClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.table_image_download1:
+                showToast("正在下载项目推进报表");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast("逗你玩的:)");
+                    }
+                },1500);
+                break;
+            case R.id.table_image_download2:
+                showToast("正在下载学员请假审批表");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showToast("逗你玩的:)");
+                    }
+                },1500);
+                break;
+        }
     }
 
     @Override
@@ -37,12 +59,15 @@ public class TableActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+        mIvDownload1 = $(R.id.table_image_download1);
+        mIvDownload2 = $(R.id.table_image_download2);
         mToolbar =$(R.id.table_toolbar);
     }
 
     @Override
     public void setListener() {
-
+        mIvDownload1.setOnClickListener(this);
+        mIvDownload2.setOnClickListener(this);
     }
 
     @Override

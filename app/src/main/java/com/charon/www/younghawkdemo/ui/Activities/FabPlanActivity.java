@@ -3,15 +3,19 @@ package com.charon.www.younghawkdemo.ui.Activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.presenter.FabPresenter;
+import com.charon.www.younghawkdemo.view.IBaseFabView;
 
 import static com.charon.www.younghawkdemo.model.Constant.PLAN_PLAN;
 import static com.charon.www.younghawkdemo.model.Constant.PLAN_SUMMARY;
@@ -20,9 +24,11 @@ import static com.charon.www.younghawkdemo.model.Constant.PLAN_SUMMARY;
  * Created by Charon on 2017/5/3.
  */
 
-public class FabPlanActivity extends BaseActivity {
+public class FabPlanActivity extends BaseActivity implements IBaseFabView {
     private EditText mEtSummary,mEtPlan;
     private Toolbar mToolbar;
+    private LinearLayout mPb;
+    private FabPresenter fabPresenter = new FabPresenter(this);
     @Override
     public void widgetClick(View v) {
 
@@ -50,6 +56,7 @@ public class FabPlanActivity extends BaseActivity {
 
     @Override
     public void initView(View view) {
+        mPb = $(R.id.fab_plan_pb);
         mToolbar =$(R.id.fab_plan_toolbar);
         mEtSummary =$(R.id.fab_plan_et_summary);
         mEtPlan =$(R.id.fab_plan_et_plan);
@@ -92,11 +99,34 @@ public class FabPlanActivity extends BaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.fab_home_release) {
-            Toast.makeText(this, "总结：" + mEtSummary.getText()+"计划："+mEtPlan.getText(), Toast.LENGTH_SHORT).show();
-            //上传
-            finish();
+            send();
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void send() {
+        //上传
+        showToast("总结：" + mEtSummary.getText()+"计划："+mEtPlan.getText());
+        fabPresenter.sendPlan(mEtPlan.getText().toString(),mEtSummary.getText().toString());
+    }
+
+    @Override
+    public void loading(boolean loading) {
+        if (loading) {
+            mPb.setVisibility(View.VISIBLE);
+        } else mPb.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onError() {
+        Snackbar.make(mPb, R.string.error_network, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void finishActivity() {
+        showToast("发送成功");
+        finish();
     }
 }

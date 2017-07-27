@@ -10,7 +10,7 @@ package com.charon.www.younghawkdemo.view;
  * 修改备注：
  */
 
-public  interface IBaseView  {
+public  interface IBaseItemView  {
     void loading(boolean loading);
 
     void showError();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -24,7 +24,9 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:background="@drawable/et"
-        android:layout_margin="8dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:hint="标题（必填），4-40字"
         android:gravity="start|top"
         android:padding="8dp"
@@ -33,6 +35,7 @@
         android:id="@+id/fab_discuss_et_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/fab_discuss_et_title"
         android:minLines="4"
         android:maxLines="6"
         android:background="@drawable/et"
@@ -41,4 +44,16 @@
         android:gravity="start|top"
         android:padding="8dp"
         android:ellipsize="start"/>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/fab_discuss_pb"
+        android:layout_marginTop="56dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorTranslucence"
+        android:visibility="gone">
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </LinearLayout>
+</RelativeLayout>

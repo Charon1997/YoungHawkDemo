@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Administrator on 2017/7/21.
  */
 
-public interface IDiscussView extends IBaseView{
+public interface IDiscussView extends IBaseItemView{
 
     void showInf(List<DiscussBean> discussList, int position);
 

@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Administrator on 2017/7/17.
  */
 
-public interface IHomeView extends IBaseView{
+public interface IHomeView extends IBaseItemView{
     void showInf(List<Moment> list, int position);
 
     void clickLike(int position);

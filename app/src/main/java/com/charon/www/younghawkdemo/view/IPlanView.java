@@ -8,7 +8,7 @@ import java.util.List;
  * Created by Charon on 2017/7/21.
  */
 
-public interface IPlanView  extends IBaseView {
+public interface IPlanView  extends IBaseItemView {
 
     void showInf(List<PlanBean> list, int position);
 
