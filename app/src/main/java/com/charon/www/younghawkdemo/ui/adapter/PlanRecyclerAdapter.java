@@ -3,28 +3,22 @@ package com.charon.www.younghawkdemo.ui.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeBean;
+import com.charon.www.younghawkdemo.model.Date;
 import com.charon.www.younghawkdemo.model.PlanBean;
-import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.ui.Fragments.PlanFragment;
 
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
@@ -224,7 +218,7 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
     }
 
     private String changeTime(int position) {
-        Time timeList = list.get(position).getPubTime();
+        Date timeList = list.get(position).getPubTime();
         String year = String.valueOf(timeList.getYear());
         String month = String.valueOf(timeList.getMonth());
         String day = String.valueOf(timeList.getDay());

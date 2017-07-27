@@ -4,7 +4,7 @@ package com.charon.www.younghawkdemo.model;
  * Created by Administrator on 2017/4/25.
  */
 
-public class Time {
+public class Date {
     private int year;
     private int month;
     private int day;
@@ -12,17 +12,17 @@ public class Time {
     private int min;
     private int sec;
 
-    public Time() {
+    public Date() {
 
     }
 
-    public Time(int year, int month, int day) {
+    public Date(int year, int month, int day) {
         this.year = year;
         this.month = month;
         this.day = day;
     }
 
-    public Time(int year, int month, int day, int hour, int min) {
+    public Date(int year, int month, int day, int hour, int min) {
         this.year = year;
         this.month = month;
         this.day = day;

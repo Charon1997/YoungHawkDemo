@@ -2,11 +2,10 @@ package com.charon.www.younghawkdemo.presenter;
 
 
 import android.os.Handler;
-import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeBean;
-import com.charon.www.younghawkdemo.model.Time;
+import com.charon.www.younghawkdemo.model.Date;
+import com.charon.www.younghawkdemo.model.Moment;
 import com.charon.www.younghawkdemo.ui.Fragments.HomeFragment;
 import com.charon.www.younghawkdemo.view.IHomeView;
 
@@ -18,18 +17,18 @@ import java.util.List;
  */
 
 public class HomePresenter {
-    private List<HomeBean> homeList;
+    private List<Moment> homeList;
     private IHomeView homeView;
     Handler handler = new Handler();
     public HomePresenter(IHomeView homeView) {
         this.homeView = homeView;
     }
 
-    private List<HomeBean> addDate(int j) {
+    private List<Moment> addDate(int j) {
         homeList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
-            Time time = new Time(2017,2,3,12,i);
-            HomeBean homeBean = new HomeBean(R.drawable.charonhead,"Charon",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i,0,0);
+            Date time = new Date(2017,2,3,12,i);
+            Moment homeBean = new Moment(R.drawable.charonhead,"Charon",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i,0,0);
             homeList.add(homeBean);
         }
         return homeList;
@@ -37,8 +36,13 @@ public class HomePresenter {
 
     public void getHomeInf() {
         homeView.loading(true);
-        homeView.addView(addDate(20));
-        homeView.loading(false);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                homeView.addView(addDate(20));
+                homeView.loading(false);
+            }
+        },1500);
     }
 
     public void getMoreInf() {

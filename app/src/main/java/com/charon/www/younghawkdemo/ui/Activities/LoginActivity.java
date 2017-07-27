@@ -3,11 +3,14 @@ package com.charon.www.younghawkdemo.ui.Activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
@@ -23,6 +26,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     private Toolbar mToolbar;
     private Button mBtnRegister,mBtnLoginIn,mBtnVisitor,mBtnForget;
     private MaterialEditText mMetUserName,mMetPassword;
+    private LinearLayout mLlProgressBar;
     private LoginPresenter presenter = new LoginPresenter(this);
 
     @Override
@@ -65,6 +69,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void initView(View view) {
+        mLlProgressBar = $(R.id.login_progressBar);
         mToolbar = $(R.id.login_toolbar);
         mBtnRegister = $(R.id.login_signup_button);
         mBtnLoginIn =$(R.id.login_send_button);
@@ -109,14 +114,12 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     @Override
-    public void showLoading() {
-
+    public void loading(boolean loading) {
+        if (loading) {
+            mLlProgressBar.setVisibility(View.VISIBLE);
+        } else mLlProgressBar.setVisibility(View.GONE);
     }
 
-    @Override
-    public void hideLoading() {
-
-    }
 
     @Override
     public void loginSuccessfully() {

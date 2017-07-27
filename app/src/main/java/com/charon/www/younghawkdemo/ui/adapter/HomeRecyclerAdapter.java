@@ -1,7 +1,6 @@
 package com.charon.www.younghawkdemo.ui.adapter;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -11,16 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeBean;
-import com.charon.www.younghawkdemo.model.Time;
+import com.charon.www.younghawkdemo.model.Date;
+import com.charon.www.younghawkdemo.model.Moment;
 import com.charon.www.younghawkdemo.ui.Fragments.HomeFragment;
-import com.charon.www.younghawkdemo.ui.MPoPuWindow;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,7 +33,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     private static boolean noMore = false;
     private static boolean onError = false;
 
-    private List<HomeBean> list;//相关数据
+    private List<Moment> list;//相关数据
     private Context mContext;
     private int position;
     private HomeFragment homeFragment = new HomeFragment();
@@ -53,7 +48,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     }
 
 
-    public HomeRecyclerAdapter(List<HomeBean> list, Context context) {
+    public HomeRecyclerAdapter(List<Moment> list, Context context) {
         this.list = list;
         this.mContext = context;
     }
@@ -137,7 +132,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
     }
 
     private String changeTime(int position) {
-        Time timeList = list.get(position).getPubTime();
+        Date timeList = list.get(position).getPubTime();
         String year = String.valueOf(timeList.getYear());
         String month = String.valueOf(timeList.getMonth());
         String day = String.valueOf(timeList.getDay());
@@ -192,7 +187,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
         }
     }
 
-    public void addHeadItem(List<HomeBean> list) {
+    public void addHeadItem(List<Moment> list) {
         this.list.add(0,list.get(0));
         //具体在变。
         notifyDataSetChanged();
@@ -206,7 +201,7 @@ public class HomeRecyclerAdapter extends RecyclerView.Adapter  {
         }
     }
 
-    public void addData(List<HomeBean> homeBeanList) {
+    public void addData(List<Moment> homeBeanList) {
         for (int i = 0;i < homeBeanList.size();i++) {
             list.add(homeBeanList.get(i));
         }

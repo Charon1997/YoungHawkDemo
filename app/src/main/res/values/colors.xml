@@ -15,4 +15,5 @@
     <color name="colorBlack">#000000</color>
 
     <color name="colorTextPrimary">#CC000000</color>
+    <color name="colorTranslucence">#3f000000</color>
 </resources>

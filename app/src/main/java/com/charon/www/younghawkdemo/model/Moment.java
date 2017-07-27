@@ -6,15 +6,15 @@ import java.util.List;
  * Created by Administrator on 2017/4/25.
  */
 
-public class HomeBean {
+public class Moment {
     private int img;
     private String userName;
-    private Time pubTime;
+    private Date pubTime;
     private String pubContent;
     private int likeNum;
     private int commentNum;
 
-    public HomeBean(int img, String userName, Time pubTime, String pubContent, int likeNum, int commentNum) {
+    public Moment(int img, String userName, Date pubTime, String pubContent, int likeNum, int commentNum) {
         this.img = img;
         this.userName = userName;
         this.pubTime = pubTime;
@@ -39,11 +39,11 @@ public class HomeBean {
         this.userName = userName;
     }
 
-    public Time getPubTime() {
+    public Date getPubTime() {
         return pubTime;
     }
 
-    public void setPubTime(Time pubTime) {
+    public void setPubTime(Date pubTime) {
         this.pubTime = pubTime;
     }
 

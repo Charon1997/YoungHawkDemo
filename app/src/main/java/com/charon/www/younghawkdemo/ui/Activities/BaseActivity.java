@@ -25,7 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /** 是否沉浸状态栏 **/
     private boolean isSetStatusBar = false;
     /** 是否允许全屏 **/
-    private boolean mAllowFullScreen = true;
+    //private boolean mAllowFullScreen = false;
     /** 是否禁止旋转屏幕 **/
     private boolean isAllowScreenRoate = true;
     /** 当前Activity渲染的视图View **/
@@ -48,9 +48,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
                     .inflate(bindLayout(), null);
         } else
             mContextView = mView;
-        if (mAllowFullScreen) {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }
+//        if (mAllowFullScreen) {
+//            requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        }
         if (isSetStatusBar) {
             steepStatusBar();
         }
@@ -225,9 +225,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      *
      * @param allowFullScreen
      */
-    public void setAllowFullScreen(boolean allowFullScreen) {
-        this.mAllowFullScreen = allowFullScreen;
-    }
+//    public void setAllowFullScreen(boolean allowFullScreen) {
+//        this.mAllowFullScreen = allowFullScreen;
+//    }
 
     /**
      * [是否设置沉浸状态栏]

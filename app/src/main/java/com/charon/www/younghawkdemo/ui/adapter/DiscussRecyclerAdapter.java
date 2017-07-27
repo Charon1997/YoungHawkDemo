@@ -13,10 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.model.Date;
 import com.charon.www.younghawkdemo.model.DiscussBean;
-import com.charon.www.younghawkdemo.model.HomeBean;
-import com.charon.www.younghawkdemo.model.PlanBean;
-import com.charon.www.younghawkdemo.model.Time;
 
 import java.util.List;
 
@@ -167,7 +165,7 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
     }
 
     private String changeTime(int position) {
-        Time timeList = list.get(position).getPubTime();
+        Date timeList = list.get(position).getPubTime();
         String year = String.valueOf(timeList.getYear());
         String month = String.valueOf(timeList.getMonth());
         String day = String.valueOf(timeList.getDay());

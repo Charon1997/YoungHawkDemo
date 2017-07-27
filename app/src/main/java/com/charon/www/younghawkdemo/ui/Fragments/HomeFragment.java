@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,21 +18,16 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.biz.MyRecClickListener;
-import com.charon.www.younghawkdemo.model.HomeBean;
-import com.charon.www.younghawkdemo.model.Time;
+import com.charon.www.younghawkdemo.model.Moment;
 import com.charon.www.younghawkdemo.presenter.HomePresenter;
 import com.charon.www.younghawkdemo.ui.Activities.FabHomeActivity;
-import com.charon.www.younghawkdemo.ui.Activities.MainActivity;
 import com.charon.www.younghawkdemo.ui.adapter.HomeRecyclerAdapter;
 import com.charon.www.younghawkdemo.view.IHomeView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.charon.www.younghawkdemo.model.Constant.HOME_CONTENT;
@@ -69,6 +65,7 @@ public class HomeFragment extends Fragment implements IHomeView {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_recycler);
         refresh = (SwipeRefreshLayout) view.findViewById(R.id.home_refresh);
+        refresh.setColorSchemeResources(R.color.colorPrimary);
         homePresenter.getHomeInf();
         return view;
     }
@@ -95,7 +92,7 @@ public class HomeFragment extends Fragment implements IHomeView {
         return super.onContextItemSelected(item);
     }
 
-    public void addView(List<HomeBean> homeList) {
+    public void addView(List<Moment> homeList) {
         Log.d("123", homeList.size() + "homeList的大小");
         if (moreCount == 0) {
             RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
@@ -119,7 +116,7 @@ public class HomeFragment extends Fragment implements IHomeView {
 
 
 
-        refresh.setColorSchemeResources(R.color.colorPrimary);
+
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -151,12 +148,15 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void loading(boolean loading) {
-
+        if (loading){
+            refresh.setRefreshing(true);
+        } else refresh.setRefreshing(false);
     }
 
     @Override
     public void showError() {
-
+        refresh.setRefreshing(false);
+        Snackbar.make(mRecyclerView,R.string.error_network,Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -194,7 +194,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     @Override
-    public void refreshList(List<HomeBean> homeList) {
+    public void refreshList(List<Moment> homeList) {
         adapter.addHeadItem(homeList);
     }
 
@@ -221,7 +221,7 @@ public class HomeFragment extends Fragment implements IHomeView {
 
 
     @Override
-    public void showInf(List<HomeBean> list, int position) {
+    public void showInf(List<Moment> list, int position) {
 
         //Toast.makeText(getActivity(), "点击的名字" + list.get(position).getUserName(), Toast.LENGTH_SHORT).show();
     }

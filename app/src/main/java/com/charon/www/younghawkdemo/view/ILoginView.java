@@ -5,21 +5,26 @@ package com.charon.www.younghawkdemo.view;
  */
 
 public interface ILoginView {
-    public String getName();
-    public String getPassword();
 
-    public void clearName();
-    public void clearPassword();
+    String getName();
 
-    public void showLoading();
-    public void hideLoading();
+    String getPassword();
 
-    public void loginSuccessfully();
-    public void loginFailure();
+    void clearName();
+
+    void clearPassword();
+
+    void loading(boolean loading);
+
+    void loginSuccessfully();
+
+    void loginFailure();
 
 
-    public void register();
-    public void visitor();
-    public void forget(String name);
+    void register();
+
+    void visitor();
+
+    void forget(String name);
 
 }

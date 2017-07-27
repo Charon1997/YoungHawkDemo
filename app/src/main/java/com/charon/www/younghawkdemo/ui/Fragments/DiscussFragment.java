@@ -3,34 +3,26 @@ package com.charon.www.younghawkdemo.ui.Fragments;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.biz.MyRecClickListener;
 import com.charon.www.younghawkdemo.model.DiscussBean;
-import com.charon.www.younghawkdemo.model.PlanBean;
-import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.presenter.DiscussPresenter;
 import com.charon.www.younghawkdemo.ui.Activities.FabDiscussActivity;
-import com.charon.www.younghawkdemo.ui.Activities.FabHomeActivity;
 import com.charon.www.younghawkdemo.ui.adapter.DiscussRecyclerAdapter;
-import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
 import com.charon.www.younghawkdemo.view.IDiscussView;
 
 import java.util.ArrayList;
@@ -38,7 +30,6 @@ import java.util.List;
 
 import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_CONTENT;
 import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
-import static com.charon.www.younghawkdemo.model.Constant.HOME_CONTENT;
 import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
 
 /**
@@ -70,6 +61,7 @@ public class DiscussFragment extends Fragment implements IDiscussView {
         View view = inflater.inflate(R.layout.fragment_discuss, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.discuss_recycler);
         refresh = (SwipeRefreshLayout) view.findViewById(R.id.discuss_refresh);
+        refresh.setColorSchemeResources(R.color.colorPrimary);
         discussPresenter.getDiscussInf();
         return view;
     }
@@ -109,7 +101,7 @@ public class DiscussFragment extends Fragment implements IDiscussView {
         } else adapter.addData(discussList);
 
 
-        refresh.setColorSchemeResources(R.color.colorPrimary);
+
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -141,12 +133,15 @@ public class DiscussFragment extends Fragment implements IDiscussView {
 
     @Override
     public void loading(boolean loading) {
-
+        if (loading){
+            refresh.setRefreshing(true);
+        } else refresh.setRefreshing(false);
     }
 
     @Override
     public void showError() {
-
+        refresh.setRefreshing(false);
+        Snackbar.make(mRecyclerView,R.string.error_network,Snackbar.LENGTH_LONG).show();
     }
 
     @Override

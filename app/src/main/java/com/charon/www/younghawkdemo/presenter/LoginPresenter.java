@@ -24,7 +24,7 @@ public class LoginPresenter {
     }
 
     public void login() {
-        loginView.showLoading();
+        loginView.loading(true);
         loginBiz.login(loginView.getName(), loginView.getPassword(), new OnLoginListener() {
             @Override
             public void loginSuccessfully(LoginModel loginModel) {
@@ -32,7 +32,7 @@ public class LoginPresenter {
                     @Override
                     public void run() {
                         loginView.loginSuccessfully();
-                        loginView.hideLoading();
+                        loginView.loading(false);
                     }
                 });
 
@@ -44,7 +44,7 @@ public class LoginPresenter {
                     @Override
                     public void run() {
                         loginView.loginFailure();
-                        loginView.hideLoading();
+                        loginView.loading(false);
                     }
                 });
             }
@@ -60,6 +60,14 @@ public class LoginPresenter {
     }
 
     public void visitor() {
-        loginView.visitor();
+        loginView.loading(true);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loginView.loading(false);
+                loginView.visitor();
+            }
+        },2000);
+
     }
 }

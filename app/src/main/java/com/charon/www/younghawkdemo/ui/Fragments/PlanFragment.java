@@ -4,8 +4,8 @@ import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,22 +19,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.HomeBean;
 import com.charon.www.younghawkdemo.model.PlanBean;
-import com.charon.www.younghawkdemo.model.Time;
 import com.charon.www.younghawkdemo.presenter.PlanPresenter;
-import com.charon.www.younghawkdemo.ui.Activities.FabDiscussActivity;
 import com.charon.www.younghawkdemo.ui.Activities.FabPlanActivity;
-import com.charon.www.younghawkdemo.ui.adapter.HomeRecyclerAdapter;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
-import com.charon.www.younghawkdemo.view.IHomeView;
 import com.charon.www.younghawkdemo.view.IPlanView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_CONTENT;
-import static com.charon.www.younghawkdemo.model.Constant.DISCUSS_TITLE;
 import static com.charon.www.younghawkdemo.model.Constant.PLAN_PLAN;
 import static com.charon.www.younghawkdemo.model.Constant.PLAN_SUMMARY;
 import static com.charon.www.younghawkdemo.model.Constant.VISIBLE_THRESHOLD;
@@ -68,6 +60,7 @@ public class PlanFragment extends Fragment implements IPlanView {
         View view = inflater.inflate(R.layout.fragment_plan, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.plan_recycler);
         refresh = (SwipeRefreshLayout) view.findViewById(R.id.plan_refresh);
+        refresh.setColorSchemeResources(R.color.colorPrimary);
         planPresenter.getPlanInf();
         return view;
     }
@@ -105,7 +98,7 @@ public class PlanFragment extends Fragment implements IPlanView {
         } else adapter.addData(planList);
 
 
-        refresh.setColorSchemeResources(R.color.colorPrimary);
+
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -137,13 +130,15 @@ public class PlanFragment extends Fragment implements IPlanView {
 
     @Override
     public void loading(boolean loading) {
-
+        if (loading){
+            refresh.setRefreshing(true);
+        } else refresh.setRefreshing(false);
     }
-
 
     @Override
     public void showError() {
-
+        refresh.setRefreshing(false);
+        Snackbar.make(mRecyclerView,R.string.error_network,Snackbar.LENGTH_LONG).show();
     }
 
     @Override

@@ -6,11 +6,11 @@ package com.charon.www.younghawkdemo.model;
 
 public class PlanBean {
     private String userName;
-    private Time pubTime;
+    private Date pubTime;
     private String summary;
     private String plan;
 
-    public PlanBean(String userName, Time pubTime, String summary, String plan) {
+    public PlanBean(String userName, Date pubTime, String summary, String plan) {
         this.userName = userName;
         this.pubTime = pubTime;
         this.summary = summary;
@@ -41,11 +41,11 @@ public class PlanBean {
         this.userName = userName;
     }
 
-    public Time getPubTime() {
+    public Date getPubTime() {
         return pubTime;
     }
 
-    public void setPubTime(Time pubTime) {
+    public void setPubTime(Date pubTime) {
         this.pubTime = pubTime;
     }
 
