@@ -64,7 +64,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     }
 
     @Override
-    public void initParms(Bundle parms) {
+    public void initParam(Bundle param) {
 
     }
 

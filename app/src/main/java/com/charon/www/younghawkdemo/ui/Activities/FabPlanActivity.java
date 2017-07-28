@@ -29,6 +29,7 @@ public class FabPlanActivity extends BaseActivity implements IBaseFabView {
     private Toolbar mToolbar;
     private LinearLayout mPb;
     private FabPresenter fabPresenter = new FabPresenter(this);
+    private String summary="",plan="";
     @Override
     public void widgetClick(View v) {
 
@@ -40,8 +41,11 @@ public class FabPlanActivity extends BaseActivity implements IBaseFabView {
     }
 
     @Override
-    public void initParms(Bundle parms) {
-
+    public void initParam(Bundle param) {
+        if (param != null){
+            summary = param.getString(PLAN_SUMMARY);
+            plan = param.getString(PLAN_PLAN);
+        }
     }
 
     @Override
@@ -79,10 +83,10 @@ public class FabPlanActivity extends BaseActivity implements IBaseFabView {
             }
         });
 
-        mEtSummary.setText(getIntent().getStringExtra(PLAN_SUMMARY));
-        mEtSummary.setSelection(mEtSummary.getText().toString().length());
-        mEtPlan.setText(getIntent().getStringExtra(PLAN_PLAN));
-        mEtPlan.setSelection(mEtPlan.getText().toString().length());
+        mEtSummary.setText(summary);
+        mEtSummary.setSelection(summary.length());
+        mEtPlan.setText(plan);
+        mEtPlan.setSelection(plan.length());
     }
 
     @Override

@@ -25,15 +25,15 @@ public class NameListActivity extends BaseActivity {
     private Date date = new Date();
     private Toolbar mToolbar;
     private ListView mListView;
-
+    private int oldPosition;
     @Override
     public void widgetClick(View v) {
 
     }
 
     @Override
-    public void initParms(Bundle parms) {
-
+    public void initParam(Bundle param) {
+        oldPosition = param.getInt("position");
     }
 
     @Override
@@ -59,13 +59,11 @@ public class NameListActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        final Intent intent = getIntent();
-        final int oldPositon = intent.getIntExtra("position", -1);
-        Log.d("test", oldPositon + "oldPosition");
+        Log.d("test", oldPosition + "oldPosition");
         date.addDate();
         //设置toolbar
 
-        mToolbar.setTitle(date.teamList.get(oldPositon).getProjectName());
+        mToolbar.setTitle(date.teamList.get(oldPosition).getProjectName());
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -75,17 +73,16 @@ public class NameListActivity extends BaseActivity {
             }
         });
 
-        mListView.setAdapter(new ItemAdapter(this, getDate(oldPositon)));
+        mListView.setAdapter(new ItemAdapter(this, getDate(oldPosition)));
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
                 Bundle bundle1 = new Bundle();
-                Man man = date.teamList.get(oldPositon).getManList().get(i);
+                Man man = date.teamList.get(oldPosition).getManList().get(i);
                 bundle1.putSerializable("man", man);
                 startActivity(PersonalDateActivity.class, bundle1);
-                Log.d("test", "跳转" + oldPositon + i);
+                Log.d("test", "跳转" + oldPosition + i);
             }
         });
     }

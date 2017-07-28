@@ -53,7 +53,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     @Override
-    public void initParms(Bundle parms) {
+    public void initParam(Bundle param) {
 
     }
 

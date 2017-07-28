@@ -41,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         Log.d(TAG, "BaseActivity-->onCreate()");
         Bundle bundle = getIntent().getExtras();
-        initParms(bundle);
+        initParam(bundle);
         View mView = bindView();
         if (null == mView) {
             mContextView = LayoutInflater.from(this)
@@ -80,9 +80,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     /**
      * [初始化参数]
      *
-     * @param parms
+     * @param param
      */
-    public abstract void initParms(Bundle parms);
+    public abstract void initParam(Bundle param);
 
     /**
      * [绑定视图]

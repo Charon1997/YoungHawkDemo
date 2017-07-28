@@ -22,10 +22,8 @@ public class WelcomeActivity extends BaseActivity {
     public void widgetClick(View v) {
 
     }
-
-
     @Override
-    public void initParms(Bundle parms) {
+    public void initParam(Bundle param) {
 
     }
 

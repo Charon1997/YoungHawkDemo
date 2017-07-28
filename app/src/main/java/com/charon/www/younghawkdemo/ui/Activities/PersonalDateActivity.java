@@ -36,8 +36,9 @@ public class PersonalDateActivity extends BaseActivity {
     }
 
     @Override
-    public void initParms(Bundle parms) {
-
+    public void initParam(Bundle param) {
+        man=(Man)param.getSerializable("man");
+        dif = param.getInt("key");
     }
 
     @Override
@@ -68,9 +69,6 @@ public class PersonalDateActivity extends BaseActivity {
 
     @Override
     public void doBusiness(Context mContext) {
-        Bundle bundle=getIntent().getExtras();
-        man=(Man)bundle.getSerializable("man");
-        dif = bundle.getInt("key");
         assert man != null;
         mToolbarlayout.setTitle(man.getName());
         setSupportActionBar(mToolbar);

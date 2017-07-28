@@ -30,13 +30,18 @@ public class FabDiscussActivity extends BaseActivity implements IBaseFabView{
     private Toolbar mToolbar;
     private LinearLayout mPb;
     private FabPresenter fabPresenter = new FabPresenter(this);
+    private String title="",content="";
     @Override
     public void widgetClick(View v) {
 
     }
 
     @Override
-    public void initParms(Bundle parms) {
+    public void initParam(Bundle param) {
+        if (param != null){
+            title = param.getString(DISCUSS_TITLE);
+            content = param.getString(DISCUSS_CONTENT);
+        }
 
     }
 
@@ -75,10 +80,10 @@ public class FabDiscussActivity extends BaseActivity implements IBaseFabView{
             }
         });
 
-        mEtTitle.setText(getIntent().getStringExtra(DISCUSS_TITLE));
-        mEtContent.setText(getIntent().getStringExtra(DISCUSS_CONTENT));
-        mEtTitle.setSelection(mEtTitle.getText().toString().length());
-        mEtContent.setSelection(mEtContent.getText().toString().length());
+        mEtTitle.setText(title);
+        mEtContent.setText(content);
+        mEtTitle.setSelection(title.length());
+        mEtContent.setSelection(content.length());
     }
 
     @Override

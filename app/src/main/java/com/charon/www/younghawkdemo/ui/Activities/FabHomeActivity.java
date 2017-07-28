@@ -29,14 +29,17 @@ public class FabHomeActivity extends BaseActivity implements IBaseFabView{
     private Toolbar mToolbar;
     private LinearLayout mPb;
     private FabPresenter fabPresenter = new FabPresenter(this);
-
+    private String content = "";
     @Override
     public void widgetClick(View v) {
 
     }
 
     @Override
-    public void initParms(Bundle parms) {
+    public void initParam(Bundle param) {
+        if (param != null) {
+            content = param.getString(HOME_CONTENT);
+        }
 
     }
 
@@ -73,8 +76,8 @@ public class FabHomeActivity extends BaseActivity implements IBaseFabView{
                 finish();
             }
         });
-        mEditText.setText(getIntent().getStringExtra(HOME_CONTENT));
-        mEditText.setSelection(mEditText.getText().toString().length());
+        mEditText.setText(content);
+        mEditText.setSelection(content.length());
     }
 
     @Override
