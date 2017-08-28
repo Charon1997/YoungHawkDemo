@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorBackGround">#20c7c7c7</color>
+
+    <!--MD调色板-->
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorPrimaryLight">#9FA8DA</color>
-    <color name="colorBackGround">#20c7c7c7</color>
-    
+    <color name="colorPrimaryLight">#C5CAE9</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#BDBDBD</color>
+
     <color name="colorOne">#f2c572</color>
     <color name="colorTwo">#93e887</color>
     <color name="colorThree">#E8C698</color>
@@ -16,4 +22,5 @@
 
     <color name="colorTextPrimary">#CC000000</color>
     <color name="colorTranslucence">#3f000000</color>
+    <color name="inActive_icon">#a1a1a1</color>
 </resources>

@@ -1,5 +1,6 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -25,8 +27,9 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 public class LoginActivity extends BaseActivity implements ILoginView {
     private Toolbar mToolbar;
     private Button mBtnRegister,mBtnLoginIn,mBtnVisitor,mBtnForget;
-    private MaterialEditText mMetUserName,mMetPassword;
+    private EditText mMetUserName,mMetPassword;
     private LinearLayout mLlProgressBar;
+    private ProgressDialog progressDialog;
     private LoginPresenter presenter = new LoginPresenter(this);
 
     @Override
@@ -115,9 +118,14 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void loading(boolean loading) {
+        if(progressDialog == null){
+            progressDialog =  new ProgressDialog(this);
+            progressDialog.setMessage("加载中...");
+            progressDialog.setTitle("登录");
+        }
         if (loading) {
-            mLlProgressBar.setVisibility(View.VISIBLE);
-        } else mLlProgressBar.setVisibility(View.GONE);
+            progressDialog.show();
+        } else progressDialog.dismiss();
     }
 
 
