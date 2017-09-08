@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_FIXED;
 import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_SHIFTING;
 
 /**
@@ -115,7 +116,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 .addItem(new BottomNavigationItem(R.drawable.nav_discuss, "讨论"))
                 .addItem(new BottomNavigationItem(R.drawable.nav_me, "我的"))
                 .setActiveColor(R.color.colorPrimary)
-                .setMode(MODE_SHIFTING)
+                .setInActiveColor(R.color.inActive_icon)
+                .setMode(MODE_FIXED)
                 .initialise();
         mBNBar.setAutoHideEnabled(true);
         mBNBar.setTabSelectedListener(this);

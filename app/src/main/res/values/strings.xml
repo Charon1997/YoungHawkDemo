@@ -97,4 +97,8 @@
     <string name="menu_release">发布</string>
 
     <string name="error_network">更新失败,请检查网络连接</string>
+    <string name="nexuslink">NexusLink</string>
+    <string name="sign_in">登录</string>
+    <string name="register">还没有帐号？注册一个</string>
+    <string name="loading">加载中...</string>
 </resources>
