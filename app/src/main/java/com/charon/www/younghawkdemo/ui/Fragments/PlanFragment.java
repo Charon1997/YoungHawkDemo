@@ -85,6 +85,7 @@ public class PlanFragment extends Fragment implements IPlanView {
 
     @Override
     public void showInf(List<PlanBean> list, int position) {
+
     }
 
     @Override

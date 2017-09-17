@@ -27,8 +27,9 @@ public class HomePresenter {
     private List<Moment> addDate(int j) {
         homeList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
-            Date time = new Date(2017,2,3,12,i);
-            Moment homeBean = new Moment(R.drawable.charonhead,"Charon",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i,0,0);
+            Date day = new Date(2017,12,12);
+            Date time = new Date(22,i);
+            Moment homeBean = new Moment(R.drawable.charonhead,"Charon",day,time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i,0,0);
             homeList.add(homeBean);
         }
         return homeList;
@@ -39,7 +40,7 @@ public class HomePresenter {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                homeView.addView(addDate(20));
+                homeView.addView(addDate(10));
                 homeView.loading(false);
             }
         },1500);

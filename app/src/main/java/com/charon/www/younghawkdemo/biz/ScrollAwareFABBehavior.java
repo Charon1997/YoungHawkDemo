@@ -1,5 +1,7 @@
 package com.charon.www.younghawkdemo.biz;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.os.Build;
 import android.support.design.widget.CoordinatorLayout;
@@ -37,16 +39,41 @@ public class ScrollAwareFABBehavior extends FloatingActionButton.Behavior {
     public void onNestedScroll(final CoordinatorLayout coordinatorLayout, final FloatingActionButton child, final View target, final int dxConsumed, final int dyConsumed, final int dxUnconsumed, final int dyUnconsumed) {
         super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
         Log.d("behavior", "dy" + dyConsumed + "dyu"+dyUnconsumed);
-        if (dyConsumed > 0  && child.getVisibility() == View.VISIBLE){
+        if (dyConsumed > 0  && !mIsAnimatingOut){
             Log.d("behavior", "out");
-            animateOut(child);
+            //animateOut(child);
+            childOut(child);
         }
-        else if (dyConsumed < 0 &&  child.getVisibility() != View.VISIBLE){
+        else if (dyConsumed < 0 &&  mIsAnimatingOut){
             Log.d("behavior", "in");
-            animateIn(child);
+            //animateIn(child);
+            childIn(child);
         }
-
     }
+
+    private void childIn(FloatingActionButton child) {
+        ObjectAnimator ob1 = ObjectAnimator.ofFloat(child, "ScaleX", 0.0f, 1.0f);
+        ObjectAnimator ob2 = ObjectAnimator.ofFloat(child, "ScaleY", 0.0f, 1.0f);
+        ObjectAnimator ob3 = ObjectAnimator.ofFloat(child, "Alpha", 0.0f, 1.0f);
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(ob1, ob2, ob3);
+        set.setDuration(300);
+        mIsAnimatingOut = false;
+        set.start();
+    }
+
+    private void childOut(FloatingActionButton child) {
+        ObjectAnimator ob1 = ObjectAnimator.ofFloat(child, "ScaleX", 1.0f, 0.0f);
+        ObjectAnimator ob2 = ObjectAnimator.ofFloat(child, "ScaleY", 1.0f, 0.0f);
+        ObjectAnimator ob3 = ObjectAnimator.ofFloat(child, "Alpha", 1.0f, 0.0f);
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(ob1, ob2, ob3);
+        set.setDuration(300);
+        mIsAnimatingOut = true;
+        set.start();
+    }
+
+
 
     private void animateOut(final FloatingActionButton button) {
         if (Build.VERSION.SDK_INT >= 14) {

@@ -16,16 +16,34 @@ public class Date {
 
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Date date = (Date) o;
+
+        if (year != date.year) return false;
+        if (month != date.month) return false;
+        return day == date.day;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = year;
+        result = 31 * result + month;
+        result = 31 * result + day;
+        return result;
+    }
+
     public Date(int year, int month, int day) {
         this.year = year;
         this.month = month;
         this.day = day;
     }
 
-    public Date(int year, int month, int day, int hour, int min) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
+    public Date(int hour, int min) {
         this.hour = hour;
         this.min = min;
     }

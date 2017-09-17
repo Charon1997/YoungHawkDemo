@@ -9,20 +9,30 @@ import java.util.List;
 public class Moment {
     private int img;
     private String userName;
+    private Date pubDay;
     private Date pubTime;
     private String pubContent;
     private int likeNum;
     private int commentNum;
 
-    public Moment(int img, String userName, Date pubTime, String pubContent, int likeNum, int commentNum) {
+
+
+    public Moment(int img, String userName, Date pubDay, Date pubTime, String pubContent, int likeNum, int commentNum) {
         this.img = img;
         this.userName = userName;
+        this.pubDay = pubDay;
         this.pubTime = pubTime;
         this.pubContent = pubContent;
         this.likeNum = likeNum;
         this.commentNum = commentNum;
     }
+    public Date getPubDay() {
+        return pubDay;
+    }
 
+    public void setPubDay(Date pubDay) {
+        this.pubDay = pubDay;
+    }
     public int getImg() {
         return img;
     }

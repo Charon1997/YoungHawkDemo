@@ -1,18 +1,11 @@
 package com.charon.www.younghawkdemo.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.model.Date;
 import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.ui.Fragments.PlanFragment;
@@ -23,13 +16,13 @@ import java.util.List;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_FOOTER;
-import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM_PLAN;
 
 /**
  * Created by Charon on 2017/4/26.
  */
 
-public class PlanRecyclerAdapter extends RecyclerView.Adapter {
+public class PlanRecyclerAdapter extends BaseRecyclerAdapter {
     private static boolean noMore = false;
     private static boolean onError = false;
 
@@ -54,37 +47,16 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        switch (viewType) {
-            case TYPE_ITEM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_plan, parent, false);
-                return new MyViewHolder(view);
-            case TYPE_FOOTER:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_footer, parent, false);
-                return new FooterHolder(view);
-            case TYPE_END:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_end, parent, false);
-                return new EndHolder(view);
-            case TYPE_ERROR:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_error, parent, false);
-                return new ErrorHolder(view);
-            default:
-                return null;
-        }
-    }
-
-    @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof MyViewHolder) {
-            ((MyViewHolder) holder).mTvName.setText(list.get(position).getUserName());
-            ((MyViewHolder) holder).mTvTime.setText(changeTime(position));
-            ((MyViewHolder) holder).mTvSummary.setText(list.get(position).getSummary());
-            ((MyViewHolder) holder).mTvSummary.setTag(position);
-            ((MyViewHolder) holder).mTvPlan.setText(list.get(position).getPlan());
-            ((MyViewHolder) holder).mTvPlan.setTag(position);
+        if (holder instanceof PlanViewHolder) {
+            ((PlanViewHolder) holder).mTvName.setText(list.get(position).getUserName());
+            ((PlanViewHolder) holder).mTvTime.setText(changeTime(position));
+            ((PlanViewHolder) holder).mTvSummary.setText(list.get(position).getSummary());
+            ((PlanViewHolder) holder).mTvSummary.setTag(position);
+            ((PlanViewHolder) holder).mTvPlan.setText(list.get(position).getPlan());
+            ((PlanViewHolder) holder).mTvPlan.setTag(position);
 
-            ((MyViewHolder) holder).mCardView.setOnClickListener(new View.OnClickListener() {
+            ((PlanViewHolder) holder).mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(mContext, "点击了" + position, Toast.LENGTH_SHORT).show();
@@ -92,7 +64,7 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
                 }
             });
 
-            ((MyViewHolder) holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            ((PlanViewHolder) holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     setPosition(position);
@@ -170,52 +142,9 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
             else
                 return TYPE_FOOTER;
         } else
-            return TYPE_ITEM;
+            return TYPE_ITEM_PLAN;
     }
 
-    private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
-        private TextView mTvName, mTvTime, mTvSummary, mTvPlan;
-        private CardView mCardView;
-
-        MyViewHolder(View itemView) {
-            super(itemView);
-            mCardView = (CardView) itemView.findViewById(R.id.item_plan_card);
-            mTvName = (TextView) itemView.findViewById(R.id.item_plan_name);
-            mTvTime = (TextView) itemView.findViewById(R.id.item_plan_time);
-            mTvSummary = (TextView) itemView.findViewById(R.id.item_plan_summary);
-            mTvPlan = (TextView) itemView.findViewById(R.id.item_plan_plan);
-            //mTvMore = (TextView) itemView.findViewById(R.id.item_plan_more);
-
-            mCardView.setOnCreateContextMenuListener(this);
-        }
-
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.add(0, 0, 0, "编辑");
-            menu.add(0, 1, 0, "删除");
-        }
-    }
-
-    private class FooterHolder extends RecyclerView.ViewHolder {
-        ProgressBar mPbFooter;
-
-        FooterHolder(View itemView) {
-            super(itemView);
-            mPbFooter = (ProgressBar) itemView.findViewById(R.id.footer_progress_bar);
-        }
-    }
-
-    private class EndHolder extends RecyclerView.ViewHolder {
-        public EndHolder(View itemView) {
-            super(itemView);
-        }
-    }
-
-    private class ErrorHolder extends RecyclerView.ViewHolder {
-        public ErrorHolder(View itemView) {
-            super(itemView);
-        }
-    }
 
     private String changeTime(int position) {
         Date timeList = list.get(position).getPubTime();
@@ -244,7 +173,8 @@ public class PlanRecyclerAdapter extends RecyclerView.Adapter {
         int size = list.size();
         if (size > 0) {
             list.remove(i);
-            notifyDataSetChanged();
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, list.size() - position);
         }
     }
 

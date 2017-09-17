@@ -31,7 +31,7 @@ public class DiscussPresenter {
     private List<DiscussBean> addDate(int j) {
         discussList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
-            Date time = new Date(2017,2,3,12,i);
+            Date time = new Date(2,i);
             DiscussBean discussBean = new DiscussBean("陈恳",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的讨论文字段"+i,"标题");
             discussList.add(discussBean);
         }

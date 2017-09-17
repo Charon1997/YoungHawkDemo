@@ -30,7 +30,7 @@ public class PlanPresenter {
     private List<PlanBean> addDate(int j) {
         planList = new ArrayList<>();
         for (int i = 0 ; i < j ; i++) {
-            Date time = new Date(2017,2,3,12,i);
+            Date time = new Date(2,i);
             PlanBean planList = new PlanBean("姓名",time,"这是一个计划计划计划计长很长很很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i,i+"计划是这个啊");
             this.planList.add(planList);
         }

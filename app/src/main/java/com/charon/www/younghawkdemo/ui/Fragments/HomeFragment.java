@@ -113,10 +113,6 @@ public class HomeFragment extends Fragment implements IHomeView {
             });
         } else adapter.addData(homeList);
 
-
-
-
-
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

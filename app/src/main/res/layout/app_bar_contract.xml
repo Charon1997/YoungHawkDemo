@@ -41,7 +41,7 @@
         android:layout_marginBottom="72dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:src="@drawable/home_fab"
+        app:srcCompat="@drawable/home_fab"
         app:layout_behavior="com.charon.www.younghawkdemo.biz.ScrollAwareFABBehavior" />
 
 

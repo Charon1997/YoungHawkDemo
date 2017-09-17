@@ -21,13 +21,13 @@ import java.util.List;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_FOOTER;
-import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM;
+import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM_DISCUSS;
 
 /**
  * Created by Charon on 2017/5/2.
  */
 
-public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
+public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
     private static boolean noMore = false;
     private static boolean onError = false;
 
@@ -50,44 +50,22 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        switch (viewType) {
-            case TYPE_ITEM:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_discuss, parent, false);
-                return new MyViewHolder(view);
-
-            case TYPE_FOOTER:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_footer, parent, false);
-                return new FooterHolder(view);
-            case TYPE_END:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_end, parent, false);
-                return new EndHolder(view);
-            case TYPE_ERROR:
-                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recyler_error, parent, false);
-                return new ErrorHolder(view);
-            default:return null;
-        }
-    }
-
-
-    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        if (holder instanceof MyViewHolder) {
-            ((MyViewHolder) holder).mTvName.setText(list.get(position).getPubTitle());
-            ((MyViewHolder) holder).mTvTime.setText(changeTime(position));
-            ((MyViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
+        if (holder instanceof DiscussViewHolder) {
+            ((DiscussViewHolder) holder).mTvName.setText(list.get(position).getPubTitle());
+            ((DiscussViewHolder) holder).mTvTime.setText(changeTime(position));
+            ((DiscussViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
             Log.d("123", "绑定了holder");
-            ((MyViewHolder) holder).itemView.setTag(position);
+            ((DiscussViewHolder) holder).itemView.setTag(position);
 
-            ((MyViewHolder) holder).mCardView.setOnClickListener(new View.OnClickListener() {
+            ((DiscussViewHolder) holder).mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(mContext, "click" + position, Toast.LENGTH_SHORT).show();
                 }
             });
 
-            ((MyViewHolder) holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
+            ((DiscussViewHolder) holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     setPosition(position);
@@ -99,8 +77,8 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
-        if (holder instanceof MyViewHolder) {
-            ((MyViewHolder) holder).mCardView.setOnLongClickListener(null);
+        if (holder instanceof DiscussViewHolder) {
+            ((DiscussViewHolder) holder).mCardView.setOnLongClickListener(null);
             super.onViewRecycled(holder);
         }
     }
@@ -121,47 +99,7 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
                 return TYPE_FOOTER;
         }
         else
-            return TYPE_ITEM;
-    }
-
-    private class MyViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
-        private TextView mTvName, mTvTime, mTvContent;
-        private CardView mCardView;
-
-        MyViewHolder(View itemView) {
-            super(itemView);
-            mCardView = (CardView) itemView.findViewById(R.id.item_discuss_card);
-            mTvName = (TextView) itemView.findViewById(R.id.item_discuss_name);
-            mTvTime = (TextView) itemView.findViewById(R.id.item_discuss_time);
-            mTvContent = (TextView) itemView.findViewById(R.id.item_discuss_content);
-            mCardView.setOnCreateContextMenuListener(this);
-        }
-
-        @Override
-        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-            menu.add(0, 0, 0, "编辑");
-            menu.add(0, 1, 0, "删除");
-        }
-    }
-
-    private class FooterHolder extends RecyclerView.ViewHolder {
-        ProgressBar mPbFooter;
-        FooterHolder(View itemView) {
-            super(itemView);
-            mPbFooter = (ProgressBar) itemView.findViewById(R.id.footer_progress_bar);
-        }
-    }
-
-    private class EndHolder extends RecyclerView.ViewHolder {
-        public EndHolder(View itemView) {
-            super(itemView);
-        }
-    }
-
-    private class ErrorHolder extends RecyclerView.ViewHolder {
-        public ErrorHolder(View itemView) {
-            super(itemView);
-        }
+            return TYPE_ITEM_DISCUSS;
     }
 
     private String changeTime(int position) {
@@ -196,7 +134,8 @@ public class DiscussRecyclerAdapter extends RecyclerView.Adapter {
         int size = list.size();
         if (size > 0) {
             list.remove(i);
-            notifyDataSetChanged();
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, list.size() - position);
         }
     }
 
