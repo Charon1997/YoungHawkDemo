@@ -5,12 +5,12 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
-import android.icu.text.DisplayContext;
-import android.icu.text.MessagePattern;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,7 +20,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.Constant;
+import com.charon.www.younghawkdemo.util.PhotoUtils;
 
 import java.io.File;
 
@@ -36,16 +36,21 @@ public class MPoPuWindow extends PopupWindow implements View.OnClickListener {
 
     private int type;
 
-    public Fragment mFragment;
-
+    private Fragment mFragment;
+    private Activity activity;
     private File file;
     private Uri ImgUri;
 
     private TextView mTakePhoto, mAlbumPhoto, mCancel;
-
-    public MPoPuWindow(Context context, Fragment mFragment) {
+    private static final int CODE_GALLERY_REQUEST = 0xa0;
+    private static final int CODE_CAMERA_REQUEST = 0xa1;
+    private static final int CODE_RESULT_REQUEST = 0xa2;
+    private static final int CAMERA_PERMISSIONS_REQUEST_CODE = 0x03;
+    private static final int STORAGE_PERMISSIONS_REQUEST_CODE = 0x04;
+    public MPoPuWindow(Context context, Fragment mFragment,Activity activity) {
         initView(context);
         this.mFragment = mFragment;
+        this.activity = activity;
     }
 
     private void initView(Context mContext) {
@@ -91,19 +96,44 @@ public class MPoPuWindow extends PopupWindow implements View.OnClickListener {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onClick(View arg0) {
         switch (arg0.getId()) {
             case R.id.photo_take:
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                file = new File(Environment.getExternalStorageDirectory(),
-                        System.currentTimeMillis() + ".jpg");
-                Log.d("123", "file" + file.getPath());
+                file = new File(Environment.getExternalStorageDirectory(), System.currentTimeMillis() + ".jpg");
                 ImgUri = Uri.fromFile(file);
-                intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, ImgUri);
-                Log.d("123", "take photo");
-                mFragment.startActivityForResult(intent, 1);
+                Log.d("123", "take photo file"+file+"uri"+ImgUri);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    //通过FileProvider创建一个content类型的Uri
+                    ImgUri = FileProvider.getUriForFile(mContext, "com.charon.www.younghawkdemo.fileprovider", file);
+                }
+                PhotoUtils.takePicture(mFragment, ImgUri, CODE_CAMERA_REQUEST);
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
+//                }
+//                file = new File(Environment.getExternalStorageDirectory(),
+//                        System.currentTimeMillis() + ".jpg");
+//                Log.d("123", "file" + file.getPath());
+//                //ImgUri = FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + "com.charon.www.younghawkdemo.fileprovider", file);
+//                ImgUri = FileProvider.getUriForFile(mContext,"com.charon.www.younghawkdemo.fileprovider", file);
+//
+//                Log.d("123", "take photo"+ImgUri);
+//                int currentapiVersion = Build.VERSION.SDK_INT;
+//                if (currentapiVersion < 24) {
+//                    //ImgUri = FileProvider.getUriForFile(mContext,"com.charon.www.younghawkdemo.fileprovider", file);
+//                    intent.putExtra(MediaStore.Images.Media.ORIENTATION, 0);
+//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, ImgUri);
+//                    mFragment.startActivityForResult(intent, 1);
+//                } else {
+//                    ContentValues contentValues = new ContentValues(1);
+//                    contentValues.put(MediaStore.Images.Media.DATA, file.getAbsolutePath());
+//                    Uri uri =  mFragment.getContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,contentValues);
+//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+//                    mFragment.startActivityForResult(intent, 1);
+//                }
+
                 Log.d("123", "take photo");
                 type = CAMERA;
                 if (listener != null) {
@@ -114,11 +144,12 @@ public class MPoPuWindow extends PopupWindow implements View.OnClickListener {
                 this.dismiss();
                 break;
             case R.id.photo_album:
-                Intent intent2 = new Intent("android.intent.action.PICK");
-                intent2.setType("image/*");
-                Log.d("123", "album");
-                mFragment.startActivityForResult(intent2, 2);
-                Log.d("123", "album");
+                PhotoUtils.openPic(mFragment, CODE_GALLERY_REQUEST);
+//                Intent intent2 = new Intent("android.intent.action.PICK");
+//                intent2.setType("image/*");
+//                Log.d("123", "album");
+//                mFragment.startActivityForResult(intent2, 2);
+//                Log.d("123", "album");
                 type = PHONE;
                 if (listener != null) {
                     listener.getType(type);
@@ -138,7 +169,9 @@ public class MPoPuWindow extends PopupWindow implements View.OnClickListener {
 
         intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(uri, "image/*");
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        }
         intent.putExtra("crop", "true");
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);

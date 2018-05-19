@@ -1,160 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackGround">
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/me_bg"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:src="@drawable/me_bg" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/me_img_head"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            android:src="@drawable/charonhead"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:src="@drawable/charonhead" />
+
         <TextView
-            android:layout_marginTop="8dp"
             android:id="@+id/me_title_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Charon"
-            android:textSize="18sp"
             android:layout_below="@id/me_img_head"
+            android:layout_marginTop="8dp"
             android:gravity="center"
-            android:textColor="@color/colorWhite"/>
+            android:text="Charon"
+            android:textColor="@color/colorWhite"
+            android:textSize="18sp" />
     </RelativeLayout>
-   <LinearLayout
-       android:id="@+id/me_lin_at"
-       android:orientation="horizontal"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:background="#ffffff"
-       android:foreground="?android:attr/selectableItemBackgroundBorderless">
-       <ImageView
-           android:layout_width="48dp"
-           android:layout_height="48dp"
-           android:layout_marginRight="16dp"
-           android:layout_marginEnd="16dp"
-           android:src="@drawable/me_at"
-           android:padding="12dp"/>
-       <TextView
-           android:layout_width="match_parent"
-           android:layout_height="48dp"
-           android:text="与我相关"
-           android:gravity="center_vertical"
-           android:paddingStart="8dp"
-           android:paddingLeft="8dp"
-           android:textSize="18sp"
-           android:textColor="@color/colorBlack"
-           android:alpha="0.7"/>
-   </LinearLayout>
-    <LinearLayout
-        android:id="@+id/me_set"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
+
+    <RelativeLayout
+        android:id="@+id/me_lin_at"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless">
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        >
+
         <ImageView
+            android:id="@+id/me_img_at"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/me_setting"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:src="@drawable/me_at" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="相关设置"
+            android:alpha="0.7"
             android:gravity="center_vertical"
-            android:paddingStart="8dp"
-            android:paddingLeft="8dp"
-            android:textSize="18sp"
+            android:layout_toRightOf="@id/me_img_at"
+            android:text="与我相关"
             android:textColor="@color/colorBlack"
-            android:alpha="0.7"/>
-    </LinearLayout>
-    <LinearLayout
+            android:textSize="18sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_toRightOf="@id/me_img_at"
+            android:layout_below="@id/me_img_at"
+            android:background="@color/colorBackGround" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
         android:id="@+id/me_project"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless">
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        >
+
         <ImageView
+            android:id="@+id/me_img_project"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/me_project"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:src="@drawable/me_project" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:alpha="0.7"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/me_img_project"
             android:text="我的项目"
-            android:gravity="center_vertical"
-            android:paddingStart="8dp"
-            android:paddingLeft="8dp"
-            android:textSize="18sp"
             android:textColor="@color/colorBlack"
-            android:alpha="0.7"/>
-    </LinearLayout>
-    <LinearLayout
+            android:textSize="18sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_toRightOf="@id/me_img_project"
+            android:layout_below="@id/me_img_project"
+            android:background="@color/colorBackGround" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/me_scan"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless">
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        >
+
         <ImageView
+            android:id="@+id/me_img_scan"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/me_scan"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:src="@drawable/me_scan" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:alpha="0.7"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/me_img_scan"
             android:text="扫码签到"
-            android:gravity="center_vertical"
-            android:paddingStart="8dp"
-            android:paddingLeft="8dp"
-            android:textSize="18sp"
             android:textColor="@color/colorBlack"
-            android:alpha="0.7"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/me_about_us"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
+            android:textSize="18sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_toRightOf="@id/me_img_scan"
+            android:layout_below="@id/me_img_scan"
+            android:background="@color/colorBackGround" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/me_set"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:foreground="?android:attr/selectableItemBackgroundBorderless">
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        >
+
         <ImageView
+            android:id="@+id/me_img_set"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/me_aboutus"
-            android:padding="12dp"/>
+            android:padding="12dp"
+            android:src="@drawable/me_setting" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="关于我们"
+            android:alpha="0.7"
             android:gravity="center_vertical"
-            android:paddingStart="8dp"
-            android:paddingLeft="8dp"
-            android:textSize="18sp"
+            android:text="相关设置"
+            android:layout_toRightOf="@id/me_img_set"
             android:textColor="@color/colorBlack"
-            android:alpha="0.7"/>
-    </LinearLayout>
+            android:textSize="18sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_toRightOf="@id/me_img_set"
+            android:layout_below="@id/me_img_set"
+            android:background="@color/colorBackGround" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/me_about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        >
+
+        <ImageView
+            android:id="@+id/me_img_about_us"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:src="@drawable/me_aboutus" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:alpha="0.7"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@id/me_img_about_us"
+            android:text="关于我们"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_toRightOf="@id/me_img_about_us"
+            android:layout_below="@id/me_img_about_us"
+            android:background="@color/colorBackGround" />
+    </RelativeLayout>
+
 </LinearLayout>

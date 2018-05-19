@@ -2,13 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.charon.www.younghawkdemo">
-    <uses-sdk tools:overrideLibrary="com.nexuslink.textimageview"/>
+
+    <uses-sdk tools:overrideLibrary="com.nexuslink.textimageview" />
+
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS"/>
-    <uses-permission android:name="androd.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_FORMAT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,21 +27,48 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.Activities.IntroActivity"
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.charon.www.younghawkdemo.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+        <activity
+            android:name=".ui.Activities.IntroActivity"
             android:theme="@style/AppTheme">
+
         </activity>
-        <activity android:name=".ui.Activities.NameListActivity"/>
-        <activity android:name=".ui.Activities.PersonalDateActivity"/>
-        <activity android:name=".ui.Activities.LoginActivity"/>
-        <activity android:name=".ui.Activities.MainActivity"/>
-        <activity android:name=".ui.Activities.MailListActivity"/>
-        <activity android:name=".ui.Activities.ManageActivity"/>
-        <activity android:name=".ui.Activities.ProfessorActivity"/>
-        <activity android:name=".ui.Activities.TableActivity"/>
-        <activity android:name=".ui.Activities.FabHomeActivity"/>
-        <activity android:name=".ui.Activities.FabPlanActivity"/>
-        <activity android:name=".ui.Activities.FabDiscussActivity"/>
-        <activity android:name=".ui.Activities.NMIDActivity"/>
+        <activity android:name=".ui.Activities.NameListActivity" />
+        <activity android:name=".ui.Activities.PersonalDateActivity" />
+        <activity android:name=".ui.Activities.LoginActivity" />
+        <activity android:name=".ui.Activities.MainActivity" />
+        <activity
+            android:name=".ui.Activities.MailListActivity"
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity
+            android:name=".ui.Activities.ManageActivity"
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity
+            android:name=".ui.Activities.ProfessorActivity"
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity
+            android:name=".ui.Activities.TableActivity"
+            android:launchMode="singleTask">
+
+        </activity>
+        <activity android:name=".ui.Activities.FabHomeActivity" />
+        <activity android:name=".ui.Activities.FabPlanActivity" />
+        <activity android:name=".ui.Activities.FabDiscussActivity" />
+        <activity android:name=".ui.Activities.NMIDActivity" />
     </application>
 
 </manifest>

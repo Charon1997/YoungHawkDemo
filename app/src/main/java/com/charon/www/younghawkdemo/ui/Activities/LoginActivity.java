@@ -1,24 +1,24 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
 import com.charon.www.younghawkdemo.presenter.LoginPresenter;
 import com.charon.www.younghawkdemo.view.ILoginView;
-import com.rengwuxian.materialedittext.MaterialEditText;
+
+import kr.co.namee.permissiongen.PermissionFail;
+import kr.co.namee.permissiongen.PermissionGen;
+import kr.co.namee.permissiongen.PermissionSuccess;
 
 /**
  * Created by Charon on 2017/4/20.
@@ -46,6 +46,8 @@ public class LoginActivity extends BaseActivity implements ILoginView {
                 break;
             case R.id.login_forget_button:
                 presenter.forget();
+                break;
+            default:
                 break;
         }
     }
@@ -94,6 +96,12 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void doBusiness(Context mContext) {
         mToolbar.setTitle("雏鹰计划");
         setSupportActionBar(mToolbar);
+        PermissionGen.with(LoginActivity.this)
+                .addRequestCode(100)
+                .permissions(
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+                ).request();
+        //PermisionUtils.verifyStoragePermissions(this);
     }
 
     @Override
@@ -125,7 +133,9 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         }
         if (loading) {
             progressDialog.show();
-        } else progressDialog.dismiss();
+        } else {
+            progressDialog.dismiss();
+        }
     }
 
 
@@ -156,5 +166,21 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public void forget(String name) {
         //忘记密码界面
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionGen.onRequestPermissionsResult(this, requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    }
+
+    @PermissionSuccess(requestCode = 100)
+    public void doSomething() {
+        showToast("已经获取权限");
+    }
+
+    @PermissionFail(requestCode = 100)
+    public void doFailSomething() {
+        showToast("获取权限失败");
     }
 }

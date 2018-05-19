@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="wrap_content">
-    <com.nexuslink.textimageview.TextImageView
+    <com.charon.www.younghawkdemo.util.TextCircleImageView
         android:id="@+id/text_image"
         android:layout_margin="16dp"
         android:layout_width="40dp"

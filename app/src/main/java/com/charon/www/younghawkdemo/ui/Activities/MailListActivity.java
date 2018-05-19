@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.charon.www.younghawkdemo.util.PinyinComparator;
 import com.charon.www.younghawkdemo.R;
@@ -81,7 +82,7 @@ public class MailListActivity extends BaseActivity{
 
     @Override
     public void doBusiness(Context mContext) {
-
+        // TODO: 2018/4/13  加入pb过渡
         mToolbar.setTitle("通讯录");
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -214,5 +215,10 @@ public class MailListActivity extends BaseActivity{
             intent.putExtras(bundle1);
             startActivity(intent);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.charon.www.younghawkdemo.R;
-import com.nexuslink.textimageview.TextImageView;
+import com.charon.www.younghawkdemo.util.TextCircleImageView;
 
 import java.util.List;
 import java.util.Map;
@@ -46,11 +46,11 @@ public class ItemAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View myView = LayoutInflater.from(context).inflate(R.layout.project_list_mail,null);
         TextView textView = (TextView) myView.findViewById(R.id.mail_list_projectName);
-        TextImageView textImageView = (TextImageView) myView.findViewById(R.id.text_image);
+        TextCircleImageView textImageView = (TextCircleImageView) myView.findViewById(R.id.text_image);
         String  name = (String) data.get(i).get("name");
         textView.setText(name);
         textImageView.setText(name);
-        textImageView.setMaterialDefaultColor(i);
+        textImageView.setDefaultBackgroundColor(i);
         return myView;
     }
 }

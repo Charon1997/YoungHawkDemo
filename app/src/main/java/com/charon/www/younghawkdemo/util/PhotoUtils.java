@@ -24,7 +24,7 @@ import android.provider.MediaStore;
  * 修改备注：
  */
 
-public class PhoneUtil {
+public class PhotoUtils {
     private static final String TAG = "PhotoUtils";
 
     /**
@@ -55,7 +55,7 @@ public class PhoneUtil {
     }
 
     /**
-     * @param activity    当前activity
+     * @param fragment    当前activity
      * @param orgUri      剪裁原图的Uri
      * @param desUri      剪裁后的图片的Uri
      * @param aspectX     X方向的比例
@@ -64,7 +64,7 @@ public class PhoneUtil {
      * @param height      剪裁图片高度
      * @param requestCode 剪裁图片的请求码
      */
-    public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, int aspectX, int aspectY, int width, int height, int requestCode) {
+    public static void cropImageUri(Fragment fragment, Uri orgUri, Uri desUri, int aspectX, int aspectY, int width, int height, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
@@ -78,10 +78,10 @@ public class PhoneUtil {
         intent.putExtra("scale", true);
         //将剪切的图片保存到目标Uri中
         intent.putExtra(MediaStore.EXTRA_OUTPUT, desUri);
-        intent.putExtra("return-data", false);
+        intent.putExtra("return-data", true);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         intent.putExtra("noFaceDetection", true);
-        activity.startActivityForResult(intent, requestCode);
+        fragment.startActivityForResult(intent, requestCode);
     }
 
     /**
