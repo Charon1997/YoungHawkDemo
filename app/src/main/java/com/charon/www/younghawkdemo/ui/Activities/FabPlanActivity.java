@@ -28,7 +28,7 @@ public class FabPlanActivity extends BaseActivity implements IBaseFabView {
     private EditText mEtSummary,mEtPlan;
     private Toolbar mToolbar;
     private LinearLayout mPb;
-    private FabPresenter fabPresenter = new FabPresenter(this);
+    private FabPresenter fabPresenter ;
     private String summary="",plan="";
     @Override
     public void widgetClick(View v) {
@@ -112,7 +112,8 @@ public class FabPlanActivity extends BaseActivity implements IBaseFabView {
     @Override
     public void send() {
         //上传
-        showToast("总结：" + mEtSummary.getText()+"计划："+mEtPlan.getText());
+        //showToast("总结：" + mEtSummary.getText()+"计划："+mEtPlan.getText());
+        fabPresenter = new FabPresenter(this,this);
         fabPresenter.sendPlan(mEtPlan.getText().toString(),mEtSummary.getText().toString());
     }
 
@@ -120,7 +121,9 @@ public class FabPlanActivity extends BaseActivity implements IBaseFabView {
     public void loading(boolean loading) {
         if (loading) {
             mPb.setVisibility(View.VISIBLE);
-        } else mPb.setVisibility(View.GONE);
+        } else {
+            mPb.setVisibility(View.GONE);
+        }
     }
 
     @Override

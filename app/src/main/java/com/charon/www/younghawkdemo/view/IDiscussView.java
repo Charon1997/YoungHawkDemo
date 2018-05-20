@@ -1,19 +1,20 @@
 package com.charon.www.younghawkdemo.view;
 
-import com.charon.www.younghawkdemo.model.DiscussBean;
+import com.charon.www.younghawkdemo.model.Discuss;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2017/7/21.
  */
 
-public interface IDiscussView extends IBaseItemView{
+public interface IDiscussView extends IBaseItemView {
 
-    void showInf(List<DiscussBean> discussList, int position);
+    void showInf(Discuss[] discussList, int position);
 
-    void addView(List<DiscussBean> discussList);
+    void addView(ArrayList<Discuss> discussList);
 
-    void refreshList(List<DiscussBean> discussList);
+    void refreshList(Discuss[] discussList);
 
+    void showToastMsg(String msg);
 }

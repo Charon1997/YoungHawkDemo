@@ -1,19 +1,21 @@
 package com.charon.www.younghawkdemo.view;
 
-import com.charon.www.younghawkdemo.model.PlanBean;
+import com.charon.www.younghawkdemo.model.Plan;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * Created by Charon on 2017/7/21.
  */
 
-public interface IPlanView  extends IBaseItemView {
+public interface IPlanView extends IBaseItemView {
 
-    void showInf(List<PlanBean> list, int position);
+    void showInf(Plan[] list, int position);
 
-    void addView(List<PlanBean> planList);
+    void addView(ArrayList<Plan> planList);
 
-    void refreshList(List<PlanBean> planList);
+    void refreshList(Plan[] planList);
 
+    void showToastMsg(String msg);
 }

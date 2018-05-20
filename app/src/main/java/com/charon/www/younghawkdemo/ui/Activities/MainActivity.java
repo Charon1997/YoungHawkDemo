@@ -47,6 +47,7 @@ import static com.ashokvarma.bottomnavigation.BottomNavigationBar.MODE_SHIFTING;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener, IContract, BottomNavigationBar.OnTabSelectedListener {
     private Fragment currentNavFragment;
+    private static int curIndex = 0;
     private boolean isQuit = false;
     private Timer timer = new Timer();
     private Toolbar toolbar;
@@ -172,6 +173,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 currentNavFragment = fragmentNavPool.get(0);
                 toolbar.setTitle("主页");
                 mFab.setOnClickListener(onFabClickListener1);
+                curIndex = 0;
                 break;
             case 1:
                 mFab.setVisibility(View.VISIBLE);
@@ -179,6 +181,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 currentNavFragment = fragmentNavPool.get(1);
                 toolbar.setTitle("计划");
                 mFab.setOnClickListener(onFabClickListener2);
+                curIndex = 1;
                 break;
             case 2:
                 mFab.setVisibility(View.VISIBLE);
@@ -186,12 +189,16 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 currentNavFragment = fragmentNavPool.get(2);
                 toolbar.setTitle("讨论");
                 mFab.setOnClickListener(onFabClickListener3);
+                curIndex = 2;
                 break;
             case 3:
                 mFab.setVisibility(View.INVISIBLE);
                 switchFragment(currentNavFragment, fragmentNavPool.get(3));
                 currentNavFragment = fragmentNavPool.get(3);
                 toolbar.setTitle("我的");
+                curIndex =3;
+                break;
+            default:
                 break;
         }
     }
@@ -256,4 +263,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             startActivity( FabDiscussActivity.class);
         }
     }
+
 }

@@ -7,14 +7,20 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.app.MyApplication;
 import com.charon.www.younghawkdemo.presenter.LoginPresenter;
 import com.charon.www.younghawkdemo.view.ILoginView;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import kr.co.namee.permissiongen.PermissionFail;
 import kr.co.namee.permissiongen.PermissionGen;
@@ -28,15 +34,21 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     private Toolbar mToolbar;
     private Button mBtnRegister,mBtnLoginIn,mBtnVisitor,mBtnForget;
     private EditText mMetUserName,mMetPassword;
-    private LinearLayout mLlProgressBar;
     private ProgressDialog progressDialog;
-    private LoginPresenter presenter = new LoginPresenter(this);
+    private ImageView mIvWx;
+    private LoginPresenter presenter = new LoginPresenter(this,this);
+
+
 
     @Override
     public void widgetClick(View v) {
         switch (v.getId()) {
             case R.id.login_signup_button:
                 presenter.register();
+                break;
+            case R.id.login_wx_send_button:
+
+                toWx();
                 break;
             case R.id.login_send_button:
                 presenter.login();
@@ -50,6 +62,15 @@ public class LoginActivity extends BaseActivity implements ILoginView {
             default:
                 break;
         }
+    }
+
+    private void toWx() {
+        showToast("toWx");
+        SendAuth.Req req = new SendAuth.Req();
+        req.scope = "snsapi_userinfo";
+         req.scope = "snsapi_userinfo";//提示 scope参数错误，或者没有scope权限
+        req.state = "wechat_sdk_微信登录";
+        MyApplication.api.sendReq(req);
     }
 
     @Override
@@ -74,7 +95,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     @Override
     public void initView(View view) {
-        mLlProgressBar = $(R.id.login_progressBar);
         mToolbar = $(R.id.login_toolbar);
         mBtnRegister = $(R.id.login_signup_button);
         mBtnLoginIn =$(R.id.login_send_button);
@@ -82,6 +102,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         mBtnForget = $(R.id.login_forget_button);
         mMetUserName = $(R.id.login_name);
         mMetPassword = $(R.id.login_password);
+        mIvWx = $(R.id.login_wx_send_button);
     }
 
     @Override
@@ -90,17 +111,19 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         mBtnLoginIn.setOnClickListener(this);
         mBtnVisitor.setOnClickListener(this);
         mBtnForget.setOnClickListener(this);
+        mIvWx.setOnClickListener(this);
     }
 
     @Override
     public void doBusiness(Context mContext) {
-        mToolbar.setTitle("雏鹰计划");
+        mToolbar.setTitle(R.string.app_name);
         setSupportActionBar(mToolbar);
         PermissionGen.with(LoginActivity.this)
                 .addRequestCode(100)
                 .permissions(
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
                 ).request();
+
         //PermisionUtils.verifyStoragePermissions(this);
     }
 
@@ -131,7 +154,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
             progressDialog.setMessage("加载中...");
             progressDialog.setTitle("登录");
         }
-        if (loading) {
+        if (loading && !progressDialog.isShowing()) {
             progressDialog.show();
         } else {
             progressDialog.dismiss();
@@ -153,6 +176,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public void register() {
         //挑战注册界面
+        startActivity(RegisterActivity.class);
     }
 
     @Override

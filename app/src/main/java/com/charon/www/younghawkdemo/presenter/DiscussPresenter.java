@@ -1,24 +1,36 @@
 package com.charon.www.younghawkdemo.presenter;
 
+import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
-import com.charon.www.younghawkdemo.model.Date;
-import com.charon.www.younghawkdemo.model.DiscussBean;
+import com.charon.www.younghawkdemo.biz.HttpService;
+import com.charon.www.younghawkdemo.model.Discuss;
+import com.charon.www.younghawkdemo.model.Status;
 import com.charon.www.younghawkdemo.ui.Fragments.DiscussFragment;
+import com.charon.www.younghawkdemo.util.SpUtil;
 import com.charon.www.younghawkdemo.view.IDiscussView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by Charon on 2017/7/21.
  */
 
 public class DiscussPresenter {
-    private List<DiscussBean> discussList;
+    private ArrayList<Discuss> discussList = new ArrayList<>();
     private IDiscussView discussView;
     Handler handler = new Handler();
-    public DiscussPresenter(IDiscussView discussView) {
+    private Context mContext;
+    private Subscriber<Discuss[]> subscriberList;
+
+    private Subscriber<Status> subscriber;
+    public DiscussPresenter(Context mContext,IDiscussView discussView) {
+        this.mContext = mContext;
         this.discussView = discussView;
     }
 
@@ -28,43 +40,48 @@ public class DiscussPresenter {
      * @param j
      * @return
      */
-    private List<DiscussBean> addDate(int j) {
-        discussList = new ArrayList<>();
-        for (int i = 0 ; i < j ; i++) {
-            Date time = new Date(2,i);
-            DiscussBean discussBean = new DiscussBean("陈恳",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的讨论文字段"+i,"标题");
-            discussList.add(discussBean);
-        }
-        return discussList;
-    }
+//    private List<DiscussBean> addDate(int j) {
+//        discussList = new ArrayList<>();
+//        for (int i = 0 ; i < j ; i++) {
+//            Date time = new Date(2,i);
+//            DiscussBean discussBean = new DiscussBean("陈恳",time,"这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的讨论文字段"+i,"标题");
+//            discussList.add(discussBean);
+//        }
+//        return discussList;
+//    }
 
     /**
      * [得到所有条目的信息]
      */
     public void getDiscussInf() {
         discussView.loading(true);
-
-        handler.postDelayed(new Runnable() {
+        subscriberList = new Subscriber<Discuss[]>() {
             @Override
-            public void run() {
-                discussView.addView(addDate(20));
-                DiscussFragment.loading = false;
+            public void onCompleted() {
                 discussView.loading(false);
+                discussView.addView(discussList);
+                Log.d("Discuss", "onCompleted ");
             }
-        },1500);
+
+            @Override
+            public void onError(Throwable e) {
+                discussView.loading(false);
+                Log.d("Home", "onError: "+e);
+            }
+
+            @Override
+            public void onNext(Discuss[] discusses) {
+                Collections.addAll(discussList, discusses);
+            }
+        };
+        HttpService.getInstance().getDiscussList(subscriberList);
     }
 
     /**
      * [上拉得到更多条目的信息]
      */
     public void getMoreInf() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                discussView.addView(addDate(5));
-                DiscussFragment.loading = false;
-            }
-        },1500);
+
     }
 
     /**
@@ -75,7 +92,7 @@ public class DiscussPresenter {
             @Override
             public void run() {
                 //判断是否有新数据
-                discussView.refreshList(addDate(1));
+                //discussView.refreshList(addDate(1));
                 DiscussFragment.loading = false;
                 discussView.refresh(false);
             }
@@ -86,10 +103,36 @@ public class DiscussPresenter {
      * [删除条目]
      * @param position
      */
-    public void deleteItem(int position) {
-        //先判断身份，可以删除，上传服务器，再删除
-        discussView.deleteItem(position);
+    public void deleteItem(final int position) {
+        if (discussList.get(position).getUserId() == (int) SpUtil.get(mContext,"userId",1)){//discussList[position].getUserId() == (int)SpUtil.get(mContext,"userId",1)){
+            discussView.loading(true);
+            subscriber = new Subscriber<Status>() {
+                @Override
+                public void onCompleted() {
+                    discussView.loading(false);
+                    Log.d("Dis", "onCompleted");
+                }
 
+                @Override
+                public void onError(Throwable e) {
+                    discussView.loading(false);
+                    Log.d("Dis", "onError: "+e);
+                }
+
+                @Override
+                public void onNext(Status status) {
+                    if (status.getCode().equals("200")){
+                        //删除成功
+                        discussView.toDelete(position);
+                    }else {
+                        discussView.showToastMsg("删除失败");
+                    }
+                }
+            };
+            HttpService.getInstance().delDiscussById(subscriber,discussList.get(position).getDcId());
+        } else {
+            discussView.showToastMsg("只能删除自己的哟！");
+        }
     }
 
     /**

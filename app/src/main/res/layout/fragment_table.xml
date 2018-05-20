@@ -37,7 +37,7 @@
                     android:layout_marginLeft="34dp"
                     android:layout_centerVertical="true"
                     android:textColor="@android:color/white"
-                    android:text="PDF"
+                    android:text="TXT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </RelativeLayout>
@@ -48,7 +48,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
-                android:text="重邮移动互联网应用工程研究中心·雏鹰项目推进报表"
+                android:text="项目推进报表"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -97,7 +97,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
-                android:text="重邮移动互联网应用工程研究中心·雏鹰学员请假审批表"
+                android:text="请假审批表"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <ImageView
@@ -110,6 +110,53 @@
                 android:layout_height="23dp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="92dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <android.support.v7.widget.CardView
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="30dp"
+                    app:cardBackgroundColor="@color/colorPrimaryLight"
+                    android:layout_margin="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+                <TextView
+                    android:layout_marginLeft="34dp"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/white"
+                    android:text="DOC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <TextView
+                android:alpha="0.75"
+                android:textColor="@android:color/black"
+                android:lineSpacingExtra="3dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:text="项目推进报表"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/table_image_download3"
+                android:layout_gravity="center"
+                android:layout_margin="16dp"
+                android:src="@drawable/download"
+                android:layout_weight="0"
+                android:layout_width="23dp"
+                android:layout_height="23dp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

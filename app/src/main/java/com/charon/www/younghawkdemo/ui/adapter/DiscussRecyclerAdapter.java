@@ -1,22 +1,17 @@
 package com.charon.www.younghawkdemo.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.charon.www.younghawkdemo.R;
-import com.charon.www.younghawkdemo.model.Date;
-import com.charon.www.younghawkdemo.model.DiscussBean;
+import com.charon.www.younghawkdemo.model.Discuss;
 
-import java.util.List;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
@@ -28,11 +23,11 @@ import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM_DISCUSS;
  */
 
 public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
-    private static boolean noMore = false;
+    private static boolean noMore = true;
     private static boolean onError = false;
 
 
-    private List<DiscussBean> list;//相关数据
+    private ArrayList<Discuss> list;//相关数据
     private Context mContext;
     private int position;
 
@@ -44,7 +39,7 @@ public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
         this.position = position;
     }
 
-    public DiscussRecyclerAdapter(List<DiscussBean> list, Context mContext) {
+    public DiscussRecyclerAdapter(ArrayList<Discuss> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
@@ -52,9 +47,9 @@ public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof DiscussViewHolder) {
-            ((DiscussViewHolder) holder).mTvName.setText(list.get(position).getPubTitle());
-            ((DiscussViewHolder) holder).mTvTime.setText(changeTime(position));
-            ((DiscussViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
+            ((DiscussViewHolder) holder).mTvName.setText(list.get(position).getTitle());
+            ((DiscussViewHolder) holder).mTvTime.setText(formatTime(list.get(position).getTime()));
+            ((DiscussViewHolder) holder).mTvContent.setText(list.get(position).getDcContent());
             Log.d("123", "绑定了holder");
             ((DiscussViewHolder) holder).itemView.setTag(position);
 
@@ -79,7 +74,6 @@ public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
     public void onViewRecycled(RecyclerView.ViewHolder holder) {
         if (holder instanceof DiscussViewHolder) {
             ((DiscussViewHolder) holder).mCardView.setOnLongClickListener(null);
-            super.onViewRecycled(holder);
         }
     }
 
@@ -102,26 +96,26 @@ public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
             return TYPE_ITEM_DISCUSS;
     }
 
-    private String changeTime(int position) {
-        Date timeList = list.get(position).getPubTime();
-        String year = String.valueOf(timeList.getYear());
-        String month = String.valueOf(timeList.getMonth());
-        String day = String.valueOf(timeList.getDay());
-        String hour = String.valueOf(timeList.getHour());
-        String min = String.valueOf(timeList.getMin());
-        return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
-    }
+//    private String changeTime(int position) {
+//        Date timeList = list.get(position).getPubTime();
+//        String year = String.valueOf(timeList.getYear());
+//        String month = String.valueOf(timeList.getMonth());
+//        String day = String.valueOf(timeList.getDay());
+//        String hour = String.valueOf(timeList.getHour());
+//        String min = String.valueOf(timeList.getMin());
+//        return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
+//    }
 
 
 
-    public void addHeadItem(List<DiscussBean> list) {
-        this.list.add(0,list.get(0));
+    public void addHeadItem(Discuss[] list) {
+        //this.list.add(0,list.get(0));
         //具体在变。
         notifyDataSetChanged();
     }
-    public void addData(List<DiscussBean> list) {
-        for (int i = 0;i < list.size();i++) {
-            this.list.add(list.get(i));
+    public void addData(Discuss[] list) {
+        for (int i = 0;i < list.length;i++) {
+            //this.list[i] = ;
         }
         notifyDataSetChanged();
     }
@@ -133,17 +127,33 @@ public class DiscussRecyclerAdapter extends BaseRecyclerAdapter{
     public void deleteItem(int i) {
         int size = list.size();
         if (size > 0) {
+            //deleteItemById(i);
             list.remove(i);
             notifyItemRemoved(position);
             notifyItemRangeChanged(position, list.size() - position);
         }
     }
-
+//    private void deleteItemById(int i) {
+//        System.arraycopy(list, i + 1, list, i + 1 - 1, list.length - (i + 1));
+//        list[list.length-1] = null;
+//    }
     public String getContent(int position) {
-        return list.get(position).getPubContent();
+        return list.get(position).getDcContent();
     }
 
     public String getTitle(int position) {
-        return list.get(position).getPubTitle();
+        return list.get(position).getTitle();
+    }
+
+    private String formatTime(Timestamp timestamp){
+        String tsStr = "";
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            //方法一
+            tsStr = sdf.format(timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tsStr;
     }
 }

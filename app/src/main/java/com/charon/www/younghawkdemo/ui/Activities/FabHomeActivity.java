@@ -28,7 +28,7 @@ public class FabHomeActivity extends BaseActivity implements IBaseFabView{
     private EditText mEditText;
     private Toolbar mToolbar;
     private LinearLayout mPb;
-    private FabPresenter fabPresenter = new FabPresenter(this);
+    private FabPresenter fabPresenter ;
     private String content = "";
     @Override
     public void widgetClick(View v) {
@@ -40,7 +40,6 @@ public class FabHomeActivity extends BaseActivity implements IBaseFabView{
         if (param != null) {
             content = param.getString(HOME_CONTENT);
         }
-
     }
 
     @Override
@@ -104,8 +103,9 @@ public class FabHomeActivity extends BaseActivity implements IBaseFabView{
 
     @Override
     public void send() {
-        showToast(mEditText.getText().toString());
+        //showToast(mEditText.getText().toString());
         //上传
+        fabPresenter = new FabPresenter(this,this);
         fabPresenter.sendMoment(mEditText.getText().toString());
     }
 
@@ -113,7 +113,9 @@ public class FabHomeActivity extends BaseActivity implements IBaseFabView{
     public void loading(boolean loading) {
         if (loading) {
             mPb.setVisibility(View.VISIBLE);
-        } else mPb.setVisibility(View.GONE);
+        } else {
+            mPb.setVisibility(View.GONE);
+        }
     }
 
     @Override

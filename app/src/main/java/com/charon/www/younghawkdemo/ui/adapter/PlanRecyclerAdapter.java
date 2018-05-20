@@ -5,13 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
-
-import com.charon.www.younghawkdemo.model.Date;
-import com.charon.www.younghawkdemo.model.PlanBean;
+import com.charon.www.younghawkdemo.model.Plan;
 import com.charon.www.younghawkdemo.ui.Fragments.PlanFragment;
 
-import java.util.List;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_END;
 import static com.charon.www.younghawkdemo.model.Constant.TYPE_ERROR;
@@ -23,11 +24,11 @@ import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM_PLAN;
  */
 
 public class PlanRecyclerAdapter extends BaseRecyclerAdapter {
-    private static boolean noMore = false;
+    private static boolean noMore = true;
     private static boolean onError = false;
 
     private PlanFragment planFragment = new PlanFragment();
-    private List<PlanBean> list;//相关数据
+    private ArrayList<Plan> list = new ArrayList<>();//相关数据
     private Context mContext;
     private boolean mMore = false;//false代表最大3行
 
@@ -41,7 +42,7 @@ public class PlanRecyclerAdapter extends BaseRecyclerAdapter {
         this.position = position;
     }
 
-    public PlanRecyclerAdapter(List<PlanBean> list, Context mContext) {
+    public PlanRecyclerAdapter(ArrayList<Plan> list, Context mContext) {
         this.list = list;
         this.mContext = mContext;
     }
@@ -50,17 +51,17 @@ public class PlanRecyclerAdapter extends BaseRecyclerAdapter {
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof PlanViewHolder) {
             ((PlanViewHolder) holder).mTvName.setText(list.get(position).getUserName());
-            ((PlanViewHolder) holder).mTvTime.setText(changeTime(position));
-            ((PlanViewHolder) holder).mTvSummary.setText(list.get(position).getSummary());
+            ((PlanViewHolder) holder).mTvTime.setText(formatTime(list.get(position).getTime()));
+            ((PlanViewHolder) holder).mTvSummary.setText(list.get(position).getSumContent());
             ((PlanViewHolder) holder).mTvSummary.setTag(position);
-            ((PlanViewHolder) holder).mTvPlan.setText(list.get(position).getPlan());
+            ((PlanViewHolder) holder).mTvPlan.setText(list.get(position).getPlanContent());
             ((PlanViewHolder) holder).mTvPlan.setTag(position);
 
             ((PlanViewHolder) holder).mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(mContext, "点击了" + position, Toast.LENGTH_SHORT).show();
-                    planFragment.showInf(list, position);
+                    //planFragment.showInf(list, position);
                 }
             });
 
@@ -146,26 +147,26 @@ public class PlanRecyclerAdapter extends BaseRecyclerAdapter {
     }
 
 
-    private String changeTime(int position) {
-        Date timeList = list.get(position).getPubTime();
-        String year = String.valueOf(timeList.getYear());
-        String month = String.valueOf(timeList.getMonth());
-        String day = String.valueOf(timeList.getDay());
-        String hour = String.valueOf(timeList.getHour());
-        String min = String.valueOf(timeList.getMin());
-        return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
-    }
+//    private String changeTime(int position) {
+//        Date timeList = list.get(position).getPubTime();
+//        String year = String.valueOf(timeList.getYear());
+//        String month = String.valueOf(timeList.getMonth());
+//        String day = String.valueOf(timeList.getDay());
+//        String hour = String.valueOf(timeList.getHour());
+//        String min = String.valueOf(timeList.getMin());
+//        return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
+//    }
 
-    public void addHeadItem(List<PlanBean> list) {
-        this.list.add(0, list.get(0));
+    public void addHeadItem(Plan[] list) {
+        //this.list.add(0, list.get(0));
         //
         notifyDataSetChanged();
     }
 
-    public void addData(List<PlanBean> homeBeanList) {
-        for (int i = 0; i < homeBeanList.size(); i++) {
-            list.add(homeBeanList.get(i));
-        }
+    public void addData(Plan[] homeBeanList) {
+//        for (int i = 0; i < homeBeanList.size(); i++) {
+//            list.add(homeBeanList.get(i));
+//        }
         notifyDataSetChanged();
     }
 
@@ -177,17 +178,32 @@ public class PlanRecyclerAdapter extends BaseRecyclerAdapter {
             notifyItemRangeChanged(position, list.size() - position);
         }
     }
-
+//    private void deleteItemById(int i) {
+//        System.arraycopy(list, i + 1, list, i + 1 - 1, list.length - (i + 1));
+//        list[list.length-1] = null;
+//    }
     public boolean ifMore() {
         //如果没有更多就返回false，noMore = ture;
         return true;
     }
 
     public String getPlan(int position) {
-        return list.get(position).getPlan();
+        return list.get(position).getPlanContent();
     }
 
     public String getSummary(int position) {
-        return list.get(position).getSummary();
+        return list.get(position).getSumContent();
+    }
+
+    private String formatTime(Timestamp timestamp){
+        String tsStr = "";
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            //方法一
+            tsStr = sdf.format(timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tsStr;
     }
 }

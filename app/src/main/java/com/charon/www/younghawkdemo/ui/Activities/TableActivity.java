@@ -1,6 +1,8 @@
 package com.charon.www.younghawkdemo.ui.Activities;
 
+import android.app.DownloadManager;
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.model.API;
 
 /**
  * Created by Charon on 2017/4/24.
@@ -17,27 +20,20 @@ import com.charon.www.younghawkdemo.R;
 
 public class TableActivity extends BaseActivity {
     private Toolbar mToolbar;
-    private ImageView mIvDownload1,mIvDownload2;
+    private ImageView mIvDownload1,mIvDownload2,getmIvDownload3;
     @Override
     public void widgetClick(View v) {
         switch (v.getId()) {
             case R.id.table_image_download1:
-                showToast("正在下载项目推进报表");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        showToast("逗你玩的:)");
-                    }
-                },1500);
+                download(API.URI_GET_DOWNLOAD1,"a.txt");
                 break;
             case R.id.table_image_download2:
-                showToast("正在下载学员请假审批表");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        showToast("逗你玩的:)");
-                    }
-                },1500);
+                download(API.URI_GET_DOWNLOAD2,"文档1.pdf");
+                break;
+            case R.id.table_image_download3:
+                download(API.URI_GET_DOWNLOAD3,"wd2.docx");
+                break;
+            default:
                 break;
         }
     }
@@ -81,5 +77,19 @@ public class TableActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    private void download(String uri,String fileString){
+        //创建下载任务,downloadUrl就是下载链接
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(uri));
+        //指定下载路径和下载文件名
+        request.setDestinationInExternalPublicDir("/download/", fileString);
+        //获取下载管理器
+        DownloadManager downloadManager = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
+        //将下载任务加入下载队列，否则不会进行下载
+        if (downloadManager != null) {
+            downloadManager.enqueue(request);
+            showToast("开始下载");
+        }
     }
 }

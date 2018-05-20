@@ -1,6 +1,7 @@
 package com.charon.www.younghawkdemo.ui.Fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,12 +20,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.charon.www.younghawkdemo.R;
+import com.charon.www.younghawkdemo.model.Plan;
 import com.charon.www.younghawkdemo.model.PlanBean;
 import com.charon.www.younghawkdemo.presenter.PlanPresenter;
 import com.charon.www.younghawkdemo.ui.Activities.FabPlanActivity;
 import com.charon.www.younghawkdemo.ui.adapter.PlanRecyclerAdapter;
 import com.charon.www.younghawkdemo.view.IPlanView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.charon.www.younghawkdemo.model.Constant.PLAN_PLAN;
@@ -43,9 +46,13 @@ public class PlanFragment extends Fragment implements IPlanView {
     private RecyclerView mRecyclerView;
     private SwipeRefreshLayout refresh;
     private static PlanFragment instance;
-
-    private PlanPresenter planPresenter = new PlanPresenter(this);
-
+    private Context context;
+    private PlanPresenter planPresenter ;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+    }
 
     public static PlanFragment getInstance() {
         if (instance == null) {
@@ -61,8 +68,16 @@ public class PlanFragment extends Fragment implements IPlanView {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.plan_recycler);
         refresh = (SwipeRefreshLayout) view.findViewById(R.id.plan_refresh);
         refresh.setColorSchemeResources(R.color.colorPrimary);
-        planPresenter.getPlanInf();
+
+        //planPresenter.getPlanInf();
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        planPresenter = new PlanPresenter(context,this);
+        planPresenter.getPlanInf();
     }
 
     @Override
@@ -75,8 +90,10 @@ public class PlanFragment extends Fragment implements IPlanView {
                 Toast.makeText(getActivity(), "编辑" + position, Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-                planPresenter.deleteItem(position);
+                deleteItem(position);
                 Toast.makeText(getActivity(), "删除" + position, Toast.LENGTH_SHORT).show();
+                break;
+            default:
                 break;
         }
         return super.onContextItemSelected(item);
@@ -84,56 +101,65 @@ public class PlanFragment extends Fragment implements IPlanView {
 
 
     @Override
-    public void showInf(List<PlanBean> list, int position) {
+    public void showInf(Plan[] list, int position) {
 
     }
 
     @Override
-    public void addView(final List<PlanBean> planList) {
+    public void addView(ArrayList<Plan> planList) {
         if (moreCount == 0) {
             final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             mRecyclerView.setLayoutManager(layoutManager);
             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
             adapter = new PlanRecyclerAdapter(planList, getActivity());
             mRecyclerView.setAdapter(adapter);
-        } else adapter.addData(planList);
-
-
+        } else {
+            //adapter.addData(planList);
+        }
 
         refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 planPresenter.getHeadInf();
-                Toast.makeText(getActivity(), "更新了1条数据...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "暂无新消息", Toast.LENGTH_SHORT).show();
             }
         });
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-
-                int totalItemCount = layoutManager.getItemCount();
-
-                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
-                Log.d("123", "开始前loading" + loading + "movieMore" + moreCount + "last" + totalItemCount);
-                if (!loading && totalItemCount < (lastVisibleItem + VISIBLE_THRESHOLD) && dy > 0 && adapter.ifMore()) {
-                    //未在加载、且还有3个就要到底了
-                    moreCount++;
-                    Log.d("123", "开始后loading" + loading + "movieMore" + moreCount);
-                    planPresenter.getMoreInf();
-                    loading = true;
-                }
-            }
-        });
+//        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+//                super.onScrolled(recyclerView, dx, dy);
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+//
+//                int totalItemCount = layoutManager.getItemCount();
+//
+//                int lastVisibleItem = layoutManager.findLastVisibleItemPosition();
+//                Log.d("123", "开始前loading" + loading + "movieMore" + moreCount + "last" + totalItemCount);
+//                if (!loading && totalItemCount < (lastVisibleItem + VISIBLE_THRESHOLD) && dy > 0 && adapter.ifMore()) {
+//                    //未在加载、且还有3个就要到底了
+//                    moreCount++;
+//                    Log.d("123", "开始后loading" + loading + "movieMore" + moreCount);
+//                    planPresenter.getMoreInf();
+//                    loading = true;
+//                }
+//            }
+//        });
     }
+
+    @Override
+    public void refreshList(Plan[] planList) {
+        adapter.addHeadItem(planList);
+    }
+
+
 
     @Override
     public void loading(boolean loading) {
         if (loading){
             refresh.setRefreshing(true);
-        } else refresh.setRefreshing(false);
+        } else {
+            refresh.setRefreshing(false);
+        }
     }
 
     @Override
@@ -177,14 +203,20 @@ public class PlanFragment extends Fragment implements IPlanView {
         normalDialog.show();
     }
 
+
     @Override
-    public void refreshList(List<PlanBean> planList) {
-        adapter.addHeadItem(planList);
+    public void showToastMsg(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void refresh(boolean refresh) {
         this.refresh.setRefreshing(refresh);
+    }
+
+    @Override
+    public void toDelete(int position) {
+        adapter.deleteItem(position);
     }
 
 

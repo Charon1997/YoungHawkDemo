@@ -105,7 +105,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
-        >
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/me_img_scan"
@@ -137,6 +137,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:foreground="?android:attr/selectableItemBackgroundBorderless"
+        android:visibility="gone"
         >
 
         <ImageView

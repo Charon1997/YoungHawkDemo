@@ -62,6 +62,7 @@ public class MeFragment extends Fragment {
     private File fileCropUri = new File(Environment.getExternalStorageDirectory().getPath() + "/crop_photo.jpg");
     private Uri imageUri;
     private Uri cropImageUri;
+
     public static MeFragment getInstance() {
         if (instance == null) {
             instance = new MeFragment();
@@ -99,7 +100,7 @@ public class MeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //改头像
-                puWindow = new MPoPuWindow(MeFragment.getInstance().getActivity(), MeFragment.getInstance(),getActivity());
+                puWindow = new MPoPuWindow(MeFragment.getInstance().getActivity(), MeFragment.getInstance(), getActivity());
                 puWindow.showPopupWindow(LayoutInflater.from(MeFragment.getInstance().getActivity()).inflate(R.layout.fragment_me, null));
                 puWindow.setOnGetTypeClickListener(new MPoPuWindow.onGetTypeClickListener() {
                     @Override
@@ -152,8 +153,6 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override
@@ -165,56 +164,36 @@ public class MeFragment extends Fragment {
             if (resultCode == RESULT_OK) {
                 switch (requestCode) {
 
-                        case CODE_CAMERA_REQUEST://拍照完成回调
+                    case CODE_CAMERA_REQUEST://拍照完成回调
+                        cropImageUri = Uri.fromFile(fileCropUri);
+                        Log.d("123", "onActivityResult: " + imageUri);
+                        PhotoUtils.cropImageUri(MeFragment.getInstance(), imageUri, cropImageUri, 1, 1, 480, 480, CODE_RESULT_REQUEST);
+                        break;
+                    case CODE_GALLERY_REQUEST://访问相册完成回调
+                        if (hasSdcard()) {
                             cropImageUri = Uri.fromFile(fileCropUri);
-                            Log.d("123", "onActivityResult: "+imageUri);
-                            PhotoUtils.cropImageUri(MeFragment.getInstance(), imageUri, cropImageUri, 1, 1, 480, 480, CODE_RESULT_REQUEST);
-                            break;
-                        case CODE_GALLERY_REQUEST://访问相册完成回调
-                            if (hasSdcard()) {
-                                cropImageUri = Uri.fromFile(fileCropUri);
-                                Uri newUri = Uri.parse(PhotoUtils.getPath(mContext, data.getData()));
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                                    newUri = FileProvider.getUriForFile(getActivity(), "com.charon.www.younghawkdemo.fileprovider", new File(newUri.getPath()));
-                                }
-                                PhotoUtils.cropImageUri(MeFragment.getInstance(), newUri, cropImageUri, 1, 1, 480, 480, CODE_RESULT_REQUEST);
-                            } else {
-                                //ToastUtils.showShort(this, "设备没有SD卡！");
+                            Uri newUri = Uri.parse(PhotoUtils.getPath(mContext, data.getData()));
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                newUri = FileProvider.getUriForFile(getActivity(), "com.charon.www.younghawkdemo.fileprovider", new File(newUri.getPath()));
                             }
-                            break;
-                        case CODE_RESULT_REQUEST:
-                            Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, mContext);
-                            if (bitmap != null) {
-                                showImages(bitmap);
-                            }
-                            break;
-                        default:
-                           break;
+                            PhotoUtils.cropImageUri(MeFragment.getInstance(), newUri, cropImageUri, 1, 1, 480, 480, CODE_RESULT_REQUEST);
+                        } else {
+                            //ToastUtils.showShort(this, "设备没有SD卡！");
+                        }
+                        break;
+                    case CODE_RESULT_REQUEST:
+                        Bitmap bitmap = PhotoUtils.getBitmapFromUri(cropImageUri, mContext);
+                        if (bitmap != null) {
+                            showImages(bitmap);
+                        }
+                        break;
+                    default:
+                        break;
                 }
-//            if (requestCode == 1) {
-//                if (imgUri != null) {
-//                    puWindow.onPhoto(imgUri, 300, 300);
-//                }
-//            } else if (requestCode == 2) {
-//                if (data != null) {
-//                    Uri uri = data.getData();
-//                    puWindow.onPhoto(uri, 300, 300);
-//                }
-//            } else if (requestCode == 3) {
-//                Log.d("123", type + "type");
-//                if (data != null) {
-//                    Bundle extras = data.getExtras();
-//                    Bitmap bitmap = (Bitmap) extras.get("data");
-//                    if (bitmap != null) {
-//                        mCivHead.setImageBitmap(bitmap);
-//                        Log.d("123", "bitmap"+bitmap.toString());
-//                        saveImageToGallery(MeFragment.getInstance().getActivity(),bitmap,file);
-//                    }
-//                }
-//            }
             }
         }
     }
+
     private void showImages(Bitmap bitmap) {
         mCivHead.setImageBitmap(bitmap);
     }
@@ -227,7 +206,7 @@ public class MeFragment extends Fragment {
         return state.equals(Environment.MEDIA_MOUNTED);
     }
 
-    public static void saveImageToGallery(Context context, Bitmap bmp,File file) {
+    public static void saveImageToGallery(Context context, Bitmap bmp, File file) {
         // 首先保存图片
         if (!file.exists()) {
             file.mkdir();
@@ -249,7 +228,7 @@ public class MeFragment extends Fragment {
         // 其次把文件插入到系统图库
         try {
             MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                    file.getAbsolutePath(),System.currentTimeMillis()+".jpg", null);
+                    file.getAbsolutePath(), System.currentTimeMillis() + ".jpg", null);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

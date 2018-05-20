@@ -3,6 +3,7 @@ package com.charon.www.younghawkdemo.view;
 
 import com.charon.www.younghawkdemo.model.Moment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,18 +11,20 @@ import java.util.List;
  */
 
 public interface IHomeView extends IBaseItemView{
-    void showInf(List<Moment> list, int position);
+    void showInf(Moment list);
 
     void clickLike(int position);
 
     void clickComment(int position);
 
-    void addView(List<Moment> homeList);
+    void addView(ArrayList<Moment> homeList);
 
-    void refreshList(List<Moment> homeList);
+    void refreshList(Moment[] homeList);
 
     void changeLikeView(boolean isBlue);
 
     void changeCommentView(boolean isBlue);
+
+    void showToastMsg(String msg);
 
 }

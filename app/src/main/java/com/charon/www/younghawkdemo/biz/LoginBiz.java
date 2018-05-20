@@ -1,31 +1,37 @@
 package com.charon.www.younghawkdemo.biz;
 
 import com.charon.www.younghawkdemo.model.LoginModel;
+import com.charon.www.younghawkdemo.model.UserBean;
 import com.charon.www.younghawkdemo.view.ILoginView;
+
+import rx.Subscriber;
 
 /**
  * Created by Administrator on 2017/4/24.
  */
 
 public class LoginBiz implements ILoginBiz {
+    private Subscriber<UserBean> subscriber;
     @Override
     public void login(final String name, final String password, final OnLoginListener loginListener) {
-        new Thread(){
-            public void run(){
-                try {
-                    //模拟联网操作
-                    sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if ("123456".equals(name) && "123456".equals(password)){
-                    LoginModel user = new LoginModel();
-                    user.setName(name);
-                    user.setPassword(password);
-                    loginListener.loginSuccessfully(user);
-                } else loginListener.loginFailure();
+        subscriber = new Subscriber<UserBean>() {
+            @Override
+            public void onCompleted() {
+
             }
-        }.start();
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(UserBean userBean) {
+                loginListener.loginSuccessfully(userBean);
+            }
+        };
+
+
     }
 
     @Override

@@ -1,83 +1,63 @@
 package com.charon.www.younghawkdemo.model;
 
-import java.util.List;
+import java.sql.Timestamp;
 
 /**
- * Created by Administrator on 2017/4/25.
+ * @author wayne
+ * @date 2017/8/10.
  */
-
 public class Moment {
-    private int img;
-    private String userName;
-    private Date pubDay;
-    private Date pubTime;
-    private String pubContent;
-    private int likeNum;
-    private int commentNum;
 
+    private int userId;
+    private Timestamp time;
+    private int likes;
+    private String content;
+    private int momentId;
+    private UserBean userBean;
 
-
-    public Moment(int img, String userName, Date pubDay, Date pubTime, String pubContent, int likeNum, int commentNum) {
-        this.img = img;
-        this.userName = userName;
-        this.pubDay = pubDay;
-        this.pubTime = pubTime;
-        this.pubContent = pubContent;
-        this.likeNum = likeNum;
-        this.commentNum = commentNum;
-    }
-    public Date getPubDay() {
-        return pubDay;
+    public Moment(int userId,String content){
+        this.userId = userId;
+        this.content = content;
     }
 
-    public void setPubDay(Date pubDay) {
-        this.pubDay = pubDay;
-    }
-    public int getImg() {
-        return img;
+    public UserBean getUserBean() { return userBean; }
+
+    public void setUserBean(UserBean userBean) { this.userBean = userBean; }
+
+    public int getMomentId() {
+        return momentId;
     }
 
-    public void setImg(int img) {
-        this.img = img;
+    public void setMomentId(int momentId) {
+        this.momentId = momentId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getContent() {
+        return content;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public Date getPubTime() {
-        return pubTime;
+    public Timestamp getTime() {
+        return time;
     }
 
-    public void setPubTime(Date pubTime) {
-        this.pubTime = pubTime;
+    public void setTime(Timestamp time) {
+        this.time = time;
     }
 
-    public String getPubContent() {
-        return pubContent;
+    public int getLikes() {
+        return likes;
     }
 
-    public void setPubContent(String pubContent) {
-        this.pubContent = pubContent;
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
-    public int getLikeNum() {
-        return likeNum;
-    }
+    public int getUserId() { return userId; }
 
-    public void setLikeNum(int likeNum) {
-        this.likeNum = likeNum;
-    }
+    public void setUserId(int userId) { this.userId = userId; }
 
-    public int getCommentNum() {
-        return commentNum;
-    }
-
-    public void setCommentNum(int commentNum) {
-        this.commentNum = commentNum;
-    }
 }

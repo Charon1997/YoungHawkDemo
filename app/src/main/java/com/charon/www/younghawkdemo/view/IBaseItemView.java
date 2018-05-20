@@ -20,4 +20,6 @@ public  interface IBaseItemView  {
     void deleteItem(int position);
 
     void refresh(boolean refresh);
+
+    void toDelete(int position);
 }

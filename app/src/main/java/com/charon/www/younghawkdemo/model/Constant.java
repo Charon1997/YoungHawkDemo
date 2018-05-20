@@ -22,4 +22,6 @@ public class Constant {
 
     public static final int PHONE = 0;
     public static final int CAMERA = 1;
+
+    public static final String SP_SAVE_USER_ID = "USER_ID";
 }

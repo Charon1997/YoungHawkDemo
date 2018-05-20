@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">雏鹰计划</string>
+    <string name="app_name">项目管理</string>
     <string name="book">管理手册</string>
     <string name="professor">专家</string>
+    <string name="team">团队</string>
     <string name="personage">个人</string>
     <string name="table">表格</string>
     <string name="mailList">通讯录</string>
@@ -9,14 +10,14 @@
     <string name="more">更多</string>
     <string name="projectTeam">项目成员</string>
     <string name="text_professor_chen">
-        ### 陈 前斌\n
-        >  博士，教授（二级），博士生导师。重庆邮电大学通信与信息工程学院执行院长，兼重庆邮电大学电子信息与网络工程研究院院长、重庆市移动通信技术重点实验室主任。 \n\n
+        ### 陈 阳\n
+        >  简介，教授（二级），博士生导师。重庆邮电大学通信与信息工程学院执行院长，兼重庆邮电大学电子信息与网络工程研究院院长、重庆市移动通信技术重点实验室主任。 \n\n
         　　2002年获得国务院政府特殊津贴专家称号，2006年入选教育部“新世纪优秀人才支持计划”，2008年入选重庆市学术技术带头人，2010年入选重庆高校“巴渝学者”，2013年入选重庆市“两江学者”特聘教授。现为国际IEEE高级会员、中国通信学会会士，《中国邮电高校学报》(英文版)、《重庆邮电大学学报（自然科学版）》编委，《中兴通讯技术》编委会副主任，教育部高等学校电子信息类专业教学指导委员会委员、重庆市政府第四届决策咨询专家委员会专家。\n\n
-        　　陈前斌教授长期从事通信网理论与技术、无线通信、多媒体信息传输与处理等领域的科研和教学工作。先后主持完成国家及省部级20余项科研项目，获得国家科技进步二等奖1项、重庆市技术发明一等奖1项、重庆市科技进步一等奖1项、二、三等奖共5项。获得国家发明专利28项，软件成果登记3项。出版教材著作7部，发表论文被SCI、EI检索120余篇。培养了一批通信人才，获得国家级教学成果二等奖2项，重庆市教学成果4项。\n\n
+        　　陈阳教授长期从事通信网理论与技术、无线通信、多媒体信息传输与处理等领域的科研和教学工作。先后主持完成国家及省部级20余项科研项目，获得国家科技进步二等奖1项、重庆市技术发明一等奖1项、重庆市科技进步一等奖1项、二、三等奖共5项。获得国家发明专利28项，软件成果登记3项。出版教材著作7部，发表论文被SCI、EI检索120余篇。培养了一批通信人才，获得国家级教学成果二等奖2项，重庆市教学成果4项。\n\n
         </string>
 
     <string name="text_professor_tang">
-        ### 唐 宏\n
+        ### 张 欣欣\n
         >  博士，教授，移动通信技术重庆市重点实验室常务副主任，四川省南充市人。 \n\n
         　　1990年毕业于四川大学物理系，1995年于四川大学获理学硕士，2003年于重庆大学获工学博士。1995年7月至今在重庆邮电大学从事教学和科研工作，2008年-2009年在加拿大Mcgill大学访问研究一年。教育部“移动信息终端与测试技术”创新团队主要成员，重庆市高校优秀中青年骨干教师，重庆市高校优秀教学团队主要成员，国家级精品课程《现代交换原理》骨干成员，重庆市双语示范课程《数字电路与逻辑设计》负责人。\n\n
         　　主要研究方向包括移动通信技术、计算机网络，公开发表学术论文70余篇，其中核心级刊物及以上30余篇，作为项目负责人/合作单位负责人获得了国家科技重大专项、重庆市信息制造业重大科技专项、教育部高级访问学者基金、教育部春晖计划、重庆市自然科学基金、重庆市教委科学科学技术研究基金、重庆市移动通信重点实验室开放基金、重庆邮电大学科技基金的资助，以子课题负责人或主研身份参加了国家863项目“移动IP与MPLS结合的网络体系结构及关键技术”、国家科技重大专项“IMT-Advanced新型无线网络技术研发”、863重点项目“基于TD-SCDMA的集群通信关键技术和系统”、国家自然科学基金项目“协同中继系统跨层资源分配与优化调度的理论及方法” 等项目的研发工作。\n\n
@@ -88,7 +89,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title">雏鹰计划</string>
+    <string name="title">项目管理</string>
     <string name="nmid">重邮 移动互联网应用工程研究中心</string>
     <string name="nmid_email">nexuslink@nexuslink.cn</string>
     <string name="next">下一步</string>
@@ -99,6 +100,7 @@
     <string name="error_network">更新失败,请检查网络连接</string>
     <string name="nexuslink">NexusLink</string>
     <string name="sign_in">登录</string>
-    <string name="register">还没有帐号？注册一个</string>
+    <string name="register_in">注册</string>
+    <string name="register">账号注册</string>
     <string name="loading">加载中...</string>
 </resources>

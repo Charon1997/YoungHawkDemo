@@ -1,56 +1,63 @@
 package com.charon.www.younghawkdemo.presenter;
 
+import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 
-import com.charon.www.younghawkdemo.model.Date;
-import com.charon.www.younghawkdemo.model.PlanBean;
+import com.charon.www.younghawkdemo.biz.HttpService;
+import com.charon.www.younghawkdemo.model.Plan;
+import com.charon.www.younghawkdemo.model.Status;
 import com.charon.www.younghawkdemo.ui.Fragments.PlanFragment;
 import com.charon.www.younghawkdemo.view.IPlanView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import rx.Subscriber;
 
 /**
  * Created by Administrator on 2017/7/21.
  */
 
 public class PlanPresenter {
-    private List<PlanBean> planList;
+    private ArrayList<Plan> planList = new ArrayList<>();
     private IPlanView planView;
     Handler handler = new Handler();
-    public PlanPresenter(IPlanView planView) {
+    private Subscriber<Plan[]> subscriberList;
+    private Subscriber<Status> subscriber;
+    private Context mContext;
+    public PlanPresenter(Context mContext,IPlanView planView) {
+        this.mContext = mContext;
         this.planView = planView;
     }
 
-    /**
-     * [添加临时数据]
-     * @param j
-     * @return
-     */
-    private List<PlanBean> addDate(int j) {
-        planList = new ArrayList<>();
-        for (int i = 0 ; i < j ; i++) {
-            Date time = new Date(2,i);
-            PlanBean planList = new PlanBean("姓名",time,"这是一个计划计划计划计长很长很很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的测试文字段"+i,i+"计划是这个啊");
-            this.planList.add(planList);
-        }
-        return planList;
-    }
 
     /**
      * [得到所有条目的信息]
      */
     public void getPlanInf() {
         planView.loading(true);
-
-        handler.postDelayed(new Runnable() {
+        subscriberList= new Subscriber<Plan[]>() {
             @Override
-            public void run() {
-                planView.addView(addDate(20));
+            public void onCompleted() {
                 planView.loading(false);
-                PlanFragment.loading = false;
+                planView.addView(planList);
+                Log.d("Plan", "onCompleted ");
             }
-        },2000);
+
+            @Override
+            public void onError(Throwable e) {
+                planView.loading(false);
+                Log.d("Plan", "onError: "+e);
+            }
+
+            @Override
+            public void onNext(Plan[] plans) {
+                Collections.addAll(planList, plans);
+            }
+        };
+        HttpService.getInstance().getPlanList(subscriberList);
     }
 
     /**
@@ -61,7 +68,7 @@ public class PlanPresenter {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                planView.addView(addDate(5));
+                //planView.addView(addDate(5));
                 PlanFragment.loading = false;
             }
         },1500);
@@ -75,20 +82,48 @@ public class PlanPresenter {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                planView.refreshList(addDate(1));
+                //planView.refreshList(addDate(1));
                 planView.refresh(false);
                 PlanFragment.loading = false;
             }
-        },1500);
+        },500);
     }
 
     /**
      * [删除条目]
      * @param position
      */
-    public void deleteItem(int position) {
+    public void deleteItem(final int position) {
         //先判断身份，可以删除，上传服务器，再删除
-        planView.deleteItem(position);
+        if (true){//momnetList[position].getUserId() == (Integer)SpUtil.get(mContext,"userId",1)){
+            planView.loading(true);
+            subscriber = new Subscriber<Status>() {
+                @Override
+                public void onCompleted() {
+                    planView.loading(false);
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    planView.loading(false);
+                    Log.d("Plan", "onError: "+e);
+                }
+
+                @Override
+                public void onNext(Status status) {
+                    if (status.getCode().equals("200")){
+                        //删除成功
+                        planView.toDelete(position);
+                    }else {
+                        planView.showToastMsg("删除失败");
+                    }
+                }
+            };
+
+            HttpService.getInstance().delMomentById(subscriber,planList.get(position).getPlanId());
+        } else {
+            planView.showToastMsg("只能删除自己的哟！");
+        }
     }
 
     /**

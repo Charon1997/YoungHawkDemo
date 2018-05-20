@@ -26,6 +26,7 @@ dependencies {
     compile 'com.zzhoujay.richtext:richtext:2.4.0'
     //noinspection GradleCompatible
     compile 'com.android.support:support-v4:25.2.0'
+    compile 'com.android.support:design:24.2.1'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:cardview-v7:25.2.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -35,4 +36,17 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'org.greenrobot:greendao:3.2.2'
     compile 'com.lovedise:permissiongen:0.0.6'
+    /*rx-android-java*/
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.trello:rxlifecycle:1.0'
+    compile 'com.trello:rxlifecycle-components:1.0'
+    /*rotrofit*/
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
+
 }

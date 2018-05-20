@@ -12,11 +12,14 @@ import android.view.animation.AlphaAnimation;
 import android.widget.LinearLayout;
 
 import com.charon.www.younghawkdemo.R;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 public class WelcomeActivity extends BaseActivity {
     private int firstEnter = 0;
     private SharedPreferences spre;
     private LinearLayout logoView;
+
 
     @Override
     public void widgetClick(View v) {
@@ -62,7 +65,7 @@ public class WelcomeActivity extends BaseActivity {
             public void run() {
                 Log.d("test", firstEnter + "");
                 if (firstEnter == 0) {
-                    Intent intent = new Intent(WelcomeActivity.this, IntroActivity.class);
+                    Intent intent = new Intent(WelcomeActivity.this, LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

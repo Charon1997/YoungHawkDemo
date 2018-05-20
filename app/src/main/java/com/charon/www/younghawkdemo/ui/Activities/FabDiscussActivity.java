@@ -29,7 +29,7 @@ public class FabDiscussActivity extends BaseActivity implements IBaseFabView{
     private EditText mEtTitle,mEtContent;
     private Toolbar mToolbar;
     private LinearLayout mPb;
-    private FabPresenter fabPresenter = new FabPresenter(this);
+    private FabPresenter fabPresenter ;
     private String title="",content="";
     @Override
     public void widgetClick(View v) {
@@ -111,8 +111,9 @@ public class FabDiscussActivity extends BaseActivity implements IBaseFabView{
 
     @Override
     public void send() {
-        showToast("标题" + mEtTitle.getText()+"内容"+mEtContent.getText());
+        //showToast("标题" + mEtTitle.getText()+"内容"+mEtContent.getText());
         //上传
+        fabPresenter = new FabPresenter(this,this);
         fabPresenter.sendDiscuss(mEtTitle.getText().toString(),mEtContent.getText().toString());
     }
 
@@ -120,7 +121,9 @@ public class FabDiscussActivity extends BaseActivity implements IBaseFabView{
     public void loading(boolean loading) {
         if (loading) {
             mPb.setVisibility(View.VISIBLE);
-        } else mPb.setVisibility(View.GONE);
+        } else {
+            mPb.setVisibility(View.GONE);
+        }
     }
 
     @Override

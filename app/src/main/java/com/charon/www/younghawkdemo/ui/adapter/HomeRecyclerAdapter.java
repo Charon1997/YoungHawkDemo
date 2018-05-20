@@ -6,10 +6,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.charon.www.younghawkdemo.model.Date;
+import com.bumptech.glide.Glide;
 import com.charon.www.younghawkdemo.model.Moment;
 import com.charon.www.younghawkdemo.ui.Fragments.HomeFragment;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +27,11 @@ import static com.charon.www.younghawkdemo.model.Constant.TYPE_ITEM_HOME;
 
 public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
     private static final String TAG = HomeRecyclerAdapter.class.getSimpleName();
-    private static boolean noMore = false;
+    private static boolean noMore = true;
     private static boolean onError = false;
-    private static Date day ;
     private static List<Integer> titleCount = new ArrayList<>();
 
-    private List<Moment> list;//相关数据
+    private ArrayList<Moment> list = new ArrayList<>();//相关数据
     private Context mContext;
     private int position;
     private HomeFragment homeFragment = new HomeFragment();
@@ -44,7 +46,7 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
     }
 
 
-    public HomeRecyclerAdapter(List<Moment> list, Context context) {
+    public HomeRecyclerAdapter(ArrayList<Moment> list, Context context) {
         this.list = list;
         this.mContext = context;
     }
@@ -53,10 +55,10 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         if (holder instanceof HomeViewHolder) {
-            ((HomeViewHolder) holder).mCivHead.setImageResource(list.get(position).getImg());
-            ((HomeViewHolder) holder).mTvName.setText(list.get(position).getUserName());
-            ((HomeViewHolder) holder).mTvTime.setText(changeTime(position));
-            ((HomeViewHolder) holder).mTvContent.setText(list.get(position).getPubContent());
+            Glide.with(mContext).load(list.get(position).getUserBean().getAvatarUrl()).into(((HomeViewHolder) holder).mCivHead);
+            ((HomeViewHolder) holder).mTvName.setText(list.get(position).getUserBean().getUserName());
+            ((HomeViewHolder) holder).mTvTime.setText(formatTime(list.get(position).getTime()));
+            ((HomeViewHolder) holder).mTvContent.setText(list.get(position).getContent());
             ((HomeViewHolder) holder).mIvLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,7 +77,7 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
             ((HomeViewHolder)holder).mCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    homeFragment.showInf(list,position);
+                    homeFragment.showInf(list.get(position));
                 }
             });
             ((HomeViewHolder)holder).mCardView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -86,20 +88,22 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
                 }
             });
         } else if (holder instanceof TitleHolder) {
-            ((TitleHolder)holder).mTitle.setText(changeDay());
+            //((TitleHolder)holder).mTitle.setText(changeDay());
+        } else if (holder instanceof EndHolder){
+
         }
     }
 
-    private String changeDay() {
-        String year = String.valueOf(day.getYear());
-        String month = String.valueOf(day.getMonth());
-        String days = String.valueOf(day.getDay());
-        return year + "-" + month + "-" + days;
-    }
+//    private String changeDay() {
+////        String year = String.valueOf(day.getYear());
+////        String month = String.valueOf(day.getMonth());
+////        String days = String.valueOf(day.getDay());
+////        return year + "-" + month + "-" + days;
+//    }
 
     @Override
     public int getItemCount() {
-        return list.size() == 0?0:list.size()+1;
+        return list.size() == 0?0:list.size() +1;
     }
 
     @Override
@@ -129,20 +133,33 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
             return TYPE_ITEM_HOME;
     }
 
-    private String changeTime(int position) {
-        Date timeList = list.get(position).getPubTime();
-        Date dayList = list.get(position).getPubDay();
-        String year = String.valueOf(dayList.getYear());
-        String month = String.valueOf(dayList.getMonth());
-        String day = String.valueOf(dayList.getDay());
-        String hour = String.valueOf(timeList.getHour());
-        String min = String.valueOf(timeList.getMin());
-        return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
-//        return hour + ":" + min;
+    private String formatTime(Timestamp timestamp){
+        String tsStr = "";
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            //方法一
+            tsStr = sdf.format(timestamp);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return tsStr;
     }
 
+
+//    private String changeTime(int position) {
+//        Date timeList = list.get(position).getPubTime();
+//        Date dayList = list.get(position).getPubDay();
+//        String year = String.valueOf(dayList.getYear());
+//        String month = String.valueOf(dayList.getMonth());
+//        String day = String.valueOf(dayList.getDay());
+//        String hour = String.valueOf(timeList.getHour());
+//        String min = String.valueOf(timeList.getMin());
+//        return year + "年" + month + "月" + day + "日    " + hour + ":" + min;
+//        return hour + ":" + min;
+//    }
+
     public void addHeadItem(List<Moment> list) {
-        this.list.add(0,list.get(0));
+        //this.list.add(0,list.get(0));
         //具体在变。
         notifyDataSetChanged();
     }
@@ -156,9 +173,14 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
         }
     }
 
-    public void addData(List<Moment> homeBeanList) {
+//    private void deleteItemById(int i) {
+//        System.arraycopy(list, i + 1, list, i + 1 - 1, list.length - (i + 1));
+//        list[list.length-1] = null;
+//    }
+
+    public void addData(ArrayList<Moment> homeBeanList) {
         for (int i = 0;i < homeBeanList.size();i++) {
-            list.add(homeBeanList.get(i));
+            //list.add(homeBeanList.get(i));
         }
         notifyDataSetChanged();
     }
@@ -173,7 +195,7 @@ public class HomeRecyclerAdapter extends BaseRecyclerAdapter  {
     }
 
     public String getContent(int position) {
-        return list.get(position).getPubContent();
+        return list.get(position).getContent();
     }
 
     public interface onGetImageClickListener {
